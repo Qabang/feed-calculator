@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "- Created 2020-02-28 A simple application that calculates what my horse's feed needs.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Qabang/feed-calculator/issues"
   },
-  "homepage": "https://github.com/Qabang/feed-calculator#readme"
+  "homepage": "https://github.com/Qabang/feed-calculator#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
