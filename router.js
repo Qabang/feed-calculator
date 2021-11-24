@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   res.send('Hello world')
 })
 
-router.get('/calc', (req, res) => {
+router.get('/calculation', (req, res) => {
   const calc = new Calculation(req.body)
   res.send({ base: calc.baseNeed, work: calc.workNeed })
 })

@@ -23,7 +23,7 @@ function App() {
                 </NavLink>
               </li>
               <li>
-                <NavLink exact to="/calc">
+                <NavLink exact to="/calculation">
                   Calc
                 </NavLink>
               </li>
@@ -32,7 +32,7 @@ function App() {
         </section>
         <Routes>
           <Route exact path="/" element={<Index />}></Route>
-          <Route exact path="/calc" element={<Calculator />}></Route>
+          <Route exact path="/calculation" element={<Calculator />}></Route>
         </Routes>
       </Router>
       {/* <header className="App-header">
