@@ -1,0 +1,330 @@
+.feeding-calculator-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  margin: auto;
+
+  form {
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    margin: auto;
+    padding-bottom: 15px;
+
+    input[type='submit'] {
+      background-color: darkblue;
+      border-radius: 50px;
+      border: none;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 1rem;
+      margin: 1rem auto 0;
+      padding: 10px 25px;
+
+      &:hover {
+        background-color: lighten(darkblue, 5%);
+        cursor: pointer;
+      }
+    }
+
+    .feeding-calculator-flex-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .calculator-labels {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 0.9rem;
+        text-align: center;
+
+        label {
+          color: #fff;
+          padding: 15px 5px;
+          box-sizing: border-box;
+          background: darkblue;
+          font-weight: 700;
+          font-size: 1rem;
+        }
+
+        span {
+          @media screen and (max-width: 767px) {
+            display: block;
+          }
+        }
+
+        @media screen and (max-width: 375px) {
+          font-size: 0.625rem;
+        }
+
+        @media screen and (max-width: 767px) and (min-width: 376px) {
+          font-size: 0.7rem;
+        }
+      }
+    }
+
+    .form-feed {
+      width: 100vw;
+      padding: 10px 30px;
+      box-sizing: border-box;
+    }
+
+    .form-feed-input {
+      display: flex;
+      padding: 10px;
+      margin: 0;
+      max-width: 120px;
+      width: 12%;
+      box-sizing: border-box;
+      font-size: 0.9rem;
+
+      @media screen and (max-width: 375px) {
+        font-size: 0.625rem;
+        padding: 10px 5px;
+      }
+
+      @media screen and (max-width: 767px) and (min-width: 376px) {
+        font-size: 0.7rem;
+      }
+    }
+
+    div:not(.add-row) {
+      display: flex;
+      flex-basis: 100%;
+      width: 100%;
+      justify-content: center;
+
+      label {
+        display: block;
+        max-width: 120px;
+        width: 12%;
+      }
+    }
+
+    .form-feed-submit {
+      display: block;
+    }
+
+    .add-row {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 40px 0 0 2%;
+      color: black;
+      background-color: aqua;
+      border-radius: 3px;
+      font-size: 2rem;
+      text-align: center;
+      position: relative;
+      line-height: 100%;
+
+      span {
+        line-height: 160%;
+        position: absolute;
+        top: 2.5px;
+        left: calc(100% + 20px);
+        font-size: 1rem;
+        white-space: nowrap;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: lighten(aqua, 5%);
+      }
+    }
+  }
+}
+
+.result-section {
+  margin: 80px auto;
+
+  .flex-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #save-calculation {
+    color: #000;
+    margin: auto;
+    margin-right: 0;
+    white-space: nowrap;
+    padding: 10px 35px;
+    background-color: aqua;
+    font-size: 1rem;
+    border: 0;
+    border-radius: 25px;
+    box-shadow: 2px 2px 5px rgba(#000, 0.4);
+
+    &:hover {
+      background-color: lighten(aqua, 5%);
+    }
+  }
+}
+
+#calculation-errors {
+  background: #fff;
+  padding: 10px;
+  outline: 5px solid red;
+  border-radius: 20px;
+  margin-bottom: 80px;
+
+  li {
+    margin: 15px;
+    list-style-type: none;
+    padding-left: 30px;
+
+    span {
+      font-weight: 700;
+    }
+  }
+}
+
+.result-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  flex-wrap: wrap;
+  margin: 30px auto;
+  font-weight: 700;
+
+  .profile-name {
+    flex-basis: 100%;
+    text-align: center;
+    margin: 0;
+  }
+
+  section {
+    width: 100%;
+    flex-basis: 22.5%;
+
+    h2 {
+      text-align: center;
+      text-transform: capitalize;
+      font-size: 1.5rem;
+      margin: 20px 0;
+      font-weight: unset;
+      white-space: nowrap;
+
+      font-weight: 700;
+      font-size: 1rem;
+
+      @media screen and (max-width: 768px) {
+        text-align: left;
+        margin-left: calc(25% + 20px);
+      }
+
+      @media screen and (max-width: 1023px) and (min-width: 769px) {
+        font-size: 1.1rem;
+      }
+    }
+
+    ul {
+      display: block;
+      padding: 0;
+      margin: 0;
+
+      li {
+        list-style-type: none;
+        display: block;
+        min-height: 25px;
+        text-align: center;
+        justify-content: center;
+        align-content: center;
+        box-sizing: border-box;
+        line-height: 25px;
+        margin: 20px 0;
+
+        @media screen and (max-width: 768px) {
+          text-align: left;
+          padding-left: 10px;
+          display: block;
+          flex-basis: 60%;
+        }
+      }
+
+      label {
+        display: none;
+        hyphens: auto;
+        margin-right: 15px;
+
+        @media screen and (max-width: 768px) {
+          display: block;
+          flex-basis: 25%;
+          text-align: right;
+        }
+      }
+
+      li:nth-of-type(odd) {
+        background-color: rgba($color: white, $alpha: 0.5);
+
+        &.high-value,
+        .low-value {
+          background-color: rgba($color: #ff0000, $alpha: 0.3) !important;
+        }
+      }
+
+      .low-value:nth-of-type(odd),
+      .high-value:nth-of-type(odd) {
+        background-color: rgba($color: #ff0000, $alpha: 0.4) !important;
+      }
+
+      .good-value:nth-of-type(odd) {
+        background-color: rgba($color: #008000, $alpha: 0.4) !important;
+      }
+
+      @media screen and (max-width: 768px) {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    }
+
+    &.result-labels {
+      margin-top: calc(1.5rem + 13px);
+      width: 50%;
+      flex-basis: 9%;
+
+      ul {
+        margin: 0;
+
+        li {
+          text-align: right;
+          background: transparent;
+          padding-right: 10px;
+          white-space: nowrap;
+
+          &:nth-of-type(odd) {
+            background-color: rgba($color: white, $alpha: 0.5);
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      flex-basis: unset;
+      border: 0;
+    }
+
+    @media screen and (max-width: 1023px) and (min-width: 769px) {
+      flex-basis: 22%;
+    }
+  }
+
+  .high-value,
+  .low-value {
+    color: black;
+    background-color: rgba($color: #ff0000, $alpha: 0.5) !important;
+  }
+
+  .good-value {
+    background-color: rgba($color: green, $alpha: 0.5) !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    flex-basis: 16.6%;
+
+    .result-labels {
+      display: none;
+    }
+  }
+}
