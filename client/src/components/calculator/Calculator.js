@@ -25,35 +25,35 @@ function Calculator() {
 
       <section id="feed-needs">
         <ul id="feed-labels">
-          <br />
+          <div className="feed-clearfix"></div>
           {horseBaseData &&
             Object.keys(horseBaseData).map((key, index) => (
               <li key={key + index}>{key}</li>
             ))}
         </ul>
         <ul id="basic-need">
-          <h3>basic feed needs:</h3>
+          <h3 className="feed-clearfix">basic feed needs:</h3>
           {horseBaseData &&
             Object.keys(horseBaseData).map((key, index) => (
               <li key={key + index}>{horseBaseData[key]}</li>
             ))}
         </ul>
         <ul id="work-need">
-          <h3>Work feed needs:</h3>
+          <h3 className="feed-clearfix">Work feed needs:</h3>
           {horseWorkData &&
             Object.keys(horseWorkData).map((key, index) => (
               <li key={key + index}>{horseWorkData[key]}</li>
             ))}
         </ul>
         <ul id="feed-total">
-          <h3>Total in current feed ratio:</h3>
+          <h3 className="feed-clearfix">Total in current feed ratio:</h3>
           {horseResultData &&
             Object.keys(horseResultData).map((key, index) => (
               <li key={key + index}>{horseResultData[key]}</li>
             ))}
         </ul>
         <ul id="feed-result">
-          <h3>result:</h3>
+          <h3 className="feed-clearfix">result:</h3>
           {horseResultData &&
             Object.keys(horseResultData).map((key, index) => (
               <li key={key + index}>

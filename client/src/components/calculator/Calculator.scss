@@ -2,145 +2,56 @@
 
 #feed-needs {
   display: flex;
-}
-
-#feeding-calculator-wrapper {
   width: 100%;
-  box-sizing: border-box;
   max-width: $max-width;
-  padding: 15px;
   margin: auto;
+  padding: 40px 30px;
+  box-sizing: border-box;
 
-  form {
-    width: auto;
-    height: auto;
-    background-color: transparent;
-    margin: auto;
-    padding-bottom: 15px;
+  ul {
+    width: 100%;
+    padding: 0;
 
-    input[type='submit'] {
-      background-color: $dark-blue;
-      border-radius: 50px;
-      border: none;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-      color: #fff;
-      font-family: $font-text;
-      font-size: 1rem;
-      margin: 1rem auto 0;
-      padding: 10px 25px;
-
-      &:hover {
-        background-color: lighten($dark-blue, 5%);
-        cursor: pointer;
-      }
-    }
-
-    .feeding-calculator-flex-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-
-      .calculator-labels {
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 0.9rem;
-        text-align: center;
-
-        label {
-          color: #fff;
-          font-family: $font-text;
-          padding: 15px 5px;
-          box-sizing: border-box;
-          background: $dark-blue;
-          font-weight: 700;
-          font-size: 1rem;
-        }
-
-        span {
-          @media screen and (max-width: 767px) {
-            display: block;
-          }
-        }
-
-        @media screen and (max-width: 375px) {
-          font-size: 0.625rem;
-        }
-
-        @media screen and (max-width: 767px) and (min-width: 376px) {
-          font-size: 0.7rem;
-        }
-      }
-    }
-
-    .form-feed {
-      width: 100vw;
-      padding: 10px 30px;
-      box-sizing: border-box;
-    }
-
-    .form-feed-input {
-      display: flex;
-      padding: 10px;
+    h3 {
       margin: 0;
-      max-width: 120px;
-      width: 12%;
-      box-sizing: border-box;
-      font-size: 0.9rem;
+      padding: 0;
 
-      @media screen and (max-width: 375px) {
-        font-size: 0.625rem;
-        padding: 10px 5px;
+      @media (max-width: 674px) {
+        font-size: 14px;
       }
 
-      @media screen and (max-width: 767px) and (min-width: 376px) {
-        font-size: 0.7rem;
+      @media (max-width: 424px) {
+        font-size: 12px;
       }
     }
 
-    div:not(.add-row) {
-      display: flex;
-      flex-basis: 100%;
-      width: 100%;
-      justify-content: center;
+    li {
+      list-style-type: none;
+      padding: 10px 0;
+      min-width: 70px;
 
-      label {
-        display: block;
-        max-width: 120px;
-        width: 12%;
+      &:nth-child(even) {
+        background-color: rgba($aqua, 0.2);
       }
     }
 
-    .form-feed-submit {
-      display: block;
+    .feed-clearfix {
+      height: 60px;
     }
+  }
 
-    .add-row {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      margin: 40px 0 0 2%;
-      color: $black;
-      background-color: $aqua;
-      border-radius: 3px;
-      font-size: 2rem;
-      text-align: center;
-      position: relative;
-      line-height: 100%;
+  #feed-labels {
+    max-width: fit-content;
+    text-align: right;
 
-      span {
-        line-height: 160%;
-        position: absolute;
-        top: 2.5px;
-        left: calc(100% + 20px);
-        font-size: 1rem;
-        white-space: nowrap;
-      }
-
-      &:hover {
-        cursor: pointer;
-        background-color: lighten($aqua, 5%);
-      }
+    li {
+      min-width: unset;
+      padding: 10px;
     }
+  }
+
+  @media (max-width: 424px) {
+    padding: 0;
   }
 }
 
