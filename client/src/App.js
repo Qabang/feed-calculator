@@ -8,28 +8,37 @@ import {
 import Footer from './components/footer/Footer.js'
 import Index from './components/index/Index.js'
 import Calculator from './components/calculator/Calculator.js'
+import { ReactComponent as ReactLogo } from './assets/images/logo.svg'
 import './App.scss'
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <section>
-          <nav>
-            <ul>
-              <li>
-                <NavLink exact to="/">
-                  Start
-                </NavLink>
-              </li>
-              <li>
-                <NavLink exact to="/calculation">
-                  Calc
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </section>
+        <header>
+          <section>
+            <nav>
+              <ul>
+                <li>
+                  <NavLink exact to="/">
+                    Start
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink exact to="/calculation">
+                    Calculator
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink exact to="/about">
+                    About
+                  </NavLink>
+                </li>
+              </ul>
+              <ReactLogo />
+            </nav>
+          </section>
+        </header>
         <Routes>
           <Route exact path="/" element={<Index />}></Route>
           <Route exact path="/calculation" element={<Calculator />}></Route>
