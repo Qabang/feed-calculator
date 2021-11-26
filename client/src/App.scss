@@ -30,6 +30,14 @@ p {
   letter-spacing: 0.7px;
 }
 
+button,
+input[type='submit'],
+a {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 header {
   overflow: hidden;
   font-family: $font-text;

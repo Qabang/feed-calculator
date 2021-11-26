@@ -1,4 +1,5 @@
 import ImageCard from '../ImageCard/ImageCard.js'
+import './Index.scss'
 
 function Index() {
   return (
@@ -12,8 +13,8 @@ function Index() {
         alt="horse and foal gracing"
       />
       <div id="quote">
-        <span>No hour of life is lost that is spent in the saddle</span>—
-        Winston Churchill
+        <span>No hour of life is lost that is spent in the saddle</span>
+        <br />— Winston Churchill
       </div>
       <ImageCard
         image="christine-mendoza-HDDZOfX8pLA-unsplash_mquwul"

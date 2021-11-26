@@ -1,0 +1,37 @@
+@import '../../assets/style/config';
+
+#quote {
+  max-width: $max-width;
+  padding: 60px;
+  // background: lightblue;
+  margin: auto;
+  color: darken($yellow, 5%);
+  text-align: right;
+  width: fit-content;
+
+  span {
+    text-align: center;
+    position: relative;
+    font-size: 25px;
+    color: $black;
+    &::before {
+      color: $yellow;
+      content: '\201C';
+      top: -60px;
+      left: -60px;
+      font-family: $font-heading;
+      position: absolute;
+      font-size: 160px;
+    }
+
+    &::after {
+      color: $yellow;
+      font-size: 160px;
+      font-family: $font-heading;
+      position: absolute;
+      content: '\201D';
+      right: -60px;
+      bottom: -140px;
+    }
+  }
+}
