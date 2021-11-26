@@ -1,0 +1,62 @@
+@import '../../assets/style/config';
+
+.image-card {
+  display: flex;
+  max-width: $max-width;
+  max-height: 360px;
+  margin: 50px auto;
+  justify-content: center;
+
+  img {
+    width: 50%;
+    height: auto;
+    z-index: 1;
+
+    &.right {
+      order: 2;
+    }
+  }
+
+  .image-card-text-box {
+    margin: auto auto auto -40px;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    max-height: calc(360px * 0.75);
+    padding: 35px;
+    background: $light-aqua;
+    background: linear-gradient(
+      -137deg,
+      $light-aqua,
+      lighten($light-aqua, 10%)
+    );
+    z-index: 2;
+    font-family: $font-text;
+    font-size: 16px;
+    line-height: 160%;
+    letter-spacing: 0.7px;
+
+    div:not(.text) {
+      margin: 20px auto;
+
+      a {
+        color: $dark-blue;
+        font-family: $font-heading;
+        font-size: 20px;
+        font-weight: 800;
+
+        svg {
+          margin: 0 20px;
+        }
+      }
+    }
+
+    &.right {
+      margin: auto -40px auto auto;
+      background: linear-gradient(
+        137deg,
+        $light-aqua,
+        lighten($light-aqua, 10%)
+      );
+    }
+  }
+}

@@ -1,5 +1,35 @@
 @import 'assets/style/config';
 
+h1,
+h2,
+h3 {
+  font-family: $font-heading;
+}
+
+h1 {
+  font-size: 40px;
+  line-height: $lineheight-h1;
+  font-weight: 900;
+}
+
+h2 {
+  line-height: $lineheight-h2;
+  font-size: 36px;
+  font-weight: 900;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+p {
+  font-family: $font-text;
+  font-size: 16px;
+  line-height: 160%;
+  letter-spacing: 0.7px;
+}
+
 header {
   overflow: hidden;
   font-family: $font-text;

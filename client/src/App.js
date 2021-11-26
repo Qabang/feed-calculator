@@ -53,10 +53,12 @@ function App() {
           </nav>
           {/* </section> */}
         </header>
-        <Routes>
-          <Route exact path="/" element={<Index />}></Route>
-          <Route exact path="/calculation" element={<Calculator />}></Route>
-        </Routes>
+        <main>
+          <Routes>
+            <Route exact path="/" element={<Index />}></Route>
+            <Route exact path="/calculation" element={<Calculator />}></Route>
+          </Routes>
+        </main>
       </Router>
       <Footer />
     </div>
