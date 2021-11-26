@@ -19,6 +19,10 @@ footer {
     background-color: $black;
     height: 80%;
     transform: rotate(3deg) translateX(-50%);
+
+    @media (max-width: 1024px) {
+      height: fit-content;
+    }
   }
 
   .footer-wrapper {
@@ -66,15 +70,32 @@ footer {
         margin-right: 0px;
       }
     }
+
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
   }
 
-  .angled-div {
-    background-color: $black;
-    position: absolute;
-    top: -20px;
-    left: -3vw;
-    height: 150px;
-    transform: rotate(5deg);
-    width: 110vw;
+  // .angled-div {
+  //   background-color: $black;
+  //   position: absolute;
+  //   top: -20px;
+  //   left: -3vw;
+  //   height: 150px;
+  //   transform: rotate(5deg);
+  //   width: 110vw;
+
+  // }
+
+  @media (max-width: 1024px) {
+    height: 520px;
+  }
+
+  @media (max-width: 580px) {
+    height: 560px;
+  }
+
+  @media (max-width: 425px) {
+    height: 600px;
   }
 }
