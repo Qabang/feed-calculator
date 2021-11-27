@@ -3,11 +3,13 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  Link,
 } from 'react-router-dom'
 
 import Footer from './components/footer/Footer.js'
 import Index from './components/index/Index.js'
 import Calculator from './components/calculator/Calculator.js'
+import About from './components/about/About.js'
 import { ReactComponent as ReactLogo } from './assets/images/logo.svg'
 
 import { FaBars, FaRegWindowClose } from 'react-icons/fa'
@@ -49,14 +51,16 @@ function App() {
                 </NavLink>
               </li>
             </ul>
-            <ReactLogo />
+            <Link to="/">
+              <ReactLogo />
+            </Link>
           </nav>
-          {/* </section> */}
         </header>
         <main>
           <Routes>
             <Route exact path="/" element={<Index />}></Route>
             <Route exact path="/calculation" element={<Calculator />}></Route>
+            <Route exact path="/about" element={<About />}></Route>
           </Routes>
         </main>
       </Router>

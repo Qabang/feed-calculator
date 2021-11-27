@@ -194,6 +194,12 @@ header {
           display: none;
         }
       }
+
+      &:hover {
+        path {
+          fill: $light-aqua;
+        }
+      }
     }
 
     #mobile-nav-icon,
