@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer>
       <section id="tilted-section">
-        <div class="footer-wrapper">
+        <div className="footer-wrapper">
           <section className="footer-block">
             <h3>Information</h3>
             <ul>
