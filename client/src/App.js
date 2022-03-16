@@ -12,7 +12,7 @@ import Calculator from './components/calculator/Calculator.js'
 import About from './components/about/About.js'
 import { ReactComponent as ReactLogo } from './assets/images/logo.svg'
 
-import { FaBars, FaRegWindowClose } from 'react-icons/fa'
+import { FaBars, FaRegWindowClose, FaAngleRight } from 'react-icons/fa'
 import './App.scss'
 import { useState } from 'react'
 
@@ -25,29 +25,46 @@ function App() {
 
   return (
     <div className="App">
+      <div
+        id="overlay"
+        className={isOpen ? '' : 'hidden'}
+        onClick={toggleClass}
+      ></div>
       <Router>
         <header>
           <section />
           <nav>
             <FaBars id="mobile-nav-icon" onClick={toggleClass} />
             <ul className={isOpen ? 'open' : 'closed'}>
-              <FaRegWindowClose
-                onClick={toggleClass}
-                id="mobile-nav-close-icon"
-              />
-              <li>
-                <NavLink exact to="/">
-                  Start
+              <span className="menu-grid-item">
+                <FaRegWindowClose
+                  onClick={toggleClass}
+                  id="mobile-nav-close-icon"
+                />
+              </span>
+              <li onClick={toggleClass}>
+                <NavLink className="menu-grid-item" exact="true" to="/">
+                  <span className="link-active-marker"></span>
+                  <span className="link-name">Start</span>
+                  <FaAngleRight className="link-arrow-icon" />
                 </NavLink>
               </li>
-              <li>
-                <NavLink exact to="/calculation">
-                  Calculator
+              <li onClick={toggleClass}>
+                <NavLink
+                  className="menu-grid-item"
+                  exact="true"
+                  to="/calculation"
+                >
+                  <span className="link-active-marker"></span>
+                  <span className="link-name">Calculator</span>
+                  <FaAngleRight className="link-arrow-icon" />
                 </NavLink>
               </li>
-              <li>
-                <NavLink exact to="/about">
-                  About
+              <li onClick={toggleClass}>
+                <NavLink className="menu-grid-item" exact="true" to="/about">
+                  <span className="link-active-marker"></span>
+                  <span className="link-name">About</span>
+                  <FaAngleRight className="link-arrow-icon" />
                 </NavLink>
               </li>
             </ul>

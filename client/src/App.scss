@@ -38,6 +38,21 @@ a {
   }
 }
 
+#overlay {
+  background-color: rgba($color: $aqua, $alpha: 0.5);
+  backdrop-filter: blur(2px);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 11;
+
+  &.hidden {
+    display: none;
+  }
+}
+
 header {
   overflow: hidden;
   font-family: $font-text;
@@ -149,34 +164,72 @@ header {
         position: fixed;
         top: 0;
         bottom: 0;
-        left: -150vw;
+        left: -400px;
         font-size: 20px;
         background: $black;
         margin: 0;
-        overflow: hidden;
+        // overflow: hidden;
         z-index: 100;
-        padding: 60px 60px 160px;
-        width: calc(100% - 10vw);
+        padding: 40px 40px 160px;
+        width: 320px;
+        filter: drop-shadow(-5px 5px 10px lighten($black, 10%));
+        z-index: 100;
 
         &.open {
           left: 0;
-          transition: 0.3s;
+          transition: 0.3s ease-out;
+          overflow: visible;
         }
 
         &.closed {
-          left: -150vw;
-          transition: 0.3s;
+          left: -400px;
+          transition: 0.3s ease-in;
+        }
+
+        .menu-grid-item {
+          display: grid;
+          grid-template-columns: 24px 1fr 40px;
         }
 
         li {
-          width: fit-content;
+          width: 100%;
           margin-left: auto;
           margin-right: auto;
+          text-align: left;
+          border-bottom: darken($aqua, 40%) solid 1px;
+
+          a {
+            padding-right: 0;
+            padding-left: 0;
+            margin: 5px 0;
+
+            &::before {
+              display: none;
+            }
+
+            .link-name {
+              grid-column: 2;
+            }
+
+            &.active .link-active-marker {
+              float: left;
+              grid-column: 1;
+              height: 100%;
+              width: 4px;
+              background-color: $aqua;
+              border-radius: 2px;
+            }
+
+            .link-arrow-icon {
+              color: darken($aqua, 40%);
+            }
+          }
         }
 
         #mobile-nav-close-icon {
-          margin: 0 40px 40px;
-          margin-left: auto;
+          grid-column: 3;
+          // margin: 0 40px 40px;
+          // margin-left: auto;
         }
       }
     }
