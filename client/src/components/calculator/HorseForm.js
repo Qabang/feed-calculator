@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Field } from 'formik'
+import * as Yup from 'yup'
 import axios from 'axios'
 
 import './HorseForm.scss'
 
 function HorseForm(props) {
-  const [horseData, setHorseData] = useState({})
   const [weightOptions, setweightOptions] = useState([])
 
   let defaultValues = {
@@ -21,18 +21,32 @@ function HorseForm(props) {
   useEffect(() => {
     let weight_opt = []
     for (let i = 100; i <= 1000; i = i + 50) {
-      console.log(i)
       weight_opt.push(i)
     }
     setweightOptions(weight_opt)
   }, [])
 
+  const ProfileSchema = Yup.object().shape({
+    name: Yup.string(),
+    born: Yup.number().required().positive('Required').integer(),
+    sex: Yup.string().required('Required'),
+    weight: Yup.number().required('Required').positive('Required'),
+    bodyType: Yup.string().required('Required'),
+    hull: Yup.string().required('Required'),
+    walkTime: Yup.number()
+      .moreThan(-1, 'Value must be a positive number or 0')
+      .integer(),
+    trotTime: Yup.number()
+      .moreThan(-1, 'Value must be a positive number or 0')
+      .integer(),
+  })
+
   return (
     <section className="horse-form">
       <Formik
-        initialValues={defaultValues}
+        initialValues={ProfileSchema}
+        validationSchema={ProfileSchema}
         onSubmit={(values, formData) => {
-          console.log(values)
           values.weight = parseInt(values.weight)
           axios({
             method: 'post',
@@ -42,12 +56,12 @@ function HorseForm(props) {
             },
           }).then(
             (response) => {
-              console.log(response)
               if (response.status === 200) {
                 props.calculatorCallback(response.data)
               }
             },
             (error) => {
+              // TODO Log errors to something useful.
               console.log(error)
             }
           )
@@ -58,8 +72,9 @@ function HorseForm(props) {
           handleBlur,
           handleChange,
           handleSubmit,
-          setFieldValue,
-          isSubmitting,
+          isValid,
+          dirty,
+          touched,
           values,
         }) => (
           <form onSubmit={handleSubmit}>
@@ -78,7 +93,9 @@ function HorseForm(props) {
                 <br />
                 <label>Born</label>
                 <input
-                  className="born"
+                  className={
+                    (errors.born && touched.born ? 'error ' : '') + 'born'
+                  }
                   name="born"
                   type="number"
                   placeholder="YYYY"
@@ -86,11 +103,16 @@ function HorseForm(props) {
                   onChange={handleChange}
                   value={values.born}
                 />
+                {errors.born && touched.born ? (
+                  <div className="error-message">{errors.born}</div>
+                ) : null}
                 <br />
                 <label>Gender</label>
                 <select
                   id="sex"
-                  className="sex"
+                  className={
+                    (errors.sex && touched.sex ? 'error ' : '') + 'sex'
+                  }
                   name="sex"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -100,10 +122,18 @@ function HorseForm(props) {
                   <option value="stallion">Hingst</option>
                   <option value="gelding/mare">Valack/Sto</option>
                 </select>
+                {errors.sex && touched.sex ? (
+                  <div className="error-message">{errors.sex}</div>
+                ) : null}
               </div>
               <div className="profile-section">
                 <label>Weight</label>
-                <Field as="select" name="weight" type="number">
+                <Field
+                  as="select"
+                  name="weight"
+                  type="number"
+                  className={errors.weight && touched.weight ? 'error ' : ''}
+                >
                   <option value="null">-</option>
                   {weightOptions &&
                     weightOptions.map((option, index) => (
@@ -112,11 +142,17 @@ function HorseForm(props) {
                       </option>
                     ))}
                 </Field>
+                {errors.weight && touched.weight ? (
+                  <div className="error-message">{errors.weight}</div>
+                ) : null}
                 <br />
                 <label>Body Type</label>
                 <select
                   id="type"
-                  className="type"
+                  className={
+                    (errors.bodyType && touched.bodyType ? 'error ' : '') +
+                    'type'
+                  }
                   name="bodyType"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -127,9 +163,14 @@ function HorseForm(props) {
                   <option value="type-normal">Normal</option>
                   <option value="type-hard">Hard Keep</option>
                 </select>
+                {errors.bodyType && touched.bodyType ? (
+                  <div className="error-message">{errors.bodyType}</div>
+                ) : null}
                 <label>Body Condition</label>
                 <select
-                  className="hull"
+                  className={
+                    (errors.hull && touched.hull ? 'error ' : '') + 'hull'
+                  }
                   name="hull"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -140,6 +181,9 @@ function HorseForm(props) {
                   <option value="thin">Thin</option>
                   <option value="fat">Fat</option>
                 </select>
+                {errors.hull && touched.hull ? (
+                  <div className="error-message">{errors.hull}</div>
+                ) : null}
               </div>
             </div>
             <div className="profile-section">
@@ -147,25 +191,40 @@ function HorseForm(props) {
               <div className="profile-work">
                 <label>Walk</label>
                 <input
-                  className="walk"
+                  className={
+                    (errors.walkTime && touched.walkTime ? 'error ' : '') +
+                    'walk'
+                  }
                   name="walkTime"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.walkTime}
                   type="number"
                 />
+                {errors.walkTime && touched.walkTime ? (
+                  <div className="error-message">{errors.walkTime}</div>
+                ) : null}
                 <label>Trot / Canter</label>
                 <input
-                  className="trot"
+                  className={
+                    (errors.trotTime && touched.tro ? 'error ' : '') + 'trot'
+                  }
                   name="trotTime"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.trotTime}
                   type="number"
                 />
+                {errors.trotTime && touched.trotTime ? (
+                  <div className="error-message">{errors.trotTime}</div>
+                ) : null}
               </div>
             </div>
-            <input type="submit" value="Submit Horse profile" />
+            <input
+              type="submit"
+              value="Submit Horse profile"
+              disabled={!(isValid && dirty)}
+            />
           </form>
         )}
       </Formik>
