@@ -12,7 +12,8 @@ import Calculator from './components/calculator/Calculator.js'
 import About from './components/about/About.js'
 import { ReactComponent as ReactLogo } from './assets/images/logo.svg'
 
-import { FaBars, FaRegWindowClose, FaAngleRight } from 'react-icons/fa'
+import { FaBars, FaRegWindowClose, FaAngleRight, FaTimes } from 'react-icons/fa'
+import { MdOutlineClose } from 'react-icons/md'
 import './App.scss'
 import { useState } from 'react'
 
@@ -36,8 +37,9 @@ function App() {
           <nav>
             <FaBars id="mobile-nav-icon" onClick={toggleClass} />
             <ul className={isOpen ? 'open' : 'closed'}>
-              <span className="menu-grid-item">
-                <FaRegWindowClose
+              <span className="menu-grid-item navigation-header">
+                <h2>Menu</h2>
+                <MdOutlineClose
                   onClick={toggleClass}
                   id="mobile-nav-close-icon"
                 />

@@ -39,17 +39,22 @@ a {
 }
 
 #overlay {
-  background-color: rgba($color: $aqua, $alpha: 0.5);
-  backdrop-filter: blur(2px);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 11;
+  display: none;
 
   &.hidden {
     display: none;
+  }
+
+  @media screen and (max-width: 1024px) {
+    display: block;
+    background-color: rgba($color: $aqua, $alpha: 0.5);
+    backdrop-filter: blur(2px);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 11;
   }
 }
 
@@ -98,6 +103,10 @@ header {
       justify-self: center;
       padding: 0;
       margin: auto 0 10px 0;
+
+      .navigation-header {
+        display: none;
+      }
 
       li {
         list-style-type: none;
@@ -157,6 +166,10 @@ header {
             }
           }
         }
+
+        .link-arrow-icon {
+          display: none;
+        }
       }
 
       @media screen and (max-width: 1024px) {
@@ -166,12 +179,18 @@ header {
         bottom: 0;
         left: -400px;
         font-size: 20px;
-        background: $black;
+        background-color: $black;
+        background-image: url('./assets/images/background-mob-nav.png');
+        background-position: bottom;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
         margin: 0;
         // overflow: hidden;
         z-index: 100;
-        padding: 40px 40px 160px;
-        width: 320px;
+        padding: 0 0 160px;
+        width: 400px;
+        height: 550px;
+        box-sizing: border-box;
         filter: drop-shadow(-5px 5px 10px lighten($black, 10%));
         z-index: 100;
 
@@ -191,10 +210,23 @@ header {
           grid-template-columns: 24px 1fr 40px;
         }
 
+        .navigation-header {
+          display: grid;
+          color: $light-aqua;
+          background-color: darken($aqua, 40%);
+          padding: 20px 40px;
+          margin-bottom: 40px;
+
+          h2 {
+            font-size: 24px;
+            font-weight: 700;
+          }
+        }
+
         li {
-          width: 100%;
-          margin-left: auto;
-          margin-right: auto;
+          width: calc(100% - 80px);
+          margin-left: 40px;
+          margin-right: 40px;
           text-align: left;
           border-bottom: darken($aqua, 40%) solid 1px;
 
@@ -202,6 +234,7 @@ header {
             padding-right: 0;
             padding-left: 0;
             margin: 5px 0;
+            font-weight: 300;
 
             &::before {
               display: none;
@@ -221,6 +254,7 @@ header {
             }
 
             .link-arrow-icon {
+              display: block;
               color: darken($aqua, 40%);
             }
           }
@@ -228,8 +262,6 @@ header {
 
         #mobile-nav-close-icon {
           grid-column: 3;
-          // margin: 0 40px 40px;
-          // margin-left: auto;
         }
       }
     }
@@ -261,15 +293,20 @@ header {
       margin: auto 0 20px;
       height: 40px;
       display: none;
-
-      path {
-        fill: $aqua;
-      }
+      color: $light-aqua;
+      cursor: pointer;
 
       @media (max-width: 1024px) {
         display: block;
       }
     }
+
+    #mobile-nav-icon {
+      path {
+        fill: $aqua;
+      }
+    }
+
     @media screen and (max-width: 1024px) {
       padding: 40px;
     }
