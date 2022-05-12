@@ -44,7 +44,7 @@ function HorseForm(props) {
   return (
     <section className="horse-form">
       <Formik
-        initialValues={ProfileSchema}
+        initialValues={defaultValues}
         validationSchema={ProfileSchema}
         onSubmit={(values, formData) => {
           values.weight = parseInt(values.weight)
@@ -222,7 +222,7 @@ function HorseForm(props) {
             </div>
             <input
               type="submit"
-              value="Submit Horse profile"
+              value="Save Horse's profile"
               disabled={!(isValid && dirty)}
             />
           </form>

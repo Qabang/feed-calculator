@@ -31,10 +31,138 @@ p {
 }
 
 button,
+input[type='submit'] {
+  padding: 15px 20px;
+  box-sizing: border-box;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  margin: auto 0;
+  filter: drop-shadow($drop-shadow-small);
+
+  span {
+    margin-left: 20px;
+  }
+}
+
+button,
 input[type='submit'],
 a {
   &:hover {
     cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+input:not(input[type='submit']),
+select {
+  min-width: 125px;
+  margin-bottom: 25px;
+  width: 100%;
+  height: 35px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  border: 1px solid $aqua;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
+  padding: 0 15px;
+  background-color: #fff;
+
+  &:focus {
+    box-shadow: 0 0 4px 4px rgba($yellow, 0.8);
+  }
+}
+
+select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, $light-aqua 50%),
+    linear-gradient(135deg, $light-aqua 50%, transparent 50%),
+    linear-gradient(to right, $aqua, $aqua);
+  background-position: calc(100% - 17px) calc(50% + 2px),
+    calc(100% - 12px) calc(50% + 2px), 100% 0;
+  background-size: 5px 5px, 5px 5px, 35px 35px;
+  background-repeat: no-repeat;
+}
+
+.btn-edit {
+  background-color: $yellow;
+
+  &:hover {
+    background-color: lighten($yellow, 5%);
+  }
+}
+
+.btn-primary {
+  background-color: $aqua;
+  min-width: 139px;
+
+  &:hover {
+    background-color: lighten($aqua, 5%);
+  }
+}
+.btn-delete {
+  background-color: $red;
+  color: $white;
+
+  &:hover {
+    background-color: lighten($red, 5%);
+  }
+}
+.btn-cta {
+  background-color: $dark-blue;
+  color: $white;
+
+  &:hover {
+    background-color: lighten($dark-blue, 5%);
+  }
+}
+
+.btn-slim {
+  max-height: 45px;
+  height: 45px;
+  border-radius: calc(45px / 2);
+}
+
+.btn-small {
+  width: 139px;
+}
+
+.btn-circle {
+  min-width: 45px;
+  max-width: 45px;
+  padding: 0;
+  width: 100%;
+  height: 45px;
+  border-radius: 22.5px;
+  display: flex;
+  justify-content: center;
+
+  svg {
+    margin: auto;
+  }
+
+  span {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+  }
+}
+
+.caption {
+  font-family: $font-text;
+  font-size: $caption-size;
+  text-align: left;
+  text-decoration: none;
+
+  &.center {
+    text-align: center;
+  }
+  &.right {
+    text-align: right;
   }
 }
 
