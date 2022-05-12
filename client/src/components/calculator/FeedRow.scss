@@ -1,0 +1,128 @@
+@import '../../assets/style/config';
+#feedrow-wrapper {
+  margin: 10px auto;
+  padding: 0;
+  max-width: $max-width;
+  width: 90%;
+  box-sizing: border-box;
+
+  .feedrow.open {
+    .feedrow-content {
+      visibility: visible;
+      height: 100%;
+    }
+  }
+
+  .feedrow.closed {
+    .feedrow-content {
+      visibility: hidden;
+      height: 0;
+    }
+  }
+
+  .feedrow {
+    padding: 20px;
+    border: 1px solid $aqua;
+    border-radius: 5px;
+    list-style-type: none;
+    margin-left: 0;
+    background-color: rgba($white, 0.4);
+
+    &.open {
+      .toggle-arrow {
+        transform: rotate(-180deg);
+        transition: 0.2s;
+
+        &.disabled {
+          color: $light-aqua;
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    .feedrow-header {
+      display: flex;
+      font-family: $font-text;
+      font-size: $text-size;
+      justify-content: space-between;
+      cursor: pointer;
+
+      .feedrow-title {
+        font-weight: bold;
+        margin: auto 0;
+
+        span {
+          font-weight: 400;
+        }
+      }
+
+      .toggle-arrow {
+        transition: 0.2s;
+        margin: auto 0;
+        width: 25px;
+        height: 25px;
+      }
+
+      button {
+        @media screen and (max-width: $tablet) {
+          width: 45px;
+          padding: 0;
+          justify-content: center;
+
+          svg {
+            margin: auto;
+          }
+          span {
+            visibility: hidden;
+            width: 0;
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .feedrow-content {
+      height: 100%;
+
+      &.edit {
+        margin-top: 20px;
+        background-color: rgba($yellow, 0.1);
+        border: 2px solid $yellow;
+        padding: 20px;
+
+        button.btn-cancel {
+          margin-left: 20px;
+          margin-right: auto;
+
+          @media screen and (max-width: $tablet) {
+            margin: 25px auto 0 auto;
+          }
+        }
+      }
+
+      ul {
+        display: flex;
+      }
+
+      li {
+        margin: 25px 50px 25px 0;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        &:not(:first) {
+          margin: 25px 50px;
+        }
+
+        label {
+          text-transform: capitalize;
+          font-size: $text-size;
+          margin-bottom: 15px;
+        }
+        span {
+          font-size: $caption-size;
+        }
+      }
+    }
+  }
+}

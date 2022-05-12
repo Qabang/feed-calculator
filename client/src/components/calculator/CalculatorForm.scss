@@ -1,149 +1,61 @@
 @import '../../assets/style/config';
 
 #feeding-calculator-wrapper {
-  width: 100%;
+  width: 90%;
   box-sizing: border-box;
   max-width: $max-width;
-  padding: 15px;
   margin: auto;
+  padding: 30px;
+  border: 1px solid $aqua;
+  border-radius: 5px;
+  background-color: rgba($white, 0.4);
+}
 
-  form {
-    width: auto;
-    height: auto;
-    background-color: transparent;
-    margin: auto;
-    padding-bottom: 15px;
+.form-wrapper {
+  .feeding-calculator-flex-wrap {
+    display: flex;
+    width: 100%;
+    text-align: left;
+    flex-wrap: wrap;
+  }
 
-    input[type='submit'] {
-      background-color: $dark-blue;
-      border-radius: 50px;
-      border: none;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-      color: #fff;
-      font-family: $font-text;
-      font-size: 1rem;
-      margin: 1rem auto 0;
-      padding: 10px 25px;
+  #feed-name {
+    width: 320px;
+    max-width: 320px;
+  }
 
-      &:hover {
-        background-color: lighten($dark-blue, 5%);
-        cursor: pointer;
-      }
-    }
+  input:not(input[type='submit'], #feed-name) {
+    max-width: 180px;
+  }
 
-    .feeding-calculator-flex-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
+  label {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 20px;
+    flex-basis: 20%;
 
-      .calculator-labels {
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 0.9rem;
-        text-align: center;
-
-        label {
-          color: #fff;
-          font-family: $font-text;
-          padding: 15px 5px;
-          box-sizing: border-box;
-          background: $dark-blue;
-          font-weight: 700;
-          font-size: 1rem;
-
-          @media screen and (max-width: 499px) {
-            font-size: 12px;
-          }
-        }
-
-        span {
-          @media screen and (max-width: 767px) {
-            display: block;
-          }
-        }
-
-        @media screen and (max-width: 375px) {
-          font-size: 0.625rem;
-        }
-
-        @media screen and (max-width: 767px) and (min-width: 376px) {
-          font-size: 0.7rem;
-        }
-      }
-    }
-
-    .form-feed {
-      width: 100vw;
-      padding: 10px 30px;
-      box-sizing: border-box;
-    }
-
-    .form-feed-input {
-      display: flex;
-      padding: 10px;
-      margin: 0;
-      max-width: 120px;
-      width: 12%;
-      box-sizing: border-box;
-      font-size: 0.9rem;
-
-      @media screen and (max-width: 375px) {
-        font-size: 0.625rem;
-        padding: 10px 5px;
-      }
-
-      @media screen and (max-width: 767px) and (min-width: 376px) {
-        font-size: 0.7rem;
-      }
-    }
-
-    div:not(.add-row) {
-      display: flex;
-      flex-basis: 100%;
-      width: 100%;
-      justify-content: center;
-
-      label {
-        display: block;
-        max-width: 120px;
-        width: 12%;
-      }
-    }
-
-    .form-feed-submit {
-      display: block;
-    }
-
-    .add-row {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      margin: 40px 0 0 2%;
-      color: $black;
-      background-color: $aqua;
-      border-radius: 3px;
-      font-size: 2rem;
-      text-align: center;
-      position: relative;
-      line-height: 100%;
-
-      span {
-        line-height: 160%;
-        position: absolute;
-        top: 2.5px;
-        left: calc(100% + 20px);
-        font-size: 1rem;
-        white-space: nowrap;
-      }
-
-      &:hover {
-        cursor: pointer;
-        background-color: lighten($aqua, 5%);
-      }
+    @media screen and (max-width: $tablet-xl) {
+      flex-basis: 40%;
     }
   }
 
-  @media screen and (max-width: 499px) {
-    padding: 0;
+  label.long-input {
+    flex-basis: 100%;
+  }
+
+  .unit-label {
+    flex-basis: 100%;
+    display: block;
+    margin-left: 20px;
+    border-bottom: 1px solid $light-aqua;
+  }
+
+  button[type='submit'] {
+    margin-left: auto;
+    margin-right: 20px;
+
+    @media screen and (max-width: $tablet) {
+      margin: auto;
+    }
   }
 }

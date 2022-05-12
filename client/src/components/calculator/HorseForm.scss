@@ -21,36 +21,6 @@
     display: flex;
     flex-wrap: wrap;
 
-    input,
-    select {
-      margin-bottom: 25px;
-      width: 100%;
-      height: 35px;
-      border-radius: 3px;
-      box-sizing: border-box;
-      border: 1px solid $aqua;
-      -webkit-transition: 0.2s;
-      transition: 0.2s;
-      outline: none;
-      padding: 0 15px;
-      background-color: #fff;
-
-      &:focus {
-        box-shadow: 0 0 4px 4px rgba($yellow, 0.8);
-      }
-    }
-
-    select {
-      appearance: none;
-      background-image: linear-gradient(45deg, transparent 50%, $light-aqua 50%),
-        linear-gradient(135deg, $light-aqua 50%, transparent 50%),
-        linear-gradient(to right, $aqua, $aqua);
-      background-position: calc(100% - 17px) calc(50% + 2px),
-        calc(100% - 12px) calc(50% + 2px), 100% 0;
-      background-size: 5px 5px, 5px 5px, 35px 35px;
-      background-repeat: no-repeat;
-    }
-
     .profile-basics {
       display: flex;
       flex-basis: 67%;

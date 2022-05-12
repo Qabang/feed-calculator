@@ -13,6 +13,10 @@
     padding: 0;
 
     h3 {
+      font-family: $font-text;
+      font-size: $preamble-size;
+      font-weight: bold;
+      text-align: left;
       margin: 0;
       padding: 0;
 
@@ -26,12 +30,13 @@
     }
 
     li {
+      text-align: left;
       list-style-type: none;
       padding: 10px 0;
       min-width: 70px;
 
       &:nth-child(even) {
-        background-color: rgba($aqua, 0.2);
+        background-color: rgba($white, 0.4);
       }
     }
 
@@ -42,7 +47,9 @@
 
   #feed-labels {
     max-width: fit-content;
-    text-align: right;
+    text-align: left;
+    text-transform: capitalize;
+    font-weight: bold;
 
     li {
       min-width: unset;
@@ -120,7 +127,7 @@
     flex-basis: 22.5%;
 
     h2 {
-      text-align: center;
+      text-align: left;
       text-transform: capitalize;
       font-size: 1.5rem;
       margin: 20px 0;
@@ -130,7 +137,7 @@
       font-weight: 700;
       font-size: 1rem;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: $tablet) {
         text-align: left;
         margin-left: calc(25% + 20px);
       }
@@ -149,14 +156,14 @@
         list-style-type: none;
         display: block;
         min-height: 25px;
-        text-align: center;
+        text-align: left;
         justify-content: center;
         align-content: center;
         box-sizing: border-box;
         line-height: 25px;
         margin: 20px 0;
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: $tablet) {
           text-align: left;
           padding-left: 10px;
           display: block;
@@ -169,7 +176,7 @@
         hyphens: auto;
         margin-right: 15px;
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: $tablet) {
           display: block;
           flex-basis: 25%;
           text-align: right;
@@ -194,7 +201,7 @@
         background-color: rgba($color: #008000, $alpha: 0.4) !important;
       }
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: $tablet) {
         display: flex;
         flex-wrap: wrap;
       }
@@ -221,7 +228,7 @@
       }
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $tablet) {
       flex-basis: unset;
       border: 0;
     }
@@ -241,7 +248,7 @@
     background-color: rgba($color: green, $alpha: 0.5) !important;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: $tablet) {
     flex-wrap: wrap;
     flex-basis: 16.6%;
 
