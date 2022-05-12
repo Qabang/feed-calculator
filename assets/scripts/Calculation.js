@@ -99,6 +99,7 @@ class Calculation {
   }
 
   calcFeedTotal() {
+    const EXCLUDED_LABELS = ['name', 'solids', 'amount']
     const feedData = this.data
     let result = {
       mj: 0,
@@ -109,81 +110,20 @@ class Calculation {
       selenium: 0,
     }
 
-    let i = 1
-    Object.keys(feedData).forEach((key) => {
-      // Check if key value cointains the string. If add values to result.
-      switch (true) {
-        case key.includes('mj'):
-          if (feedData[key] !== null) {
-            let solidsPercent = feedData[`solids${i}`]
-              ? feedData[`solids${i}`] / 100
-              : 1
-            let amount = feedData[`amount${i}`] || 0
-            let sum = parseFloat(feedData[key]) * amount * solidsPercent
-            result.mj += sum
-          }
-          break
-        case key.includes('smrp'):
-          if (feedData[key] !== null) {
-            let solidsPercent = feedData[`solids${i}`]
-              ? feedData[`solids${i}`] / 100
-              : 1
-            let amount = feedData[`amount${i}`] || 0
-            let sum = parseFloat(feedData[key]) * amount * solidsPercent
-            result.smrp += sum
-          }
-          break
-        case key.includes('ca'):
-          if (feedData[key] !== null) {
-            let solidsPercent = feedData[`solids${i}`]
-              ? feedData[`solids${i}`] / 100
-              : 1
-            let amount = feedData[`amount${i}`] || 0
-            let sum = parseFloat(feedData[key]) * amount * solidsPercent
-            result.ca += sum
-          }
-          break
-        case key.includes('p'):
-          if (feedData[key] !== null) {
-            let solidsPercent = feedData[`solids${i}`]
-              ? feedData[`solids${i}`] / 100
-              : 1
-            let amount = feedData[`amount${i}`] || 0
-            let sum = parseFloat(feedData[key]) * amount * solidsPercent
-            result.p += sum
-          }
-          break
-        case key.includes('mg'):
-          if (feedData[key] !== null) {
-            let solidsPercent = feedData[`solids${i}`]
-              ? feedData[`solids${i}`] / 100
-              : 1
-            let amount = feedData[`amount${i}`] || 0
-            let sum = parseFloat(feedData[key]) * amount * solidsPercent
-            result.mg += sum
-          }
-          break
-        case key.includes('selenium'):
-          if (feedData[key] !== null) {
-            let solidsPercent = feedData[`solids${i}`]
-              ? feedData[`solids${i}`] / 100
-              : 1
-            let amount = feedData[`amount${i}`] || 0
-            let sum = parseFloat(feedData[key]) * amount * solidsPercent
-            result.selenium += sum
-          }
-          break
+    feedData.forEach((row) => {
+      let solidsPercent = row[`solids`] ? row[`solids`] / 100 : 1
+      let amount = row.amount || 0
 
-        default:
-          console.warn(key, 'The key is not handled in the switch statement')
-          break
-      }
+      let filteredFeedDataKeys = Object.keys(row).filter(
+        (key) => !EXCLUDED_LABELS.includes(key)
+      )
 
-      if (i < 10) {
-        i++
-      } else {
-        i = 1
-      }
+      filteredFeedDataKeys.forEach((key) => {
+        if (row[key] !== '') {
+          let sum = parseFloat(row[key]) * amount * solidsPercent
+          result[key] += sum
+        }
+      })
     })
 
     // Round down to 2 decimals if needed.

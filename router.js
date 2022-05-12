@@ -13,12 +13,6 @@ router.get('/calculation', (req, res) => {
 })
 
 router.post('/profile', (req, res) => {
-  // Handle empty numerical values that are empty strings on submit.
-  req.body.values.walkTime =
-    req.body.values.walkTime === '' ? 0 : req.body.values.walkTime
-  req.body.values.trotTime =
-    req.body.values.trotTime === '' ? 0 : req.body.values.trotTime
-
   const calc = new Calculation(req.body)
   res.send({ base: calc.baseNeed, work: calc.workNeed })
 })
