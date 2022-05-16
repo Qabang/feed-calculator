@@ -10,7 +10,7 @@ import Footer from './components/footer/Footer.js'
 import Index from './components/index/Index.js'
 import Calculator from './components/calculator/Calculator.js'
 import About from './components/about/About.js'
-import { ReactComponent as ReactLogo } from './assets/images/logo.svg'
+import { ReactComponent as EfeLogo } from './assets/images/logo.svg'
 
 import { FaBars, FaRegWindowClose, FaAngleRight, FaTimes } from 'react-icons/fa'
 import { MdOutlineClose } from 'react-icons/md'
@@ -71,7 +71,7 @@ function App() {
               </li>
             </ul>
             <Link to="/">
-              <ReactLogo />
+              <EfeLogo />
             </Link>
           </nav>
         </header>
