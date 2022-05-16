@@ -257,3 +257,18 @@
     }
   }
 }
+
+#print-section {
+  max-width: $max-width;
+  margin: 0 auto 40px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .indicator {
+    flex-basis: 100%;
+  }
+
+  #print-trigger {
+    margin-left: auto;
+  }
+}

@@ -1,0 +1,120 @@
+@import '../../assets/style/config';
+
+#pdf {
+  padding: 2.54cm;
+  max-width: 2480px;
+  box-sizing: border-box;
+  text-align: left;
+
+  .pdf-section {
+    flex: 1;
+  }
+
+  hr {
+    border: 1px solid $aqua;
+    margin: 35px 30px;
+  }
+
+  table {
+    width: 100%;
+    text-align: left;
+    font-size: 12pt;
+    font-family: $font-text;
+
+    th {
+      font-weight: 900;
+      font-size: 14pt;
+    }
+    td {
+      font-weight: 400;
+    }
+  }
+  .vertical-line {
+    width: 2px;
+    background-color: $aqua;
+    height: 232pt;
+    margin: 30px;
+  }
+
+  h2,
+  h3 {
+    font-family: $font-heading;
+    text-align: left;
+    font-size: 18pt;
+    line-height: 115%;
+  }
+
+  .pdf-header {
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      font-family: $font-heading;
+      font-size: 20pt;
+      margin-top: 0;
+      text-align: left;
+      margin-bottom: 20px;
+
+      span {
+        font-weight: 400;
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: 12pt;
+      text-align: left;
+    }
+
+    .text-content {
+      margin: auto auto 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      svg {
+        margin: auto 0 auto auto;
+        max-width: 170pt;
+      }
+    }
+  }
+
+  .pdf-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+
+    &.first {
+      margin: 90px 30px;
+    }
+
+    &.headings {
+      padding-left: 13%;
+      h2 {
+        flex-basis: 33%;
+        text-align: left;
+      }
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      flex: 1;
+      flex-basis: 33%;
+
+      &:first {
+        flex-basis: 16.5%;
+      }
+
+      li {
+        list-style-type: none;
+      }
+
+      &.labels {
+        font-weight: 900;
+        flex-basis: 16.5%;
+      }
+    }
+  }
+}

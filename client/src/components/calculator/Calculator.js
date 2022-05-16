@@ -1,12 +1,19 @@
 import { useEffect, useState, useRef } from 'react'
+import * as React from 'react'
+import ReactToPrint from 'react-to-print'
+import { useReactToPrint } from 'react-to-print'
 import HorseForm from './HorseForm.js'
 import FeedForm from './FeedForm.js'
 import FeedRow from './FeedRow.js'
+import { FunctionalComponentToPrint } from './ComponentToPrint'
 import axios from 'axios'
+import { FaDownload } from 'react-icons/fa'
 
 import './Calculator.scss'
 
 function Calculator() {
+  const [profileName, setProfileName] = useState('')
+  const [horseWorkAmount, setHorseWorkAmount] = useState('')
   const [horseBaseData, setHorseBaseData] = useState('')
   const [horseWorkData, setHorseWorkData] = useState('')
   const [feedRows, setFeedRows] = useState([])
@@ -79,9 +86,59 @@ function Calculator() {
     )
   }
 
+  // React-to-print print component.
+  const componentRef = React.useRef(null)
+
+  const onBeforeGetContentResolve = React.useRef(null)
+
+  const [loading, setLoading] = React.useState(false)
+  const [text, setText] = React.useState('')
+
+  const handleOnBeforeGetContent = React.useCallback(() => {
+    console.log('`onBeforeGetContent` called')
+    setLoading(true)
+    setText('Loading Document...')
+
+    return new Promise((resolve) => {
+      onBeforeGetContentResolve.current = resolve
+
+      setTimeout(() => {
+        setLoading(false)
+        setText('Document is ready!')
+        resolve()
+      }, 2000)
+    })
+  }, [setLoading, setText])
+
+  React.useEffect(() => {
+    if (
+      text === 'Document is ready!' &&
+      typeof onBeforeGetContentResolve.current === 'function'
+    ) {
+      onBeforeGetContentResolve.current()
+    }
+  }, [onBeforeGetContentResolve.current, text])
+
+  const reactToPrintContent = React.useCallback(() => {
+    return componentRef.current
+  }, [componentRef.current])
+
+  const reactToPrintTrigger = React.useCallback(() => {
+    return (
+      <button id="print-trigger" className="btn-slim btn-cta">
+        <FaDownload />
+        <span>Print Feed Calculation</span>
+      </button>
+    )
+  }, [])
+
   return (
     <section>
-      <HorseForm calculatorCallback={handleHorseForm} />
+      <HorseForm
+        calculatorCallback={handleHorseForm}
+        setProfileName={setProfileName}
+        setHorseWorkAmount={setHorseWorkAmount}
+      />
 
       {horseBaseData && (
         <div>
@@ -134,6 +191,27 @@ function Calculator() {
               </ul>
             )}
           </section>
+          {horseResultData && (
+            <div id="print-section">
+              <ReactToPrint
+                content={reactToPrintContent}
+                documentTitle={'feed-caculation-' + profileName}
+                onBeforeGetContent={handleOnBeforeGetContent}
+                removeAfterPrint
+                trigger={reactToPrintTrigger}
+              />
+              {loading && <p className="indicator">Preparing document...</p>}
+              <div style={{ display: 'none' }}>
+                <FunctionalComponentToPrint
+                  ref={componentRef}
+                  feedData={feedRows}
+                  profileName={profileName}
+                  work={horseWorkAmount}
+                  calculations={[horseBaseData, horseWorkData, horseResultData]}
+                />
+              </div>
+            </div>
+          )}
         </div>
       )}
       {showCalculator && (
