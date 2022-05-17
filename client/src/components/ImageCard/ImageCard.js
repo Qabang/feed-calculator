@@ -3,28 +3,22 @@ import { FaArrowRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 function ImageCard(props) {
-  // /horses-srcset/${props.image}_c_scale,w_442.jpg 442w,
-  // /horses-srcset/${props.image}_c_scale,w_617.jpg 617w,
-  // /horses-srcset/${props.image}_c_scale,w_783.jpg 783w,
-  // /horses-srcset/${props.image}_c_scale,w_908.jpg 908w,
-  // /horses-srcset/${props.image}_c_scale,w_1027.jpg 1027w,
-  // /horses-srcset/${props.image}_c_scale,w_1131.jpg 1131w,
-  // /horses-srcset/${props.image}_c_scale,w_1239.jpg 1239w,
-  // /horses-srcset/${props.image}_c_scale,w_1280.jpg 1280w,
-  // /horses-srcset/${props.image}_c_scale,w_1378.jpg 1378w,
   return (
     <section className="image-card">
       {props.image && (
         <img
           className={props.right ? 'right' : 'left'}
-          sizes="(max-width: 1400px) 100vw, 1400px"
-          srcset={`
-                /horses-srcset/${props.image}_c_scale,w_200.jpg
-                /horses-srcset/${props.image}_c_scale,w_200.jpg 200w,
-  
-                /horses-srcset/${props.image}_c_scale,w_1400.jpg 1400w
-                `}
-          src={`/horses-srcset/${props.image}_c_scale,w_1400.jpg`}
+          sizes="(max-width: 1400px) 480px, 1400px"
+          srcSet={`
+            /horses-srcset/${props.image}_1400.jpg 1400w,
+            /horses-srcset/${props.image}_1200.jpg 1200w,
+            /horses-srcset/${props.image}_1000.jpg 1000w,
+            /horses-srcset/${props.image}_800.jpg 800w,
+            /horses-srcset/${props.image}_600.jpg 600w,
+            /horses-srcset/${props.image}_400.jpg 400w,
+      
+          `}
+          src={`/horses-srcset/${props.image}_400.jpg`}
           alt={props.alt || ''}
         />
       )}

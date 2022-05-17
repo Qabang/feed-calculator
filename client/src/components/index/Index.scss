@@ -1,9 +1,8 @@
 @import '../../assets/style/config';
 
 #quote {
-  max-width: $max-width;
+  max-width: 50%;
   padding: 60px;
-  // background: lightblue;
   margin: auto;
   color: darken($yellow, 5%);
   text-align: right;
