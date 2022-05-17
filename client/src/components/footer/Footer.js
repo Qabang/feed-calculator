@@ -1,5 +1,9 @@
-import { MdEmail } from 'react-icons/md'
-import { FaLinkedin, FaGithubSquare, FaEnvelope } from 'react-icons/fa'
+import {
+  FaLinkedin,
+  FaGithubSquare,
+  FaEnvelope,
+  FaExternalLinkAlt,
+} from 'react-icons/fa'
 import './Footer.scss'
 
 function Footer() {
@@ -27,6 +31,7 @@ function Footer() {
                   target="_blank"
                 >
                   Feed recomendations for horses (Swedish)
+                  <FaExternalLinkAlt />
                 </a>
               </li>
               <li>
@@ -35,6 +40,7 @@ function Footer() {
                   target="_blank"
                 >
                   Horse feed nutrition table (Swedish)
+                  <FaExternalLinkAlt />
                 </a>
               </li>
             </ul>
@@ -43,20 +49,20 @@ function Footer() {
             <h3 className="visibly-hidden">Contact</h3>
             <ul>
               <li>
-                <a href="mailto:hello@sandralindstrom.com">
-                  <FaEnvelope id="first-icon" />
+                <a id="first-icon" href="mailto:hello@sandralindstrom.com">
+                  <FaEnvelope />
                   <span className="visibly-hidden">
                     hello@sandralindstrom.com
                   </span>
                 </a>
-                <a href="mailto:hello@sandralindstrom.com">
+                <a href="">
                   <FaLinkedin />
                   <span className="visibly-hidden">
                     Visit my Linkedin profile
                   </span>
                 </a>
-                <a href="mailto:hello@sandralindstrom.com">
-                  <FaGithubSquare id="last-icon" />
+                <a id="last-icon" href="">
+                  <FaGithubSquare />
                   <span className="visibly-hidden">
                     Visit my Github profile
                   </span>

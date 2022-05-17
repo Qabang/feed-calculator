@@ -2,14 +2,15 @@
 
 #quote {
   max-width: 50%;
-  padding: 60px;
+  padding: 0 60px;
   margin: auto;
   color: darken($yellow, 5%);
   text-align: right;
   width: fit-content;
 
   span {
-    text-align: center;
+    text-align: left;
+    display: block;
     position: relative;
     font-size: 25px;
     color: $black;

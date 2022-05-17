@@ -43,6 +43,10 @@ input[type='submit'] {
   span {
     margin-left: 20px;
   }
+
+  &:focus {
+    box-shadow: 0 0 4px 4px rgba($yellow, 0.8);
+  }
 }
 
 button,
@@ -86,6 +90,10 @@ select {
     calc(100% - 12px) calc(50% + 2px), 100% 0;
   background-size: 5px 5px, 5px 5px, 35px 35px;
   background-repeat: no-repeat;
+
+  &:not(select[disabled]) {
+    cursor: pointer;
+  }
 }
 
 .btn-edit {

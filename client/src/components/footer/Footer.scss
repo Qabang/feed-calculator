@@ -31,7 +31,7 @@ footer {
   }
 
   .footer-wrapper {
-    padding: 30px;
+    padding: 0 30px 20px;
     width: 100vw;
     margin-left: 50%;
     box-sizing: border-box;
@@ -84,6 +84,12 @@ footer {
         margin: auto 0 0 60px;
         white-space: nowrap;
 
+        svg {
+          margin-left: 10px;
+          margin-bottom: -2px;
+          fill: $yellow;
+        }
+
         @media screen and (max-width: $tablet-xl) {
           margin: 0;
           border-bottom: 1px solid $aqua;
@@ -105,6 +111,19 @@ footer {
           justify-content: flex-end;
           a {
             color: $yellow;
+            margin: 20px;
+
+            &#first-icon {
+              margin-left: 0;
+            }
+
+            &#last-icon {
+              margin-right: 0;
+            }
+
+            &:focus {
+              box-shadow: 0 0 4px 4px rgba($light-aqua, 0.8);
+            }
           }
         }
 
@@ -115,16 +134,7 @@ footer {
         svg {
           height: 35px;
           width: auto;
-          margin: 20px;
           margin-bottom: 0;
-
-          &#first-icon {
-            margin-left: 0;
-          }
-
-          &#last-icon {
-            margin-right: 0;
-          }
         }
 
         @media screen and (max-width: $tablet-xl) {
