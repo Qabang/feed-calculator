@@ -10,17 +10,18 @@ h1 {
   font-size: 40px;
   line-height: $lineheight-h1;
   font-weight: 900;
+  text-align: center;
 }
 
 h2 {
   line-height: $lineheight-h2;
   font-size: 36px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 h3 {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 p {
@@ -62,7 +63,8 @@ a {
 }
 
 input:not(input[type='submit']),
-select {
+select,
+textarea {
   min-width: 125px;
   margin-bottom: 25px;
   width: 100%;
@@ -474,7 +476,6 @@ input[type='number'] {
 }
 
 .App {
-  text-align: center;
   overflow-x: hidden;
 }
 

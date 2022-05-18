@@ -6,7 +6,7 @@ import HelpBox from './HelpBox'
 
 function FeedForm(props) {
   const btnIcon = props.buttonIcon || <FaPlus />
-  const btnText = props.buttonText || 'Add To feed result'
+  const btnText = props.buttonText || 'Add to feed result'
   let defaultValues = props.defaultValues
     ? props.defaultValues
     : {

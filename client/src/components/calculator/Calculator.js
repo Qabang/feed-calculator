@@ -133,7 +133,7 @@ function Calculator() {
   }, [])
 
   return (
-    <section>
+    <section id="calculator-section-wrapper">
       <HorseForm
         calculatorCallback={handleHorseForm}
         setProfileName={setProfileName}

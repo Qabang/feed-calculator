@@ -1,5 +1,13 @@
 @import '../../assets/style/config';
 
+#calculator-section-wrapper {
+  max-width: $max-width;
+  margin: auto;
+
+  @media screen and (max-width: $tablet-xl) {
+    max-width: 90%;
+  }
+}
 #feed-needs {
   display: flex;
   width: 100%;

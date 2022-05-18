@@ -227,7 +227,7 @@ function HorseForm({ calculatorCallback, setProfileName, setHorseWorkAmount }) {
             </div>
             <input
               type="submit"
-              value="Save Horse's profile"
+              value="Calculate Horse's need"
               disabled={!(isValid && dirty)}
             />
           </form>
