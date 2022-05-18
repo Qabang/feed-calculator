@@ -1,0 +1,62 @@
+@import '../../assets/style/config';
+
+#contact {
+  text-align: left;
+
+  .contact-form {
+    margin: auto;
+    max-width: 820px;
+
+    form {
+      border: 1px solid $aqua;
+      border-radius: 5px;
+      padding: 30px;
+    }
+
+    label {
+      display: block;
+      font-family: $font-text;
+      font-size: $text-size;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    .error-message {
+      font-family: $font-text;
+      font-size: 14px;
+      color: $red;
+      position: absolute;
+    }
+
+    input[type='submit'] {
+      margin: 20px auto;
+      padding-left: 30px;
+      padding-right: 30px;
+
+      &:disabled {
+        filter: saturate(20%) brightness(150%);
+        opacity: 0.7;
+
+        &:hover {
+          background-color: $dark-blue;
+        }
+      }
+    }
+
+    textarea {
+      font-family: $font-text;
+      font-size: 13px;
+      padding: 15px;
+      width: 100%;
+      height: fit-content;
+      border: 1px solid $aqua;
+      margin-bottom: 10px;
+    }
+
+    input[type='text'] {
+      font-family: $font-text;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+  }
+}
