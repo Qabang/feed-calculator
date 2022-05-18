@@ -15,18 +15,114 @@ class Calculation {
     return this.calcFeedTotal()
   }
 
+  get toxicAmounts() {
+    return this.toxicAmounts()
+  }
+
+  growthNeed(age) {
+    let dailyGrowthRate = 0
+
+    // Daily growth in Kg.
+    if (age >= 1 && age < 2) {
+      dailyGrowthRate = 0.00114 * parseFloat(this.data.weight)
+    } else if (age >= 2 && age <= 3) {
+      dailyGrowthRate = 0.0003 * parseFloat(this.data.weight)
+    }
+
+    let months = age * 12
+    const a = 1350 + 67.94 * months - 1.093 * months ** 2
+    return (dailyGrowthRate * a * 13.45) / 1000
+  }
+
+  baseNeedConstants(age) {
+    let baseConstants = {
+      mj: null,
+      smrp: null,
+      ca: null,
+      p: null,
+      mg: null,
+      selenium: null,
+    }
+
+    switch (true) {
+      // The Young horse, age 1 years old.
+      case age >= 1 && age < 2:
+        baseConstants = {
+          mj: 0.59,
+          smrp: 7.5,
+          ca: 10.3,
+          p: 5.7,
+          mg: 1.7,
+          selenium: 0.2,
+        }
+
+        break
+      // The Young horse, age between 2-3 years old.
+      case age >= 2 && age <= 3:
+        baseConstants = {
+          mj: 0.57,
+          smrp: 6.5,
+          ca: 7.5,
+          p: 4.2,
+          mg: 1.6,
+          selenium: 0.2,
+        }
+        break
+      // The adult horse, age between 4-19 years old.
+      case age > 3 && age <= 19:
+        baseConstants = {
+          mj: 0.5,
+          smrp: 6,
+          ca: 4,
+          p: 2.8,
+          mg: 1.5,
+          selenium: 0.2,
+        }
+        break
+      // The old horse, age above 19 years old.
+      case age > 19:
+        baseConstants = {
+          mj: 0.5,
+          smrp: 12,
+          ca: 4,
+          p: 2.8,
+          mg: 1.5,
+          selenium: 0.2,
+        }
+        break
+      default:
+        console.log('Error in age switch:', age, baseConstants)
+        break
+    }
+
+    return baseConstants
+  }
+
   calcBaseNeed() {
     console.log('Getting calculation...')
-    let mj = 0.5 * parseInt(this.data.weight) ** 0.75
+    const currentYear = new Date().getFullYear()
+    const age = parseInt(currentYear) - parseInt(this.data.born)
+    const baseConstants = this.baseNeedConstants(age)
+    const growthAddition = this.growthNeed(age)
+    let weight = parseFloat(this.data.weight)
+
+    // Calculate weight if horse is growing.
+    if (age >= 1 && age < 2) {
+      weight = weight * 0.67
+    } else if (age >= 2 && age <= 3) {
+      weight = weight * 0.89
+    }
+
+    let mj = growthAddition + baseConstants.mj * weight ** 0.75
 
     // General need for the adult easy keep horse.
     let baseNeed = {
       mj: mj,
-      smrp: mj * 6,
-      ca: parseFloat(this.data.weight / 100) * 4,
-      p: parseFloat(this.data.weight / 100) * 2.8,
-      mg: parseFloat(this.data.weight / 100) * 1.5,
-      selenium: parseFloat(this.data.weight / 100) * 0.2,
+      smrp: mj * baseConstants.smrp,
+      ca: (weight / 100) * baseConstants.ca,
+      p: (weight / 100) * baseConstants.p,
+      mg: (weight / 100) * baseConstants.mg,
+      selenium: (weight / 100) * baseConstants.se,
     }
 
     // Alter values for enegy and protein based on if the horse is a hard keep or a normal keep.
@@ -132,6 +228,17 @@ class Calculation {
     })
 
     return result
+  }
+
+  toxicAmounts() {
+    const weight = this.data.weight / 100
+    return {
+      fe: 3000 * weight,
+      mn: 3000 * weight,
+      cu: 2400 * weight,
+      zn: 1500 * weight,
+      se: 5 * weight,
+    }
   }
 }
 
