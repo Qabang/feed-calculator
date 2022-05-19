@@ -16,6 +16,7 @@ import {
 import './Calculator.scss'
 import ResultColumn from './ResultColumn.js'
 import FeedWarningsList from './FeedWarningsList.js'
+import Quotas from './Quotas.js'
 
 function Calculator() {
   const [profile, setProfile] = useState('')
@@ -85,7 +86,6 @@ function Calculator() {
     }).then(
       (response) => {
         if (response.status === 200) {
-          console.log(response.data)
           setToxicValues(response.data)
         }
       },
@@ -119,8 +119,8 @@ function Calculator() {
     setFeedWarningList(feedWarnings)
   }
 
-  let calculateValues = (values) => {
-    axios({
+  let calculateValues = async (values) => {
+    await axios({
       method: 'post',
       url: '/calculate',
       data: {
@@ -129,10 +129,10 @@ function Calculator() {
     }).then(
       (response) => {
         if (response.status === 200) {
-          setHorseResultData(response.data)
           myRef.current.scrollIntoView()
           getToxicValues(response.data)
           handleFeedWarnings(response.data)
+          setHorseResultData(response.data)
         }
       },
       (error) => {
@@ -244,6 +244,9 @@ function Calculator() {
               </ul>
             )}
           </section>
+
+          {horseResultData && <Quotas data={horseResultData} />}
+
           <FeedWarningsList
             feedWarningList={feedWarningList}
             toxicValues={toxicValues}

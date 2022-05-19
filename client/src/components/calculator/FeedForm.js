@@ -214,6 +214,20 @@ function FeedForm(props) {
             value={values[`zn`]}
           />
         </label>
+        <label htmlFor="feed-mn">
+          <span>Manganese</span>
+          <input
+            id="feed-mn"
+            step="0.01"
+            className="form-feed-input input-mn"
+            type="number"
+            placeholder=""
+            name={`mn`}
+            onBlur={blur}
+            onChange={change}
+            value={values[`mn`]}
+          />
+        </label>
         <label htmlFor="feed-se">
           <span>Selenium</span>
           <input
