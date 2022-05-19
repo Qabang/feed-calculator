@@ -255,7 +255,7 @@ function Calculator() {
             <div id="print-section">
               <ReactToPrint
                 content={reactToPrintContent}
-                documentTitle={'feed-caculation-' + profile}
+                documentTitle={'feed-caculation-' + profile.name || '[null]'}
                 onBeforeGetContent={handleOnBeforeGetContent}
                 removeAfterPrint
                 trigger={reactToPrintTrigger}
@@ -268,6 +268,13 @@ function Calculator() {
                   profileName={profile.name}
                   work={horseWorkAmount}
                   calculations={[horseBaseData, horseWorkData, horseResultData]}
+                  quotas={<Quotas data={horseResultData} />}
+                  warnings={
+                    <FeedWarningsList
+                      feedWarningList={feedWarningList}
+                      toxicValues={toxicValues}
+                    />
+                  }
                 />
               </div>
             </div>

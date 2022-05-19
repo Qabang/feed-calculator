@@ -2,7 +2,14 @@ import { ReactComponent as EfeLogo } from '../../assets/images/logo.svg'
 
 import './PdfView.scss'
 
-function PdfView({ feedData, profileName, work, calculations }) {
+function PdfView({
+  feedData,
+  profileName,
+  work,
+  calculations,
+  quotas,
+  warnings,
+}) {
   let year = new Date().getFullYear()
   let month = ('0' + new Date().getMonth()).slice(-2)
   let day = ('0' + new Date().getDate()).slice(-2)
@@ -59,7 +66,8 @@ function PdfView({ feedData, profileName, work, calculations }) {
             </>
           )}
         </section>
-        <p>Ca/P Quota: {caPQuota || '-'}</p>
+        <hr />
+        {quotas}
       </section>
       <hr />
       <section className="pdf-content">
@@ -109,6 +117,8 @@ function PdfView({ feedData, profileName, work, calculations }) {
         </section>
       </section>
       <hr />
+      <div className="clearfix"></div>
+      {warnings}
     </article>
   )
 }

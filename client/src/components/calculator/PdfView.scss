@@ -2,6 +2,7 @@
 
 #pdf {
   padding: 2.54cm;
+  padding-top: calc(2.54cm / 2);
   max-width: 2480px;
   box-sizing: border-box;
   text-align: left;
@@ -32,15 +33,20 @@
   .vertical-line {
     width: 2px;
     background-color: $aqua;
-    height: 232pt;
+    height: 200pt;
     margin: 30px;
+  }
+
+  .clearfix {
+    height: 2.54cm;
+    width: 100%;
   }
 
   h2,
   h3 {
     font-family: $font-heading;
     text-align: left;
-    font-size: 18pt;
+    font-size: 16pt;
     line-height: 115%;
   }
 

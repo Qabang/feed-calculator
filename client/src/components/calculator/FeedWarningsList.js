@@ -34,12 +34,12 @@ function FeedWarningsList({ feedWarningList, toxicValues }) {
 
   function ListElement({ title, list, icon, listType }) {
     return (
-      <ul>
-        <h3>{title}</h3>
+      <ul id={listType} className="list-errors">
+        <h3>{title}:</h3>
         {Object.keys(list).map((key, index) => (
           <li key={index + '-' + listType + '-values'}>
             <span className={'error-icon ' + listType}>{icon}</span>
-            <span className="list-label">{labels[key]}</span>: {list[key]}
+            <span className="list-label">{labels[key]}</span> {list[key]}
           </li>
         ))}
       </ul>
@@ -52,7 +52,7 @@ function FeedWarningsList({ feedWarningList, toxicValues }) {
         <section id="calculation-errors">
           {Object.keys(feedWarningList).length > 0 && (
             <ListElement
-              title="Warnings:"
+              title="Warnings"
               list={feedWarningList}
               icon={<FaExclamationTriangle />}
               listType="warning"
@@ -60,7 +60,7 @@ function FeedWarningsList({ feedWarningList, toxicValues }) {
           )}
           {Object.keys(toxicDangerList).length > 0 && (
             <ListElement
-              title="Toxic values:"
+              title="Toxic values"
               list={toxicDangerList}
               icon={<FaExclamationCircle />}
               listType="danger"
