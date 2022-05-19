@@ -63,7 +63,7 @@ function ContactForm() {
           values,
         }) => (
           <form onSubmit={handleSubmit}>
-            <label for="subject">Subject</label>
+            <label htmlFor="subject">Subject</label>
             <input
               id="subject"
               name="subject"
@@ -79,7 +79,7 @@ function ContactForm() {
             {errors.subject && touched.subject ? (
               <div className="error-message">{errors.subject}</div>
             ) : null}
-            <label for="email">Your Email</label>
+            <label htmlFor="email">Your Email</label>
             <input
               id="email"
               name="email"
@@ -95,7 +95,7 @@ function ContactForm() {
             {errors.subject && touched.subject ? (
               <div className="error-message">{errors.subject}</div>
             ) : null}
-            <label for="message">Message</label>
+            <label htmlFor="message">Message</label>
             <textarea
               id="message"
               rows={8}

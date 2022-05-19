@@ -44,13 +44,13 @@ function PdfView({ feedData, profileName, work, calculations }) {
           {calculations && calculations.length > 0 && (
             <>
               <ul className="labels">
-                {Object.keys(calculations[0]).map((key) => (
-                  <li>{key}</li>
+                {Object.keys(calculations[0]).map((key, index) => (
+                  <li key={index + '-label'}>{key}</li>
                 ))}
               </ul>
 
-              {calculations.map((items) => (
-                <ul className="pdf-section">
+              {calculations.map((items, index) => (
+                <ul className="pdf-section" key={index + '-pdf-section'}>
                   {Object.keys(items).map((key, index) => (
                     <li key={key + index}>{items[key]}</li>
                   ))}
@@ -74,8 +74,8 @@ function PdfView({ feedData, profileName, work, calculations }) {
             </thead>
             <tbody>
               {feedData &&
-                feedData.map((item) => (
-                  <tr>
+                feedData.map((item, index) => (
+                  <tr key={index + '-tr'}>
                     <td>{item.name}</td>
                     <td>{item.amount} Kg</td>
                   </tr>

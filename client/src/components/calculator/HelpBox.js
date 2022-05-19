@@ -11,7 +11,7 @@ function HelpBox() {
     setIsVisible(!isVisisble)
   }
   return (
-    <div class="help-wrapper">
+    <div className="help-wrapper">
       <button className="btn-circle btn-primary" onClick={handleClick}>
         <FaQuestion />
         <span>Help</span>

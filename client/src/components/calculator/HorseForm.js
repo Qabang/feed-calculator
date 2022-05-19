@@ -5,7 +5,7 @@ import axios from 'axios'
 
 import './HorseForm.scss'
 
-function HorseForm({ calculatorCallback, setProfileName, setHorseWorkAmount }) {
+function HorseForm({ calculatorCallback, setProfile, setHorseWorkAmount }) {
   const [weightOptions, setweightOptions] = useState([])
 
   let defaultValues = {
@@ -57,7 +57,7 @@ function HorseForm({ calculatorCallback, setProfileName, setHorseWorkAmount }) {
           }).then(
             (response) => {
               if (response.status === 200) {
-                setProfileName(values.name)
+                setProfile(values)
                 setHorseWorkAmount({
                   walk: values.walkTime,
                   trot: values.trotTime,
