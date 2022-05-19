@@ -18,6 +18,11 @@ function FeedForm(props) {
         ca: '',
         p: '',
         mg: '',
+        na: '',
+        fe: '',
+        cu: '',
+        zn: '',
+        mn: '',
         selenium: '',
       }
 
@@ -148,6 +153,65 @@ function FeedForm(props) {
             onBlur={blur}
             onChange={change}
             value={values[`mg`]}
+          />
+        </label>
+        <label htmlFor="feed-na">
+          <span>Natrium</span>
+          <input
+            id="feed-na"
+            step="0.01"
+            className="form-feed-input input-na"
+            type="number"
+            placeholder=""
+            name={`na`}
+            onBlur={blur}
+            onChange={change}
+            value={values[`na`]}
+          />
+        </label>
+      </div>
+      <span className="caption unit-label">Unit: milligrams</span>
+      <div className="feeding-calculator-flex-wrap">
+        <label htmlFor="feed-fe">
+          <span>Iron</span>
+          <input
+            id="feed-fe"
+            step="0.01"
+            className="form-feed-input input-fe"
+            type="number"
+            placeholder=""
+            name={`fe`}
+            onBlur={blur}
+            onChange={change}
+            value={values[`fe`]}
+          />
+        </label>
+        <label htmlFor="feed-cu">
+          <span>Copper</span>
+          <input
+            id="feed-cu"
+            step="0.01"
+            className="form-feed-input input-cu"
+            type="number"
+            placeholder=""
+            name={`cu`}
+            onBlur={blur}
+            onChange={change}
+            value={values[`cu`]}
+          />
+        </label>
+        <label htmlFor="feed-zn">
+          <span>Zink</span>
+          <input
+            id="feed-zn"
+            step="0.01"
+            className="form-feed-input input-zn"
+            type="number"
+            placeholder=""
+            name={`zn`}
+            onBlur={blur}
+            onChange={change}
+            value={values[`zn`]}
           />
         </label>
         <label htmlFor="feed-se">

@@ -72,29 +72,29 @@ function FeedRow(props) {
               <>
                 <ul>
                   <li>
-                    <label for="list-mj">mj</label>
+                    <label htmlFor="list-mj">mj</label>
                     <span id="list-mj">{feedRow.mj}</span>
                   </li>
                   <li>
-                    <label for="list-smrp">smrp</label>
+                    <label htmlFor="list-smrp">smrp</label>
                     <span id="list-smrp">{feedRow.smrp}</span>
                   </li>
                 </ul>
                 <ul>
                   <li>
-                    <label for="list-ca">ca</label>
+                    <label htmlFor="list-ca">ca</label>
                     <span id="list-ca">{feedRow.ca}</span>
                   </li>
                   <li>
-                    <label for="list-p">p</label>
+                    <label htmlFor="list-p">p</label>
                     <span id="list-p">{feedRow.p}</span>
                   </li>
                   <li>
-                    <label for="list-mg">mg</label>
+                    <label htmlFor="list-mg">mg</label>
                     <span id="list-mg">{feedRow.mg}</span>
                   </li>
                   <li>
-                    <label for="list-selenium">selenium</label>
+                    <label htmlFor="list-selenium">selenium</label>
                     <span id="list-selenium">{feedRow.selenium}</span>
                   </li>
                 </ul>

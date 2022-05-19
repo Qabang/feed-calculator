@@ -22,6 +22,11 @@ router.post('/calculate', (req, res) => {
   res.send(calc.feedTotal)
 })
 
+router.post('/tolerance', (req, res) => {
+  const calc = new Calculation(req.body)
+  res.send(calc.toxicAmounts)
+})
+
 router.get('/api', async (req, res) => {
   console.log('hello world')
   res.json({ message: 'Hello from server!' })

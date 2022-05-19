@@ -16,7 +16,7 @@ class Calculation {
   }
 
   get toxicAmounts() {
-    return this.toxicAmounts()
+    return this.calcToxicAmounts()
   }
 
   growthNeed(age) {
@@ -41,6 +41,11 @@ class Calculation {
       ca: null,
       p: null,
       mg: null,
+      na: null,
+      fe: null,
+      cu: null,
+      zn: null,
+      mn: null,
       selenium: null,
     }
 
@@ -53,6 +58,11 @@ class Calculation {
           ca: 10.3,
           p: 5.7,
           mg: 1.7,
+          na: 5.1 * 0.4,
+          fe: 50,
+          cu: 12,
+          zn: 50,
+          mn: 50,
           selenium: 0.2,
         }
 
@@ -65,6 +75,11 @@ class Calculation {
           ca: 7.5,
           p: 4.2,
           mg: 1.6,
+          na: 5.1 * 0.4,
+          fe: 50,
+          cu: 12,
+          zn: 50,
+          mn: 50,
           selenium: 0.2,
         }
         break
@@ -76,6 +91,11 @@ class Calculation {
           ca: 4,
           p: 2.8,
           mg: 1.5,
+          na: 5.1 * 0.4,
+          fe: 50,
+          cu: 12,
+          zn: 50,
+          mn: 50,
           selenium: 0.2,
         }
         break
@@ -87,6 +107,11 @@ class Calculation {
           ca: 4,
           p: 2.8,
           mg: 1.5,
+          na: 5.1 * 0.4,
+          fe: 50,
+          cu: 12,
+          zn: 50,
+          mn: 50,
           selenium: 0.2,
         }
         break
@@ -99,7 +124,6 @@ class Calculation {
   }
 
   calcBaseNeed() {
-    console.log('Getting calculation...')
     const currentYear = new Date().getFullYear()
     const age = parseInt(currentYear) - parseInt(this.data.born)
     const baseConstants = this.baseNeedConstants(age)
@@ -122,7 +146,12 @@ class Calculation {
       ca: (weight / 100) * baseConstants.ca,
       p: (weight / 100) * baseConstants.p,
       mg: (weight / 100) * baseConstants.mg,
-      selenium: (weight / 100) * baseConstants.se,
+      na: (weight / 100) * baseConstants.na,
+      fe: (weight / 100) * baseConstants.fe,
+      cu: (weight / 100) * baseConstants.cu,
+      zn: (weight / 100) * baseConstants.zn,
+      mn: (weight / 100) * baseConstants.mn,
+      selenium: (weight / 100) * baseConstants.selenium,
     }
 
     // Alter values for enegy and protein based on if the horse is a hard keep or a normal keep.
@@ -138,7 +167,7 @@ class Calculation {
     Object.keys(baseNeed).forEach((obj) => {
       baseNeed[obj] = Math.round((baseNeed[obj] + Number.EPSILON) * 100) / 100
     })
-    console.log('Done calculation...')
+
     return baseNeed
   }
 
@@ -153,6 +182,11 @@ class Calculation {
       ca: 0,
       p: 0,
       mg: 0,
+      na: 0,
+      fe: 0,
+      cu: 0,
+      zn: 0,
+      mn: 0,
       selenium: 0,
     }
 
@@ -166,6 +200,13 @@ class Calculation {
 
     workNeed.mj = walk_mj + trot_mj
     workNeed.smrp = walk_smrp + trot_smrp
+
+    if (workNeed.mj > 0) {
+      workNeed.fe = (50 * this.data.weight) / 100
+      workNeed.mn = (50 * this.data.weight) / 100
+      workNeed.cu = (13 * this.data.weight) / 100
+      workNeed.zn = (50 * this.data.weight) / 100
+    }
 
     const percent_work = (workNeed.mj / baseNeed.mj) * 100
     const weightParam = this.data.weight / 100
@@ -203,6 +244,11 @@ class Calculation {
       ca: 0,
       p: 0,
       mg: 0,
+      na: 0,
+      fe: 0,
+      cu: 0,
+      zn: 0,
+      mn: 0,
       selenium: 0,
     }
 
@@ -230,15 +276,38 @@ class Calculation {
     return result
   }
 
-  toxicAmounts() {
-    const weight = this.data.weight / 100
-    return {
+  calcToxicAmounts() {
+    const currentYear = new Date().getFullYear()
+    const age = parseInt(currentYear) - parseInt(this.data.profile.born)
+    let weight = parseFloat(this.data.profile.weight)
+    let values = {}
+
+    // Calculate weight if horse is growing.
+    if (age >= 1 && age < 2) {
+      weight = weight * 0.67
+    } else if (age >= 2 && age <= 3) {
+      weight = weight * 0.89
+    }
+
+    weight = weight / 100
+
+    const ToxicValues = {
       fe: 3000 * weight,
       mn: 3000 * weight,
       cu: 2400 * weight,
       zn: 1500 * weight,
-      se: 5 * weight,
+      selenium: 5 * weight,
     }
+
+    const feedResult = this.data.resultData
+
+    Object.keys(ToxicValues).forEach((key) => {
+      if (feedResult[key] >= ToxicValues[key]) {
+        values[key] = ToxicValues[key]
+      }
+    })
+
+    return values
   }
 }
 

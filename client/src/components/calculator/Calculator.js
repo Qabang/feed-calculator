@@ -7,12 +7,20 @@ import FeedForm from './FeedForm.js'
 import FeedRow from './FeedRow.js'
 import { FunctionalComponentToPrint } from './ComponentToPrint'
 import axios from 'axios'
-import { FaDownload } from 'react-icons/fa'
+import {
+  FaDownload,
+  FaExclamationCircle,
+  FaExclamationTriangle,
+} from 'react-icons/fa'
 
 import './Calculator.scss'
+import ResultColumn from './ResultColumn.js'
+import FeedWarningsList from './FeedWarningsList.js'
 
 function Calculator() {
-  const [profileName, setProfileName] = useState('')
+  const [profile, setProfile] = useState('')
+  const [feedWarningList, setFeedWarningList] = useState({})
+  const [toxicValues, setToxicValues] = useState([])
   const [horseWorkAmount, setHorseWorkAmount] = useState('')
   const [horseBaseData, setHorseBaseData] = useState('')
   const [horseWorkData, setHorseWorkData] = useState('')
@@ -22,11 +30,13 @@ function Calculator() {
   const [showCardMessage, setShowCardMessage] = useState(false)
   const [cardMessage, setCardMessage] = useState('')
   const myRef = useRef(null)
+  const calculatorRef = useRef(null)
 
   let handleHorseForm = (childData) => {
     setHorseBaseData(childData.base)
     setHorseWorkData(childData.work)
     setShowCalculator(true)
+    calculatorRef.current.scrollIntoView()
   }
 
   let handleAddFeedRow = (row) => {
@@ -65,6 +75,50 @@ function Calculator() {
     }, 5000)
   }
 
+  const getToxicValues = async (resultData) => {
+    console.log('val: ', profile.weight)
+    let values = { profile, resultData }
+    axios({
+      method: 'post',
+      url: '/tolerance',
+      data: { values },
+    }).then(
+      (response) => {
+        if (response.status === 200) {
+          console.log(response.data)
+          setToxicValues(response.data)
+        }
+      },
+      (error) => {
+        // TODO log error somewhere.
+        console.log(error)
+      }
+    )
+  }
+
+  let handleFeedWarnings = (result) => {
+    let feedWarnings = {}
+    Object.keys(result).map((key) => {
+      let percent =
+        (result[key] / (horseBaseData[key] + horseWorkData[key])) * 100
+
+      if (!(key in toxicValues)) {
+        if (result[key] < horseBaseData[key]) {
+          feedWarnings[key] =
+            "This value is too low and does not cover your horse's minimum needs!"
+        } else if (percent > 105) {
+          feedWarnings[key] =
+            "This value is a bit high. If your horse dosen't get fat it's probably not dangerous"
+        } else if (percent < 95) {
+          feedWarnings[key] =
+            "This value is a bit low. If your horse dosen't get to skinny it's probably not dangerous"
+        }
+      }
+    })
+
+    setFeedWarningList(feedWarnings)
+  }
+
   let calculateValues = (values) => {
     axios({
       method: 'post',
@@ -77,6 +131,8 @@ function Calculator() {
         if (response.status === 200) {
           setHorseResultData(response.data)
           myRef.current.scrollIntoView()
+          getToxicValues(response.data)
+          handleFeedWarnings(response.data)
         }
       },
       (error) => {
@@ -136,7 +192,7 @@ function Calculator() {
     <section id="calculator-section-wrapper">
       <HorseForm
         calculatorCallback={handleHorseForm}
-        setProfileName={setProfileName}
+        setProfile={setProfile}
         setHorseWorkAmount={setHorseWorkAmount}
       />
 
@@ -151,51 +207,52 @@ function Calculator() {
                   <li key={key + index}>{key}</li>
                 ))}
             </ul>
-            <ul id="basic-need">
-              <h3 className="feed-clearfix">Basic needs:</h3>
-              {horseBaseData &&
-                Object.keys(horseBaseData).map((key, index) => (
-                  <li key={key + index}>{horseBaseData[key]}</li>
-                ))}
-            </ul>
-            <ul id="work-need">
-              <h3 className="feed-clearfix">Work needs:</h3>
-              {horseWorkData &&
-                Object.keys(horseWorkData).map((key, index) => (
-                  <li key={key + index}>{horseWorkData[key]}</li>
-                ))}
-            </ul>
-            {(horseBaseData || horseResultData) && (
-              <ul id="feed-total">
-                <h3 className="feed-clearfix">Total given:</h3>
-                {horseResultData &&
-                  Object.keys(horseResultData).map((key, index) => (
-                    <li key={key + index}>{horseResultData[key]}</li>
-                  ))}
-              </ul>
-            )}
+            <ResultColumn title="Basic needs" data={horseBaseData} />
+            <ResultColumn title="Work needs" data={horseWorkData} />
+            <ResultColumn title="Total given" data={horseResultData} />
             {(horseBaseData || horseResultData) && (
               <ul id="feed-result">
                 <h3 className="feed-clearfix">Result:</h3>
                 {horseResultData &&
                   Object.keys(horseResultData).map((key, index) => (
-                    <li key={key + index}>
+                    <li
+                      key={key + index}
+                      className={
+                        (key in toxicValues ? 'error-danger' : '') +
+                        ' ' +
+                        (key in feedWarningList ? 'error-warning' : '')
+                      }
+                    >
                       {parseInt(
                         (horseResultData[key] /
                           (horseBaseData[key] + horseWorkData[key])) *
                           100
                       )}
                       %
+                      {key in toxicValues && (
+                        <span className="error-icon danger">
+                          <FaExclamationCircle />
+                        </span>
+                      )}
+                      {!(key in toxicValues) && key in feedWarningList && (
+                        <span className="error-icon warning">
+                          <FaExclamationTriangle />
+                        </span>
+                      )}
                     </li>
                   ))}
               </ul>
             )}
           </section>
+          <FeedWarningsList
+            feedWarningList={feedWarningList}
+            toxicValues={toxicValues}
+          />
           {horseResultData && (
             <div id="print-section">
               <ReactToPrint
                 content={reactToPrintContent}
-                documentTitle={'feed-caculation-' + profileName}
+                documentTitle={'feed-caculation-' + profile}
                 onBeforeGetContent={handleOnBeforeGetContent}
                 removeAfterPrint
                 trigger={reactToPrintTrigger}
@@ -205,7 +262,7 @@ function Calculator() {
                 <FunctionalComponentToPrint
                   ref={componentRef}
                   feedData={feedRows}
-                  profileName={profileName}
+                  profileName={profile.name}
                   work={horseWorkAmount}
                   calculations={[horseBaseData, horseWorkData, horseResultData]}
                 />
@@ -215,7 +272,11 @@ function Calculator() {
         </div>
       )}
       {showCalculator && (
-        <section id="feeding-calculator-wrapper" className="form-wrapper">
+        <section
+          id="feeding-calculator-wrapper"
+          className="form-wrapper"
+          ref={calculatorRef}
+        >
           <FeedForm addFeedRowCallback={handleAddFeedRow} />
         </section>
       )}
