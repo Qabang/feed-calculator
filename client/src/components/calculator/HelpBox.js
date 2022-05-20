@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FaQuestion, FaTimes } from 'react-icons/fa'
+import { FaQuestion, FaTimes, FaExternalLinkAlt } from 'react-icons/fa'
 
 import './HelpBox.scss'
 
@@ -28,17 +28,43 @@ function HelpBox() {
               </button>
             </div>
             <p>
-              Praesent massa nisi, condimentum non scelerisque vitae, hendrerit
-              id sem. Aliquam et bibendum nunc. Class aptent taciti sociosqu ad
-              litora torquent per conubia nostra, per inceptos himenaeos. Duis
-              vel ultrices nunc. Morbi ut turpis vel ligula finibus lacinia ac
-              in orci. Nulla finibus rhoncus arcu, vel ullamcorper dui
-              pellentesque vitae. Aliquam vel fringilla arcu. Aenean ut lacus
-              maximus, vestibulum nisi quis, ornare eros. Vestibulum condimentum
-              facilisis velit non fringilla. Integer eu justo semper, tempor dui
-              sit amet, condimentum nisi. In molestie odio velit, tristique
-              commodo massa consectetur ut. Mauris facilisis mollis facilisis.
-              In at molestie eros.
+              This form is where you fill in the values of the feed you have
+              intended to use in your calculation. Empty fields will not be
+              included.
+            </p>
+            <p>
+              Solids: If this field is left blank, the program assumes that the
+              feed has a dry matter of 100%.
+            </p>
+            <p>
+              Calcium, Phosphorus, Magnesium and Sodium should be stated in
+              grams. Iron, Copper, Zinc, Managan and Selenium should be stated
+              in milligrams.
+            </p>
+            <p>
+              You can add how many different types of feed you want. As well as
+              edit or delete a feed entry from the list. All values are
+              calculated and displayed in the table above the calculator.
+            </p>
+
+            <p>
+              It is also possible to print or download the calculation as a pdf.
+              If you click on download the button, you can choose whether it
+              should be saved on your computer or if you want to print it
+              directly. Not sure what your feed is worth? check out this list
+              from SLU with many of the most common feed materials listed.
+            </p>
+            <a
+              href="http://www2.freefarm.se/fodertabell/fodtab.pl?djur=hast"
+              target="_blank"
+            >
+              Horse feed nutrition table (Swedish)
+              <FaExternalLinkAlt />
+            </a>
+            <p>
+              Remember that the program is not designed to discover all of the
+              dangerous overdoses. There, it is you as the owner who bears the
+              responsibility to not poison your horse.
             </p>
           </section>
         </>
