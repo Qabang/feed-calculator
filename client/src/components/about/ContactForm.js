@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Formik, Field } from 'formik'
+import Spinner from '../spinner/Spinner.js'
 import * as Yup from 'yup'
 import axios from 'axios'
 
 import './ContactForm.scss'
 
 function ContactForm() {
-  const [weightOptions, setweightOptions] = useState([])
+  const [loadingMessage, setLoadingMessage] = useState('Hello woeld')
+  const [isVisible, setIsVisible] = useState(false)
+  const [emailMessageResponse, setEmailMessageResponse] = useState('')
 
   let defaultValues = {
     subject: '',
@@ -32,6 +35,8 @@ function ContactForm() {
         initialValues={defaultValues}
         validationSchema={ProfileSchema}
         onSubmit={(values, formData) => {
+          setIsVisible(true)
+          setLoadingMessage('Prepearing email...')
           // TODO Post data and email results.
           axios({
             method: 'post',
@@ -42,10 +47,24 @@ function ContactForm() {
           }).then(
             (response) => {
               if (response.status === 200) {
-                // TODO Handle message response here
+                setLoadingMessage('Email was successfully sent.')
+                formData.resetForm({ values: '' })
+
+                setTimeout(() => {
+                  setIsVisible(false)
+                  setLoadingMessage('')
+                  setEmailMessageResponse('Thank you for your email!')
+                }, 3000)
+              } else {
+                setEmailMessageResponse(
+                  'Oops seems like the server run in to an error, please try again later. If the error still occurs send me an email at feed.estimation@gmail.com'
+                )
               }
             },
             (error) => {
+              setEmailMessageResponse(
+                'Oops seems like the server run in to an error, please try again later or send me an email at feed.estimation@gmail.com'
+              )
               // TODO Log errors to something useful.
               console.log(error)
             }
@@ -63,6 +82,7 @@ function ContactForm() {
           values,
         }) => (
           <form onSubmit={handleSubmit}>
+            <Spinner msg={loadingMessage} isVisible={isVisible} />
             <label htmlFor="subject">Subject</label>
             <input
               id="subject"
@@ -92,8 +112,8 @@ function ContactForm() {
                 (errors.email && touched.email ? 'error ' : '') + 'email'
               }
             />
-            {errors.subject && touched.subject ? (
-              <div className="error-message">{errors.subject}</div>
+            {errors.email && touched.email ? (
+              <div className="error-message">{errors.email}</div>
             ) : null}
             <label htmlFor="message">Message</label>
             <textarea
@@ -119,6 +139,12 @@ function ContactForm() {
               disabled={!(isValid && dirty)}
               className="btn-cta btn-slim"
             />
+            {emailMessageResponse && (
+              <p>
+                <br />
+                {emailMessageResponse}
+              </p>
+            )}
           </form>
         )}
       </Formik>
