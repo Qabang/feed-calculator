@@ -26,9 +26,17 @@ function HorseForm({ calculatorCallback, setProfile, setHorseWorkAmount }) {
     setweightOptions(weight_opt)
   }, [])
 
+  const thisYear = new Date().getFullYear()
+  const minValueYear = thisYear - 60
+
   const ProfileSchema = Yup.object().shape({
     name: Yup.string(),
-    born: Yup.number().required().positive('Required').integer(),
+    born: Yup.number()
+      .required()
+      .positive('Required, 4 digits')
+      .integer()
+      .min(minValueYear, `Must be a year after ${minValueYear}`)
+      .max(thisYear - 1, `Can't be younger than one year`),
     sex: Yup.string().required('Required'),
     weight: Yup.number().required('Required').positive('Required'),
     bodyType: Yup.string().required('Required'),
