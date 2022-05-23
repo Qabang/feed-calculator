@@ -61,6 +61,11 @@
         margin-top: 27px;
         margin-bottom: auto;
         font-size: 1.2rem;
+
+        @media screen and (max-width: $tablet) {
+          margin-top: 0;
+          height: fit-content;
+        }
       }
 
       .profile-work {
@@ -100,6 +105,12 @@
 
       &:disabled {
         cursor: default;
+      }
+
+      @media screen and (max-width: 450px) {
+        width: 100%;
+        min-width: fit-content;
+        padding: 13 20px;
       }
     }
 

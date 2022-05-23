@@ -28,7 +28,7 @@ function FeedForm(props) {
   const FormRows = ({ change, blur, values }) => (
     <div className={`feed-row`}>
       <div className="feeding-calculator-flex-wrap">
-        <label className="" htmlFor="feed-name">
+        <label className="long-input-label" htmlFor="feed-name">
           <span>Name</span>
           <input
             id="feed-name"

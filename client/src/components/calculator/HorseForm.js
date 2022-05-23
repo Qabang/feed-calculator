@@ -144,8 +144,8 @@ function HorseForm({ calculatorCallback, setProfile, setHorseWorkAmount }) {
                   value={values.sex}
                 >
                   <option value="null">-</option>
-                  <option value="stallion">Hingst</option>
-                  <option value="gelding/mare">Valack/Sto</option>
+                  <option value="stallion">Stallion</option>
+                  <option value="gelding/mare">Gelding / Mare</option>
                 </select>
                 {errors.sex && touched.sex ? (
                   <div className="error-message">{errors.sex}</div>

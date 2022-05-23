@@ -94,7 +94,29 @@ function FeedRow(props) {
                     <span id="list-mg">{feedRow.mg}</span>
                   </li>
                   <li>
-                    <label htmlFor="list-selenium">selenium</label>
+                    <label htmlFor="list-na">na</label>
+                    <span id="list-na">{feedRow.na}</span>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <label htmlFor="list-fe">fe</label>
+                    <span id="list-fe">{feedRow.fe}</span>
+                  </li>
+                  <li>
+                    <label htmlFor="list-cu">cu</label>
+                    <span id="list-cu">{feedRow.cu}</span>
+                  </li>
+                  <li>
+                    <label htmlFor="list-zn">zn</label>
+                    <span id="list-zn">{feedRow.zn}</span>
+                  </li>
+                  <li>
+                    <label htmlFor="list-mn">mn</label>
+                    <span id="list-mn">{feedRow.mn}</span>
+                  </li>
+                  <li>
+                    <label htmlFor="list-selenium">se</label>
                     <span id="list-selenium">{feedRow.selenium}</span>
                   </li>
                 </ul>

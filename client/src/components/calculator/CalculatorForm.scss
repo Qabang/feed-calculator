@@ -19,9 +19,21 @@
     flex-wrap: wrap;
   }
 
+  .long-input-label {
+    width: 100%;
+
+    @media screen and (max-width: 400px) {
+      order: 2;
+    }
+  }
+
   #feed-name {
     width: 320px;
     max-width: 320px;
+
+    @media screen and (max-width: 650px) {
+      width: 100%;
+    }
   }
 
   input:not(input[type='submit'], #feed-name) {

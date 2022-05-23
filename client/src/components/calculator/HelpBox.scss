@@ -10,6 +10,9 @@
   .btn-circle {
     margin-right: 20px;
     margin-left: auto;
+    @media screen and (max-width: 650px) {
+      margin-right: 0;
+    }
   }
 
   #overlay {
@@ -23,10 +26,22 @@
     right: 0;
     z-index: 11;
   }
+
+  @media screen and (max-width: 650px) {
+    flex: 1;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 400px) {
+    order: 0;
+    width: 100%;
+    flex-basis: 100%;
+  }
 }
 
 #help-box {
   position: absolute;
+  box-sizing: border-box;
   transform: translateX(-50%);
   left: 50%;
   max-width: 390px;
@@ -41,6 +56,24 @@
 
   .flex-row {
     display: flex;
+
+    button {
+      @media screen and (max-width: 400px) {
+        order: 1;
+        flex-basis: 100%;
+      }
+    }
+
+    h2 {
+      @media screen and (max-width: 400px) {
+        order: 2;
+        flex-basis: 100%;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      flex-wrap: wrap;
+    }
   }
 
   a {

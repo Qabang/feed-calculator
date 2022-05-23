@@ -10,8 +10,6 @@
 }
 
 #about {
-  background: rgba($light-aqua, 0.5);
-  padding: 40px;
   margin: auto;
   margin-bottom: 160px;
   text-align: left;
@@ -20,7 +18,26 @@
   letter-spacing: 0.9px;
   max-width: $max-width;
 
-  p {
+  .about-section {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: lighten($light-aqua, 10%);
+    filter: drop-shadow($drop-shadow-large);
+    margin: 20px 0;
+
+    h3 {
+      flex-basis: 100%;
+    }
+
+    p {
+      flex: 1;
+      min-width: 260px;
+    }
+  }
+
+  p,
+  h3 {
     margin: 30px;
   }
 }
