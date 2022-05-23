@@ -89,6 +89,7 @@ function HorseForm({ calculatorCallback, setProfile, setHorseWorkAmount }) {
           dirty,
           touched,
           values,
+          setFieldValue,
         }) => (
           <form onSubmit={handleSubmit}>
             <div className="profile-basics">
@@ -113,7 +114,18 @@ function HorseForm({ calculatorCallback, setProfile, setHorseWorkAmount }) {
                   type="number"
                   placeholder="YYYY"
                   onBlur={handleBlur}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    e.preventDefault()
+                    const { value } = e.target
+                    // Only accept digits.
+                    // Can't start with leading 0.
+                    if (/^[1-9][0-9]*$/.test(value) || value === '') {
+                      // Maximum 4 digits.
+                      if (value.length <= 4) {
+                        setFieldValue('born', value)
+                      }
+                    }
+                  }}
                   value={values.born}
                 />
                 {errors.born && touched.born ? (
