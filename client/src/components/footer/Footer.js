@@ -29,6 +29,7 @@ function Footer() {
                 <a
                   href="https://www.slu.se/institutioner/husdjurens-utfodring-vard/Verktyg/utfodringsrekommendationer-for-hast/"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Feed recomendations for horses (Swedish)
                   <FaExternalLinkAlt />
@@ -38,6 +39,7 @@ function Footer() {
                 <a
                   href="http://www2.freefarm.se/fodertabell/fodtab.pl?djur=hast"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Horse feed nutrition table (Swedish)
                   <FaExternalLinkAlt />
@@ -55,13 +57,22 @@ function Footer() {
                     hello@sandralindstrom.com
                   </span>
                 </a>
-                <a href="">
+                <a
+                  href="https://www.linkedin.com/in/sandra-lindstr%C3%B6m-b11903153/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <FaLinkedin />
                   <span className="visibly-hidden">
                     Visit my Linkedin profile
                   </span>
                 </a>
-                <a id="last-icon" href="">
+                <a
+                  id="last-icon"
+                  href="https://github.com/Qabang"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <FaGithubSquare />
                   <span className="visibly-hidden">
                     Visit my Github profile

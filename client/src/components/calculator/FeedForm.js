@@ -1,5 +1,4 @@
 import { Formik } from 'formik'
-import axios from 'axios'
 import { FaPlus } from 'react-icons/fa'
 import './CalculatorForm.scss'
 import HelpBox from './HelpBox'
@@ -43,7 +42,6 @@ function FeedForm(props) {
           />
         </label>
         <HelpBox />
-        {/* ADD BUTTON HERE */}
       </div>
       <div className="feeding-calculator-flex-wrap">
         <label htmlFor="feed-amount">

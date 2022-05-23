@@ -11,6 +11,59 @@ function Quotas({ data }) {
   const [mnCuQuota, setMnCuQuota] = useState('')
 
   useEffect(() => {
+    /**
+     * function that calculatis the ratio between 2 values.
+     * @returns string number-ratio to one
+     */
+    function calculateRatio(value1, value2) {
+      for (let num = value2; num > 1; num--) {
+        if (value1 % num === 0 && value2 % num === 0) {
+          value1 = value1 / num
+          value2 = value2 / num
+        }
+      }
+      var ratio = round(value1 / value2, 1) + ' : 1'
+      return ratio
+    }
+
+    const checkErrors = async () => {
+      let errObj = {}
+      if (caPQuota !== '' && (caPQuota > 2.0 || caPQuota < 1.2)) {
+        errObj.caP = 'Should be between 1.2 - 2.0'
+      }
+
+      if (caMgQuota !== '' && (caMgQuota > 2.0 || caMgQuota < 2.1)) {
+        errObj.caMg = 'Should be between 1.5 - 2.1'
+      }
+
+      if (smrpMjQuota !== '' && (smrpMjQuota > 8.0 || smrpMjQuota < 6.0)) {
+        errObj.smrpMj = 'Should be around 6-7 \n\n depending on the horse '
+      }
+
+      if (
+        parseFloat(feCuQuota.split(':')[0]) > 4.5 ||
+        parseFloat(feCuQuota.split(':')[0]) < 3.5
+      ) {
+        errObj.feCu = 'Should be 4:1'
+      }
+
+      if (
+        parseFloat(znCuQuota.split(':')[0]) > 3.5 ||
+        parseFloat(znCuQuota.split(':')[0]) < 2.5
+      ) {
+        errObj.znCu = 'Should be 3:1'
+      }
+
+      if (
+        parseFloat(mnCuQuota.split(':')[0]) > 4.5 ||
+        parseFloat(mnCuQuota.split(':')[0]) < 2.5
+      ) {
+        errObj.mnCu = 'Should be 3:1'
+      }
+
+      setErrors(errObj)
+    }
+
     if (data.ca !== 0 && data.p !== 0) {
       setCaPQuota(round(data.ca / data.p, 1))
     }
@@ -36,58 +89,6 @@ function Quotas({ data }) {
 
     return checkErrors()
   }, [data, caPQuota, caMgQuota, smrpMjQuota, feCuQuota, znCuQuota, mnCuQuota])
-
-  const checkErrors = async () => {
-    let errObj = {}
-    if (caPQuota !== '' && (caPQuota > 2.0 || caPQuota < 1.2)) {
-      errObj.caP = 'Should be between 1.2 - 2.0'
-    }
-
-    if (caMgQuota !== '' && (caMgQuota > 2.0 || caMgQuota < 2.1)) {
-      errObj.caMg = 'Should be between 1.5 - 2.1'
-    }
-
-    if (smrpMjQuota !== '' && (smrpMjQuota > 8.0 || smrpMjQuota < 6.0)) {
-      errObj.smrpMj = 'Should be around 6-7 \n\n depending on the horse '
-    }
-
-    if (
-      parseFloat(feCuQuota.split(':')[0]) > 4.5 ||
-      parseFloat(feCuQuota.split(':')[0]) < 3.5
-    ) {
-      errObj.feCu = 'Should be 4:1'
-    }
-
-    if (
-      parseFloat(znCuQuota.split(':')[0]) > 3.5 ||
-      parseFloat(znCuQuota.split(':')[0]) < 2.5
-    ) {
-      errObj.znCu = 'Should be 3:1'
-    }
-
-    if (
-      parseFloat(mnCuQuota.split(':')[0]) > 4.5 ||
-      parseFloat(mnCuQuota.split(':')[0]) < 2.5
-    ) {
-      errObj.mnCu = 'Should be 3:1'
-    }
-
-    setErrors(errObj)
-  }
-  /**
-   * function that calculatis the ratio between 2 values.
-   * @returns string number-ratio to one
-   */
-  function calculateRatio(value1, value2) {
-    for (let num = value2; num > 1; num--) {
-      if (value1 % num == 0 && value2 % num == 0) {
-        value1 = value1 / num
-        value2 = value2 / num
-      }
-    }
-    var ratio = round(value1 / value2, 1) + ' : 1'
-    return ratio
-  }
 
   // function that round down decimal values. defaults precision to 0 decimals.
   function round(value, precision) {

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { ReactComponent as EfeLogo } from '../../assets/images/logo.svg'
 import PdfView from './PdfView'
 
 export class ComponentToPrint extends React.PureComponent {

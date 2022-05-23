@@ -26,6 +26,7 @@ function FeedWarningsList({ feedWarningList, toxicValues }) {
           key
         ] = `This amount is toxic for your horse (values above ${toxicValues[key]}mg per 100kg, are dangerous) You need to adjust the
                 feedstate or this could potentially kill your horse`
+        return list
       })
 
       setToxicDangerList(list)

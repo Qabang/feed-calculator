@@ -57,6 +57,7 @@ function HelpBox() {
             <a
               href="http://www2.freefarm.se/fodertabell/fodtab.pl?djur=hast"
               target="_blank"
+              rel="noreferrer"
             >
               Horse feed nutrition table (Swedish)
               <FaExternalLinkAlt />

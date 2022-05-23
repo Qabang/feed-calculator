@@ -13,15 +13,6 @@ function PdfView({
   let year = new Date().getFullYear()
   let month = ('0' + new Date().getMonth()).slice(-2)
   let day = ('0' + new Date().getDate()).slice(-2)
-  let caPQuota = null
-
-  if (
-    calculations &&
-    parseFloat(calculations[2].ca) !== 0 &&
-    parseFloat(calculations[2].p) !== 0
-  ) {
-    caPQuota = parseFloat(calculations[2].ca) / parseFloat(calculations[2].p)
-  }
 
   const date = year + '-' + month + '-' + day
 

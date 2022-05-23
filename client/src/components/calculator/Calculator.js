@@ -1,7 +1,6 @@
-import { useEffect, useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import * as React from 'react'
 import ReactToPrint from 'react-to-print'
-import { useReactToPrint } from 'react-to-print'
 import HorseForm from './HorseForm.js'
 import FeedForm from './FeedForm.js'
 import FeedRow from './FeedRow.js'
@@ -114,6 +113,7 @@ function Calculator() {
             "This value is a bit low. If your horse dosen't get to skinny it's probably not dangerous"
         }
       }
+      return feedWarnings
     })
 
     setFeedWarningList(feedWarnings)
@@ -173,11 +173,11 @@ function Calculator() {
     ) {
       onBeforeGetContentResolve.current()
     }
-  }, [onBeforeGetContentResolve.current, text])
+  }, [text])
 
   const reactToPrintContent = React.useCallback(() => {
     return componentRef.current
-  }, [componentRef.current])
+  }, [])
 
   const reactToPrintTrigger = React.useCallback(() => {
     return (

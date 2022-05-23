@@ -12,7 +12,7 @@ import Calculator from './components/calculator/Calculator.js'
 import About from './components/about/About.js'
 import { ReactComponent as EfeLogo } from './assets/images/logo.svg'
 
-import { FaBars, FaRegWindowClose, FaAngleRight, FaTimes } from 'react-icons/fa'
+import { FaBars, FaAngleRight } from 'react-icons/fa'
 import { MdOutlineClose } from 'react-icons/md'
 import './App.scss'
 import { useState } from 'react'
