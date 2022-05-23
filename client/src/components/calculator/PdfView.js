@@ -75,8 +75,8 @@ function PdfView({
               {feedData &&
                 feedData.map((item, index) => (
                   <tr key={index + '-tr'}>
-                    <td>{item.name}</td>
-                    <td>{item.amount} Kg</td>
+                    <td>{item.name || '-'}</td>
+                    <td>{item.amount || 0} Kg</td>
                   </tr>
                 ))}
             </tbody>
