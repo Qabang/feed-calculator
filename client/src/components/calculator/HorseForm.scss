@@ -1,0 +1,309 @@
+@import '../../assets/style/config';
+
+.horse-form {
+  text-align: left;
+  background-color: transparent;
+  padding: 15px;
+  margin: 15px auto;
+  width: 100%;
+  max-width: $max-width;
+  box-sizing: border-box;
+
+  > h2 {
+    margin-left: 30px;
+  }
+
+  form {
+    background-color: transparent;
+    width: auto;
+    padding: 15px;
+    margin-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    .profile-basics {
+      display: flex;
+      flex-basis: 67%;
+
+      .profile-section {
+        display: block;
+        flex-basis: 50%;
+        padding: 15px;
+      }
+
+      @media screen and (max-width: 767px) {
+        flex-basis: 100%;
+      }
+
+      @media screen and (max-width: 424px) {
+        display: block;
+      }
+    }
+
+    .profile-section {
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
+      padding: 15px;
+      box-sizing: border-box;
+      flex-basis: 33%;
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 500;
+        line-height: $lineheight-preamble;
+        font-size: $text-size;
+      }
+
+      #work-label {
+        height: 35px;
+        margin-top: 27px;
+        margin-bottom: auto;
+        font-size: 1.2rem;
+
+        @media screen and (max-width: $tablet) {
+          margin-top: 0;
+          height: fit-content;
+        }
+      }
+
+      .profile-work {
+        input {
+          width: 100%;
+        }
+
+        @media screen and (max-width: 767px) {
+          display: block;
+          margin-top: 5px;
+        }
+      }
+
+      @media screen and (max-width: 767px) {
+        flex-basis: 100%;
+      }
+    }
+
+    input[type='submit'] {
+      background: $aqua;
+      border-radius: 50px;
+      font-family: $font-text;
+      font-weight: 500;
+      height: auto;
+      box-sizing: border-box;
+      letter-spacing: 1px;
+      margin: 1rem auto 1rem 15px;
+      min-width: 280px;
+      outline: 0;
+      padding: 13px 10px;
+      width: calc(33% - 30px);
+
+      &:hover:not(:disabled) {
+        background-color: $aqua;
+        background: linear-gradient(180deg, lighten($aqua, 8%), $aqua);
+      }
+
+      &:disabled {
+        cursor: default;
+      }
+
+      @media screen and (max-width: 450px) {
+        width: 100%;
+        min-width: fit-content;
+        padding: 13 20px;
+      }
+    }
+
+    .error {
+      border-color: $red !important;
+    }
+    .error-message {
+      position: absolute;
+      margin-top: -20px;
+      font-size: $caption-size;
+      font-weight: bold;
+      color: $red;
+
+      &::before {
+        content: '* ';
+      }
+    }
+  }
+}
+
+.profile-wrapper {
+  display: flex;
+  margin: 15px auto;
+  width: 100%;
+  max-width: $max-width;
+  box-sizing: border-box;
+  border-bottom: 3px solid $accent_color;
+
+  .profile-headings {
+    flex-basis: 100%;
+    background: $primary-gray;
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      width: 33%;
+      margin: 0;
+      padding: 20px;
+      display: inline-block;
+      color: $accent_color;
+      margin-bottom: 15px;
+      font-weight: 100;
+    }
+
+    .h2 {
+      @extend h2;
+      color: $white;
+      justify-content: flex-end;
+      display: flex;
+
+      span {
+        margin-right: auto;
+        margin-top: auto;
+      }
+    }
+  }
+
+  section:not(.feed-ratio-card) {
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+
+    .profile-calculation-button {
+      position: absolute;
+      margin-left: 100%;
+      transform: translateX(-100%);
+      white-space: nowrap;
+      top: 5px;
+    }
+  }
+
+  button {
+    cursor: pointer;
+
+    &:hover {
+      cursor: pointer;
+      background-color: lighten($accent_color, 10%);
+    }
+  }
+
+  .flex-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    a.btn {
+      text-decoration: none;
+      background-color: $dark-blue;
+      color: #fff;
+    }
+  }
+}
+
+.feed-ratio-card {
+  background-color: lightgray;
+  margin: 20px 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  .date-changed {
+    display: block;
+    width: 100%;
+    margin: 0;
+    background-color: $primary_gray;
+    color: $accent_color;
+    font-weight: bold;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  ul {
+    button {
+      margin: auto 15px;
+      padding: 5px 10px;
+      background-color: $accent_color;
+      font-family: $font-heading;
+      font-size: 1rem;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 2px 2px 5px black;
+      outline: 0;
+      height: 40px;
+    }
+
+    label {
+      font-weight: 900;
+      color: $black;
+    }
+
+    div {
+      li:nth-child(odd) {
+        background-color: lighten(lightgray, 3%);
+      }
+
+      li:nth-child(even) {
+        background-color: darken(lightgray, 3%);
+      }
+    }
+
+    div:nth-last-child(2) {
+      display: none;
+    }
+  }
+}
+
+.profile-card {
+  width: 100%;
+  flex-wrap: wrap;
+
+  section {
+    padding: 0;
+    flex-basis: 33.3%;
+
+    p {
+      padding-right: 20px;
+      margin: 20px 0;
+
+      span {
+        font-weight: 700;
+        text-transform: capitalize;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .change-profile-button {
+    flex-basis: 100%;
+    margin-top: 15px;
+    padding: 5px 10px;
+    background-color: $accent_color;
+    font-family: $font-heading;
+    font-size: 1rem;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px black;
+    outline: 0;
+  }
+
+  .h2 {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+}
+
+.profile-card-no-border {
+  border: 0;
+}
+
+.profile-horse-image {
+  display: block;
+  max-width: 250px;
+  height: auto;
+  width: 100%;
+  margin: 0 auto;
+}

@@ -1,0 +1,84 @@
+@import '../../assets/style/config';
+
+#quotas {
+  font-size: $text-size;
+  line-height: $lineheight-text;
+  font-family: $font-text;
+  width: 100%;
+  max-width: $max-width;
+  padding: 40px 30px;
+  margin-bottom: 100px;
+
+  tr {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $aqua;
+  }
+
+  th {
+    flex: 1;
+    font-family: $font-heading;
+    font-size: $preamble-size;
+    max-width: 240px;
+    padding: 10px 20px;
+    text-align: left;
+    @media screen and (max-width: $tablet) {
+      font-size: $text-size;
+    }
+  }
+
+  td {
+    padding: 10px 20px;
+    max-width: 240px;
+    flex: 1;
+  }
+
+  .cell-title {
+    display: block;
+    font-weight: 600;
+    max-width: 240px;
+  }
+  .cell-error {
+    display: block;
+    font-style: italic;
+    max-width: 240px;
+    font-size: 14px;
+    color: $red;
+  }
+
+  @media screen and (max-width: $tablet) {
+    font-size: 14px;
+    padding: 20px 15px;
+  }
+}
+
+#pdf #quotas {
+  font-size: 10pt;
+  line-height: normal;
+  margin-bottom: 0;
+  padding: 0;
+
+  .cell-error {
+    font-size: 10pt;
+  }
+
+  h3 {
+    font-family: $font-heading;
+    text-align: left;
+    font-size: 16pt;
+    line-height: 115%;
+    font-weight: bold;
+  }
+
+  th {
+    font-size: 12pt;
+  }
+
+  tr {
+    border-bottom: dotted 1px $light-aqua;
+
+    &:last-of-type {
+      border-bottom: 0;
+    }
+  }
+}
