@@ -43,10 +43,10 @@ function Index() {
 
           <p>
             At present, the application is not designed to be able to make a
-            correct assessment for horses / foals under 3 years. It is also not
-            designed to keep track of toxic overdoses. There, it is you as the
-            owner who bears the ultimate responsibility that your horse has a
-            correct feed state.
+            correct assessment for horses / foals under the age of 1 year. It is
+            also not designed to keep track of all the toxic overdoses. There,
+            it is you as the owner who bears the ultimate responsibility that
+            your horse has a correct feed state.
           </p>
         </section>
       </section>
