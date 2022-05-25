@@ -1,7 +1,7 @@
 {
   "name": "feed-calculator",
   "version": "1.0.0",
-  "description": "- Created 2020-02-28 A simple application that calculates what my horse's feed needs.",
+  "description": "- Created 2020-02-28, A simple application that calculates what my horse's feed need is.",
   "main": "index.js",
   "type": "module",
   "scripts": {
