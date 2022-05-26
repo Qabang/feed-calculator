@@ -192,10 +192,12 @@ class Calculation {
 
     // Calculate amount of energy and protein is being used based on the walk
     // and trot time.
-    walk_mj = (((0.2 / 100) * this.data.weight) / 10) * this.data.walkTime
+
+    let weight = this.data.weight / 100
+    walk_mj = 0.2 * weight * (this.data.walkTime / 10)
     walk_smrp = 6 * walk_mj
 
-    trot_mj = (((1.3 / 100) * this.data.weight) / 10) * this.data.trotTime
+    trot_mj = 1.3 * weight * (this.data.trotTime / 10)
     trot_smrp = 6 * trot_mj
 
     workNeed.mj = walk_mj + trot_mj
