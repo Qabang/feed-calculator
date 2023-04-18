@@ -198,13 +198,29 @@ select {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 11;
+    z-index: 10;
     opacity: 1;
     transition: opacity 0.2s ease;
   }
 }
 
+main {
+  min-height: fit-content;
+  max-width: $desktop;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: -140px auto 0 auto;
+  padding: 100px 40px;
+  background-color: rgba($light-aqua, 0.25);
+
+  @media (min-width: $desktop-xl) {
+    margin-top: -5vw
+  }
+}
+
 header {
+  position: relative;
   overflow: hidden;
   font-family: $font-text;
   text-transform: capitalize;
@@ -212,19 +228,21 @@ header {
   padding-bottom: 0;
   position: relative;
   margin: 0 0 20px 0;
-  height: 320px;
+  max-height: 320px;
+  height: 25vw;
   z-index: 10;
-  filter: drop-shadow(6px 6px 6px rgba(#000, 0.3));
 
   section {
-    position: absolute;
-    top: -3vw;
-    left: -2vw;
-    padding-top: 3vw;
-    width: 110vw;
     background-color: $dark-blue;
-    height: 80%;
+    filter: drop-shadow($drop-shadow-medium);
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 20px;
+    left: 0;
+    width: 110vw;
     transform: rotate(3deg);
+    transform-origin: top right;
 
     @media screen and (max-width: 1024px) {
       max-height: 230px;
@@ -232,20 +250,21 @@ header {
   }
 
   nav {
-    height: 190px;
+    max-height: 190px;
     width: 100%;
     box-sizing: border-box;
     padding: 20px;
     display: flex;
     justify-content: space-between;
-    min-height: 130px;
-    margin: 40px auto auto;
-    max-width: calc($max-width);
+    margin: calc(40px - 1vw) auto auto;
+    max-width: $desktop;
     position: relative;
+    height: 80%;
 
     ul {
       display: flex;
       height: fit-content;
+      height: calc(190px - 3vw);
       justify-self: center;
       padding: 0;
       margin: auto 0 10px 0;
@@ -410,6 +429,11 @@ header {
           grid-column: 3;
         }
       }
+
+      @media (min-width: $tablet) {
+        margin-top: 0;
+        margin-bottom: auto;
+      }
     }
 
     #logo {
@@ -436,7 +460,7 @@ header {
     #mobile-nav-icon,
     #mobile-nav-close-icon {
       width: 40px;
-      margin: auto 0 20px;
+      margin: auto 0 auto;
       height: 40px;
       display: none;
       color: $light-aqua;
@@ -452,15 +476,33 @@ header {
     }
 
     @media screen and (max-width: 1024px) {
-      padding: 40px;
+      padding: 20px 40px 40px 40px;
+      margin-top: 0;
     }
+
+    @media (min-width: $desktop-xl) {
+      padding: 20px;
+    }
+  }
+
+  .framing-div {
+    position: absolute;
+    top: 0;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    background-color: rgba($light-aqua, 1);
+    z-index: -1;
+    rotate: -8deg;
+    transform-origin: bottom left 60px;
+    filter: drop-shadow($drop-shadow-medium-light);
   }
 
   @media screen and (max-width: 1024px) {
     overflow-x: hidden;
     overflow-y: unset;
     filter: unset;
-    position: unset;
+    height: unset;
   }
 }
 

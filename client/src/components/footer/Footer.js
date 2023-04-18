@@ -1,9 +1,12 @@
 import {
   FaLinkedin,
-  FaGithubSquare,
-  FaEnvelope,
-  FaExternalLinkAlt,
+  FaGithub,
 } from 'react-icons/fa'
+import {
+  MdOutlineMailOutline,
+} from 'react-icons/md'
+import { ReactComponent as EfeLogo } from '../../assets/images/logo.svg'
+
 import './Footer.scss'
 
 function Footer() {
@@ -11,78 +14,61 @@ function Footer() {
     <footer>
       <section id="tilted-section">
         <div className="footer-wrapper">
-          <section className="footer-block">
-            <h3>Information</h3>
-            <ul>
-              <li>
-                The program is only an aid and is not designed to detect toxic
-                overdoses or dosages that can cause disturbances.{' '}
-                <strong>You</strong> as the owner bear the sole responsibility
-                for your horse to have a correct feed state.
-              </li>
-            </ul>
-          </section>
-          <section className="footer-block link-block">
-            <h3>Recomended Reading</h3>
-            <ul>
-              <li>
-                <a
-                  href="https://www.slu.se/institutioner/husdjurens-utfodring-vard/Verktyg/utfodringsrekommendationer-for-hast/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Feed recomendations for horses (Swedish)
-                  <FaExternalLinkAlt />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="http://www2.freefarm.se/fodertabell/fodtab.pl?djur=hast"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Horse feed nutrition table (Swedish)
-                  <FaExternalLinkAlt />
-                </a>
-              </li>
-            </ul>
-          </section>
-          <section className="footer-block">
-            <h3 className="visibly-hidden">Contact</h3>
-            <ul>
-              <li>
-                <a id="first-icon" href="mailto:hello@sandralindstrom.com">
-                  <FaEnvelope />
-                  <span className="visibly-hidden">
-                    hello@sandralindstrom.com
-                  </span>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/sandra-lindstr%C3%B6m-b11903153/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <FaLinkedin />
-                  <span className="visibly-hidden">
-                    Visit my Linkedin profile
-                  </span>
-                </a>
-                <a
-                  id="last-icon"
-                  href="https://github.com/Qabang"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <FaGithubSquare />
-                  <span className="visibly-hidden">
-                    Visit my Github profile
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </section>
+          <div className="footer-content">
+            <section className="footer-block">
+              <h3>Information</h3>
+              <ul>
+                <li>
+                  The program is only an aid and is not designed to detect toxic
+                  overdoses or dosages that can cause disturbances.{' '}
+                  <strong>You</strong> as the owner bear the sole responsibility
+                  for your horse to have a correct feed state.
+                </li>
+              </ul>
+            </section>
+            <section className="footer-block link-block">
+              <a href="/">
+                <EfeLogo />
+              </a>
+            </section>
+            <section className="footer-block">
+              <h3 className="visibly-hidden">Contact</h3>
+              <ul>
+                <li>
+                  <a id="first-icon" href="mailto:hello@sandralindstrom.com">
+                    <MdOutlineMailOutline />
+                    <span className="visibly-hidden">
+                      hello@sandralindstrom.com
+                    </span>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/sandra-lindstr%C3%B6m-b11903153/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <FaLinkedin />
+                    <span className="visibly-hidden">
+                      Visit my Linkedin profile
+                    </span>
+                  </a>
+                  <a
+                    id="last-icon"
+                    href="https://github.com/Qabang"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <FaGithub />
+                    <span className="visibly-hidden">
+                      Visit my Github profile
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </section>
+          </div>
         </div>
       </section>
+      <div className="framing-div"></div>
     </footer>
   )
 }

@@ -74,6 +74,7 @@ function App() {
               <EfeLogo />
             </Link>
           </nav>
+          <div className="framing-div"></div>
         </header>
         <main>
           <Routes>

@@ -12,13 +12,19 @@ In root folder.
 - `cp .env.example .env`
   Change example varible values to the correct ones.
 
-- `npm install`
+- `npm install` in root and client folder.
 
 ## run project locally
 
 Development, start both the server and the client and runs them paralell to each other.
 
 - `npm run dev`
+
+run server
+- `npm run server`
+
+run client
+- `cd client && npm start`
 
 Visit application locally at http://localhost:3000
 
