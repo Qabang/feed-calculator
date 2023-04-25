@@ -205,8 +205,10 @@ select {
 }
 
 main {
+  flex: 1;
   min-height: fit-content;
   max-width: $desktop;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -521,6 +523,9 @@ input[type='number'] {
 
 .App {
   overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {

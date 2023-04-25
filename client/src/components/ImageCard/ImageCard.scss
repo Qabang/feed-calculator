@@ -3,63 +3,57 @@
 .image-card {
   position: relative;
   display: flex;
-  max-width: $max-width;
-  height: 100%;
-  margin: 50px auto 150px;
+  width: 83%;
+  height: 660px;
   justify-content: center;
+  margin: 5% 0;
 
-  img {
-    min-width: 900px;
+  h3 {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 135%;
+    letter-spacing: 0.045em;
+    color: #000000;
+  }
+
+  .image-container {
+    flex: 1 1;
+    border-radius: 100%;
+    display: block;
+    background-size: cover;
+    min-width: 660px;
+    width: 33%;
     height: auto;
-    z-index: 1;
-
-    &.right {
-      order: 2;
-
-      @media (max-width: 880px) {
-        margin: auto 0 auto auto;
-      }
-    }
-
-    @media (max-width: $tablet-xl) {
-      margin: auto;
-      max-width: 400px;
-      min-width: unset;
-    }
-
-    @media (max-width: 880px) {
-      margin: auto auto auto 0;
-      max-width: 400px;
-      min-width: unset;
-      border-radius: 100%;
-    }
-    @media (max-width: 550px) {
-      display: none;
-    }
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 400px;
   }
 
   .image-card-text-box {
     position: absolute;
     left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     margin: auto;
     box-sizing: border-box;
     overflow-y: hidden;
     max-height: calc(340px * 0.75);
-    max-width: 70%;
-    bottom: -85px;
+    max-width: 60%;
     padding: 35px;
     background: $light-aqua;
     background: linear-gradient(
       -137deg,
-      $light-aqua,
-      lighten($light-aqua, 10%)
+      rgba($light-aqua, 0.7),
+      rgba(lighten($light-aqua, 10%), 0.4)
     );
     z-index: 2;
     font-family: $font-text;
     font-size: 16px;
     line-height: 160%;
     letter-spacing: 0.7px;
-    filter: drop-shadow($drop-shadow-large);
+    backdrop-filter: blur(5px);
 
     div:not(.text) {
       margin: 20px auto;
@@ -76,104 +70,99 @@
       }
     }
 
-    &.right {
+    &.inverted {
       left: unset;
       right: -20px;
       background: linear-gradient(
         137deg,
-        $light-aqua,
-        lighten($light-aqua, 10%)
+        rgba($light-aqua, 0.7),
+        rgba(lighten($light-aqua, 10%), 0.4)
       );
+    }
+  }  
+}
 
-      @media (max-width: $laptop) {
-        right: 10px;
+.cta.image-card {
+  width: 100%;
+  margin: 15% 0;
+  margin-left: -40px!important;
+  filter: drop-shadow($drop-shadow-medium);
+
+  .image-container {
+    width: 30%;
+    height: auto;
+    margin: 80px 0;
+    min-width: 500px;
+    height: auto;
+    margin-left: 0;
+    max-width: 400px;
+    z-index: 2;
+
+  }
+
+  .image-card-text-box {
+    display: flex;
+    top: 0px;
+    bottom: 0px;
+    left: unset;
+    right: -80px;
+    transform: unset;
+    height: unset;
+    max-height: unset;
+    max-width: 68%;
+    background: $aqua;
+    background: linear-gradient(
+      90deg,
+      $aqua,
+      lighten($aqua, 20%)
+    );
+    filter: unset;
+    z-index: 2;
+    padding: 80px;
+
+    .action-link {
+      display: flex;
+      a {
+        text-decoration: none;
+        padding: 10px 40px;
+        border-radius: 25px;
+        background: $dark-blue;
+        margin: 40px auto;
+        width: fit-content;
+        color: $white;
+        font-weight: 500;
+        filter: drop-shadow($drop-shadow-small);
+
+        &:hover {
+        background: lighten($dark-blue, 5%);
+
+        }
       }
 
-      @media (max-width: $tablet-xl) {
-        margin: auto -40px auto auto;
-      }
-
-      @media (max-width: 880px) {
-        transform: translate(10%, 30%);
-        position: absolute;
-        left: 0;
-        right: unset;
-        padding: 55px;
-        min-width: 450px;
-        border-radius: 50%;
-        max-height: unset;
-        height: fit-content;
-      }
-
-      @media (max-width: 550px) {
-        position: unset;
-        transform: unset;
-        margin: auto;
-        max-width: 97%;
-        min-width: unset;
+      svg {
+        display: none;
       }
     }
 
-    @media (max-width: $tablet-xl) {
-      position: unset;
-      height: 100%;
-      max-width: 70%;
-    }
-
-    @media (max-width: 880px) {
-      margin: 20px;
-      min-width: 450px;
-      min-height: fit-content;
-      border-radius: 100%;
-    }
-
-    @media (max-width: $laptop) {
-      left: 20px;
-    }
-
-    @media (max-width: $tablet-xl) {
-      margin: auto auto auto -40px;
-    }
-
-    @media (max-width: 880px) {
-      transform: translate(-10%, 30%);
-      position: absolute;
-      left: unset;
-      right: 0;
-      padding: 55px;
-      min-width: 450px;
-      border-radius: 50%;
-      max-height: unset;
-      height: fit-content;
-
-      .text {
-        padding: 10px;
-      }
-    }
-
-    @media (max-width: 550px) {
-      position: unset;
-      transform: unset;
+    .textbox-content {
       margin: auto;
-      max-width: 97%;
-      min-width: unset;
+      max-width: 80%;
     }
   }
-
-  @media (max-width: $tablet-xl) {
-    width: 100%;
-    padding: 40px;
-    box-sizing: border-box;
-    max-height: fit-content;
+  
+  &::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 10%;
+    top: 0px;
+    bottom: 0px;
+    width: 0; 
+    height: 0; 
+    border-top: 330px solid transparent;
+    border-bottom: 330px solid transparent; 
+    border-right: 397px solid $aqua; 
+    z-index: 1;
   }
 
-  @media (max-width: 880px) {
-    margin-bottom: 250px;
-    margin-top: 0;
-  }
-
-  @media (max-width: 550px) {
-    margin-bottom: 60px;
-    padding: 0;
-  }
 }

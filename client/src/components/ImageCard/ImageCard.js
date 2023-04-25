@@ -1,43 +1,41 @@
 import './ImageCard.scss'
-import { FaArrowRight } from 'react-icons/fa'
+import { FaArrowRight, FaExternalLinkAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 function ImageCard(props) {
+
+  let actionLink;
+  let imageUrl = props.image && `url(/horses-srcset/${props.image})`
+
+  if (props.link && props.link.url.includes("https")) {
+
+    actionLink = <a href={props.link.url} target="_blank" rel="noreferrer" title={props.link.text}>{props.link.text} <FaExternalLinkAlt /></a>
+  }
+  else if (props.link) {
+    actionLink = <Link to={props.link.url}>{props.link.text} <FaArrowRight /></Link>
+  }
+
   return (
-    <section className="image-card">
-      {props.image && (
-        <img
-          className={props.right ? 'right' : 'left'}
-          sizes="(max-width: 1400px) 480px, 1400px"
-          srcSet={`
-            /horses-srcset/${props.image}_1400.jpg 1400w,
-            /horses-srcset/${props.image}_1200.jpg 1200w,
-            /horses-srcset/${props.image}_1000.jpg 1000w,
-            /horses-srcset/${props.image}_800.jpg 800w,
-            /horses-srcset/${props.image}_600.jpg 600w,
-            /horses-srcset/${props.image}_400.jpg 400w,
-      
-          `}
-          src={`/horses-srcset/${props.image}_400.jpg`}
-          alt={props.alt || ''}
-        />
-      )}
+    <section className={props.cta ? "cta image-card" : "image-card"} style={{ marginLeft: props.right ? "auto" : 0, marginRight: props.right ? 0 : "auto" }}>
+      <div className="image-container" style={{ backgroundImage: imageUrl, marginLeft: props.right ? "auto" : 0, marginRight: props.right ? 0 : "auto" }}></div>
+
       <section
-        className={`image-card-text-box ${props.right ? 'right' : 'left'}`}
+        className={`image-card-text-box ${props.right ? '' : 'inverted'}`}
       >
-        <div className="text">
-          {props.text ||
-            `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium
-          hic suscipit. In itaque blanditiis perspiciatis, eveniet facilis eaque
-          cupiditate vel exercitationem, ad, expedita et fuga facere distinctio
-          rerum aliquid veritatis?`}
-          {props.link && (
-            <div>
-              <Link to={props.link.url}>
-                {props.link.text} <FaArrowRight />
-              </Link>
-            </div>
-          )}
+        <div className="textbox-content">
+          <h3>{props.title}</h3>
+          <div className="text">
+            {props.text ||
+              `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium
+            hic suscipit. In itaque blanditiis perspiciatis, eveniet facilis eaque
+            cupiditate vel exercitationem, ad, expedita et fuga facere distinctio
+            rerum aliquid veritatis?`}
+            {props.link && (
+              <div className="action-link">
+                {actionLink}
+              </div>
+            )}
+          </div>
         </div>
       </section>
     </section>
