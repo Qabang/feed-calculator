@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function ImageCard(props) {
 
   let actionLink;
-  let imageUrl = props.image && `url(/horses-srcset/${props.image})`
+  let imageUrl = props.image && `url(/images/${props.image})`
 
   if (props.link && props.link.url.includes("https")) {
 
@@ -17,19 +17,17 @@ function ImageCard(props) {
 
   return (
     <section className={props.cta ? "cta image-card" : "image-card"} style={{ marginLeft: props.right ? "auto" : 0, marginRight: props.right ? 0 : "auto" }}>
-      <div className="image-container" style={{ backgroundImage: imageUrl, marginLeft: props.right ? "auto" : 0, marginRight: props.right ? 0 : "auto" }}></div>
+      <div className={`image-container ${props.right ? '' : 'inverted'}`} style={{ backgroundImage: imageUrl, marginLeft: props.right ? "auto" : 0, marginRight: props.right ? 0 : "auto" }}></div>
 
-      <section
-        className={`image-card-text-box ${props.right ? '' : 'inverted'}`}
-      >
+      <section className={`image-card-text-box ${props.right ? '' : 'inverted'} ${props.cta ? 'cta' : ''}`}>
         <div className="textbox-content">
           <h3>{props.title}</h3>
           <div className="text">
-            {props.text ||
+            <p>{props.text ||
               `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium
-            hic suscipit. In itaque blanditiis perspiciatis, eveniet facilis eaque
-            cupiditate vel exercitationem, ad, expedita et fuga facere distinctio
-            rerum aliquid veritatis?`}
+              hic suscipit. In itaque blanditiis perspiciatis, eveniet facilis eaque
+              cupiditate vel exercitationem, ad, expedita et fuga facere distinctio
+              rerum aliquid veritatis?`}</p>
             {props.link && (
               <div className="action-link">
                 {actionLink}

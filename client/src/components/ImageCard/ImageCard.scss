@@ -4,7 +4,8 @@
   position: relative;
   display: flex;
   width: 83%;
-  height: 660px;
+  max-height: 660px;
+  height: 36vw;
   justify-content: center;
   margin: 5% 0;
 
@@ -18,22 +19,31 @@
   }
 
   .image-container {
-    flex: 1 1;
-    border-radius: 100%;
+    border-radius: 20% 50% 50% 50%;
     display: block;
     background-size: cover;
-    min-width: 660px;
-    width: 33%;
-    height: auto;
+    width: 36vw;
+    height: 36vw;
     margin-left: 0;
     margin-top: 0;
     margin-bottom: 0;
-    max-width: 400px;
+    max-width: 660px;
+    max-height: 660px;
+
+    &.inverted {
+      border-radius: 50% 20% 50% 50%;
+    }
+
+    @media (max-width: 550px) {
+      order: 2;
+      width: calc(100vw - 80px);
+      height: calc(100vw - 80px);
+    }
   }
 
   .image-card-text-box {
     position: absolute;
-    left: 20px;
+    left: 0px;
     top: 50%;
     transform: translateY(-50%);
     margin: auto;
@@ -41,13 +51,10 @@
     overflow-y: hidden;
     max-height: calc(340px * 0.75);
     max-width: 60%;
-    padding: 35px;
-    background: $light-aqua;
-    background: linear-gradient(
-      -137deg,
-      rgba($light-aqua, 0.7),
-      rgba(lighten($light-aqua, 10%), 0.4)
-    );
+    padding: 15px 35px;
+    background: rgba(240, 250, 247, 0.7);
+    border-right: 0;
+    border-left: solid 4px rgba($light-aqua, 0.7);
     z-index: 2;
     font-family: $font-text;
     font-size: 16px;
@@ -67,41 +74,98 @@
         svg {
           margin: 0 20px;
         }
+
+        @media (max-width: 1250px) {
+          margin: 0 auto;
+          font-size: 14px;
+        }
+
+        @media (max-width: $tablet) {
+          margin: 20px auto;
+        }
       }
     }
 
     &.inverted {
       left: unset;
       right: -20px;
-      background: linear-gradient(
-        137deg,
-        rgba($light-aqua, 0.7),
-        rgba(lighten($light-aqua, 10%), 0.4)
-      );
+      background: linear-gradient(137deg,
+          rgba($light-aqua, 0.7),
+          rgba(lighten($light-aqua, 10%), 0.4));
+      background: rgba(240, 250, 247, 0.7);
+      border-left: 0;
+      border-right: solid 4px rgba($light-aqua, 0.7);
+
+      &:not(.cta) {
+        @media (max-width: 550px) {
+          order: 3;
+          margin-top: 30px;
+          background: transparent;
+          border-left: 0;
+          border-right: solid 4px rgba($light-aqua, 0.7);
+        }
+      }
     }
-  }  
+
+    p {
+      @media (max-width: $tablet-xl) {
+        max-height: 125px;
+        overflow-y: auto;
+        padding-right: 20px;
+      }
+    }
+
+    @media (max-width: $tablet-xl) {
+      left: 0;
+    }
+
+    &:not(.cta) {
+      @media (max-width: 550px) {
+        position: relative;
+        transform: unset;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: unset;
+        border-right: 0;
+        border-left: solid 4px rgba($light-aqua, 0.7);
+        background: transparent;
+      }
+    }
+  }
+
+  @media (max-width: $tablet-xl) {
+    width: 100%;
+  }
+
+  @media (max-width: 550px) {
+    flex-direction: column;
+    height: fit-content;
+    max-height: unset;
+  }
 }
 
 .cta.image-card {
   width: 100%;
   margin: 15% 0;
-  margin-left: -40px!important;
+  margin-left: -40px !important;
   filter: drop-shadow($drop-shadow-medium);
+  max-height: 660px;
+  min-height: 340px;
 
   .image-container {
-    width: 30%;
-    height: auto;
-    margin: 80px 0;
-    min-width: 500px;
-    height: auto;
-    margin-left: 0;
-    max-width: 400px;
-    z-index: 2;
+    border-radius: 100%;
+    z-index: 3;
+    margin-top: auto;
+    margin-bottom: auto;
 
+    @media (max-width: $tablet) {
+      display: none;
+    }
   }
 
   .image-card-text-box {
     display: flex;
+    flex: 1 1;
     top: 0px;
     bottom: 0px;
     left: unset;
@@ -109,19 +173,19 @@
     transform: unset;
     height: unset;
     max-height: unset;
-    max-width: 68%;
+    max-width: unset;
     background: $aqua;
-    background: linear-gradient(
-      90deg,
-      $aqua,
-      lighten($aqua, 20%)
-    );
+    background: linear-gradient(90deg,
+        $aqua,
+        lighten($aqua, 20%));
     filter: unset;
     z-index: 2;
-    padding: 80px;
+    padding: 35px 20px;
+    margin-left: 31vw;
 
     .action-link {
       display: flex;
+
       a {
         text-decoration: none;
         padding: 10px 40px;
@@ -134,8 +198,16 @@
         filter: drop-shadow($drop-shadow-small);
 
         &:hover {
-        background: lighten($dark-blue, 5%);
+          background: lighten($dark-blue, 5%);
+        }
 
+        @media (max-width: 1250px) {
+          margin: 0 auto;
+          font-size: 14px;
+        }
+
+        @media (max-width: $tablet) {
+          margin: 20px auto;
         }
       }
 
@@ -147,22 +219,58 @@
     .textbox-content {
       margin: auto;
       max-width: 80%;
+
+      @media (max-width: $tablet-xl) {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: 0;
+      }
+    }
+
+    h3 {
+      @media (max-width: 1250px) {
+        margin: 0 0 10px;
+        font-size: calc(16px + 1.5vw);
+      }
+
+    }
+
+    &.cta {
+      overflow-y: visible;
+
+      &::before {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: 100%;
+        max-height: 660px;
+        border-top: calc(18vw - 4px) solid transparent;
+        border-bottom: calc(18vw - 4px) solid transparent;
+        border-right: calc(18vw - 4px) solid $aqua;
+        z-index: 1;
+
+        @media (min-width: 1800px) {
+          left: -654px;
+          border-top: 326px solid transparent;
+          border-bottom: 326px solid transparent;
+          border-right: 326px solid $aqua;
+          width: 330px;
+        }
+      }
+    }
+
+    @media (min-width: 500px) {
+      padding: 35px;
+    }
+
+    @media (min-width: 1400px) {
+      padding: 80px;
+    }
+
+    @media (max-width: $tablet) {
+      margin-left: 0;
     }
   }
-  
-  &::before {
-    content: " ";
-    display: block;
-    position: absolute;
-    left: 10%;
-    top: 0px;
-    bottom: 0px;
-    width: 0; 
-    height: 0; 
-    border-top: 330px solid transparent;
-    border-bottom: 330px solid transparent; 
-    border-right: 397px solid $aqua; 
-    z-index: 1;
-  }
-
 }
