@@ -1,0 +1,33 @@
+@import '../../assets/style/config';
+
+.link-wrapper {
+    display: inline-block;
+    position: relative;
+
+    a {
+        color: #000;
+        margin-bottom: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .hover-border {
+        background-color: $dark-blue;
+        background-image: linear-gradient(to left, $red, $yellow, $red);
+        padding-bottom: 2px;
+        height: 0px;
+        max-height: 0px;
+        display: inline-block;
+        position: absolute;
+        top: 20px;
+        left: 0;
+        width: 100%;
+        max-width: 0;
+    }
+
+    &:hover .hover-border {
+        max-width: 100%;
+        transition: max-width 0.3s ease;
+    }
+}
