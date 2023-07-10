@@ -22,7 +22,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
-    background: lighten($light-aqua, 10%);
+    background: white;
     filter: drop-shadow($drop-shadow-large);
     margin: 20px 0;
 
@@ -47,7 +47,7 @@
   max-width: $max-width;
 
   #contact-info {
-    margin: 60px auto;
+    margin: 30px auto;
     min-height: 400px;
 
     .image-container {
@@ -72,15 +72,20 @@
       }
     }
 
-    a {
-      padding-left: 40px;
-      font-family: $font-text;
-      font-size: $preamble-size;
+    .link-wrapper {
       text-decoration: none;
-      font-weight: 500;
       color: $black;
-      margin: 20px;
+      margin-left: 60px;
       white-space: nowrap;
+
+      a {
+        font-family: $font-text;
+        font-size: $preamble-size;
+      }
+
+      .hover-border {
+        top: 24px;
+      }
 
       svg {
         margin-left: 20px;
@@ -93,8 +98,7 @@
       }
 
       @media screen and (max-width: 600px) {
-        padding-left: 20px;
-        margin-left: 0;
+        margin-left: 20px;
       }
     }
 

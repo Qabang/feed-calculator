@@ -7,9 +7,26 @@ import axios from 'axios'
 import './ContactForm.scss'
 
 function ContactForm() {
-  const [loadingMessage, setLoadingMessage] = useState('Hello woeld')
+  const [loadingMessage, setLoadingMessage] = useState('Loading...')
   const [isVisible, setIsVisible] = useState(false)
   const [emailMessageResponse, setEmailMessageResponse] = useState('')
+  const [emailMessageResponseIsError, setEmailMessageResponseIsError] = useState(false)
+
+  const emailSuccessMsg = 'Thank you for your email!'
+  const emailErrorMsg = `Oops seems like the server run in to an error, please try again later. If the error still occurs send me an email at <span class="link-wrapper"><a href="mailto:${process.env.REACT_APP_EMAIL}"> ${process.env.REACT_APP_EMAIL} </a><span class="hover-border"></span></span>`
+
+  function handleEmailResult(isSuccess) {
+    setIsVisible(false)
+    if (isSuccess) {
+      setEmailMessageResponseIsError(false)
+      setEmailMessageResponse(emailSuccessMsg)
+    }
+    else {
+      setEmailMessageResponseIsError(true)
+      setEmailMessageResponse(emailErrorMsg)
+    }
+
+  }
 
   let defaultValues = {
     subject: '',
@@ -19,8 +36,7 @@ function ContactForm() {
 
   const ProfileSchema = Yup.object().shape({
     subject: Yup.string()
-      .required('Your message needs a subject')
-      .min(5, 'The subject needs to be atleast five characters long.'),
+      .required('Your message needs a subject'),
     email: Yup.string()
       .email('Invalid email format')
       .required('I need to know where to send my reply.'),
@@ -46,25 +62,21 @@ function ContactForm() {
             },
           }).then(
             (response) => {
-              if (response.status === 200) {
+              console.log(response)
+              if (response.status === 200 && response.data.status === 200) {
                 setLoadingMessage('Email was successfully sent.')
                 formData.resetForm({ values: '' })
 
                 setTimeout(() => {
-                  setIsVisible(false)
                   setLoadingMessage('')
-                  setEmailMessageResponse('Thank you for your email!')
+                  handleEmailResult(true)
                 }, 3000)
               } else {
-                setEmailMessageResponse(
-                  'Oops seems like the server run in to an error, please try again later. If the error still occurs send me an email at feed.estimation@gmail.com'
-                )
+                handleEmailResult(false)
               }
             },
             (error) => {
-              setEmailMessageResponse(
-                'Oops seems like the server run in to an error, please try again later or send me an email at feed.estimation@gmail.com'
-              )
+              handleEmailResult(false)
               // TODO Log errors to something useful.
               console.log(error)
             }
@@ -83,55 +95,70 @@ function ContactForm() {
         }) => (
           <form onSubmit={handleSubmit}>
             <Spinner msg={loadingMessage} isVisible={isVisible} />
-            <label htmlFor="subject">Subject</label>
-            <input
-              id="subject"
-              name="subject"
-              type="text"
-              placeholder="Subject goes here."
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.subject}
-              className={
-                (errors.subject && touched.subject ? 'error ' : '') + 'subject'
-              }
-            />
-            {errors.subject && touched.subject ? (
-              <div className="error-message">{errors.subject}</div>
-            ) : null}
-            <label htmlFor="email">Your Email</label>
-            <input
-              id="email"
-              name="email"
-              type="text"
-              placeholder="Your email goes here."
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.email}
-              className={
-                (errors.email && touched.email ? 'error ' : '') + 'email'
-              }
-            />
-            {errors.email && touched.email ? (
-              <div className="error-message">{errors.email}</div>
-            ) : null}
-            <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              rows={8}
-              className={
-                (errors.message && touched.message ? 'error ' : '') + 'message'
-              }
-              name="message"
-              type="text"
-              placeholder="Your message goes here..."
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.message}
-            />
-            {errors.message && touched.message ? (
-              <div className="error-message">{errors.message}</div>
-            ) : null}
+            <div className="input-wrapper">
+              <div className="input-effect-container">
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  placeholder=" "
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.subject}
+                  className="input-effect"
+                />
+                <label htmlFor="subject">Subject</label>
+                <span className="focus-border"></span>
+                <span className={`focus-bg ${(errors.subject && touched.subject ? 'error ' : '')}`}></span>
+              </div>
+
+              {errors.subject && touched.subject ? (
+                <div className="error-message">{errors.subject}</div>
+              ) : null}
+            </div>
+
+            <div className="input-wrapper">
+              <div className="input-effect-container">
+                <input
+                  id="email"
+                  name="email"
+                  type="text"
+                  placeholder=" "
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.email}
+                  className="input-effect"
+                />
+                <label htmlFor="email">Your Email</label>
+                <span className="focus-border"></span>
+                <span className={`focus-bg ${(errors.email && touched.email ? 'error ' : '')}`}></span>
+              </div>
+              {errors.email && touched.email ? (
+                <div className="error-message">{errors.email}</div>
+              ) : null}
+            </div>
+
+            <div className="input-wrapper">
+              <div className="input-effect-container">
+                <textarea
+                  id="message"
+                  rows={5}
+                  className="input-effect"
+                  name="message"
+                  type="text"
+                  placeholder=" "
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.message}
+                />
+                <label htmlFor="message">Message</label>
+                <span className="focus-border"></span>
+                <span className={`focus-bg ${(errors.message && touched.message ? 'error ' : '')}`}></span>
+              </div>
+              {errors.message && touched.message ? (
+                <div className="error-message">{errors.message}</div>
+              ) : null}
+            </div>
             <br />
             <input
               type="submit"
@@ -140,10 +167,7 @@ function ContactForm() {
               className="btn-cta btn-slim"
             />
             {emailMessageResponse && (
-              <p>
-                <br />
-                {emailMessageResponse}
-              </p>
+              <p className={emailMessageResponseIsError && "error"} dangerouslySetInnerHTML={{ __html: emailMessageResponse }} />
             )}
           </form>
         )}

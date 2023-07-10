@@ -1,6 +1,7 @@
 import ContactForm from './ContactForm'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 import './About.scss'
+import LinkWidget from '../widgets/LinkWidget'
 
 function Index() {
   return (
@@ -45,7 +46,7 @@ function Index() {
             At present, the application is not designed to be able to make a
             correct assessment for horses / foals under the age of 1 year. It is
             also not designed to keep track of all the toxic overdoses. There,
-            it is you as the owner who bears the ultimate responsibility that
+            it is you as the user and care giver who bears the ultimate responsibility that
             your horse has a correct feed state.
           </p>
         </section>
@@ -60,26 +61,14 @@ function Index() {
           </p>
           <ul>
             <li>
-              <a href="mailto:sandra.lindstrm@gmail.com">
-                sandra.lindstrm@gmail.com
-                <FaExternalLinkAlt />
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/sandra-lindstr%C3%B6m-b11903153/">
-                Sandra Lindström @ Linkedin
-                <FaExternalLinkAlt />
-              </a>
+              <LinkWidget href={`mailto:${process.env.REACT_APP_EMAIL}`} title={process.env.REACT_APP_EMAIL} />
             </li>
           </ul>
           <p>
-            If you are interested in my other projects, you are welcome to visit
+            If you are interested in my other coding projects, you are welcome to visit
             my github to see what I am working on right now.
           </p>
-          <a href="https://github.com/Qabang">
-            Qabang @ Github
-            <FaExternalLinkAlt />
-          </a>
+          <LinkWidget href={"https://github.com/Qabang"} title={"Qabang @ Github"} />
         </section>
         <section id="contact-form">
           <ContactForm />
