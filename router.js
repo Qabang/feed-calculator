@@ -32,8 +32,17 @@ router.post('/contact', (req, res) => {
   const { subject, message, email } = req.body.values
 
   sendMail(subject, message, email)
-    .then((result) => res.send(result))
-    .catch((error) => res.send(error.message))
+    .then((result) => {
+      if (result.status === 200) {
+        res.send(result)
+      }
+      else {
+        res.sendStatus(500)
+      }
+    })
+    .catch((error) => {
+      res.send(error)
+    })
 })
 
 router.get('/api', async (req, res) => {
