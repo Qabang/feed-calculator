@@ -1,0 +1,31 @@
+@import '../../assets/style/config';
+
+.collapsible-widget-wrapper {
+    display: block;
+    background: lighten($light-aqua, 55%);
+    border-radius: 20px;
+    filter: drop-shadow($drop-shadow-medium);
+    margin-bottom: 80px;
+
+    .widget-header {
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+
+        h3 {
+            margin: 0;
+        }
+    }
+
+    .widget-body {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+
+        &.open {
+            max-height: 400px;
+            transition: max-height 0.7s ease-in-out;
+        }
+    }
+}
