@@ -1,73 +1,19 @@
 @import '../../assets/style/config';
 
 #feeding-calculator-wrapper {
-  width: 90%;
+  max-width: 100%;
   box-sizing: border-box;
-  max-width: $max-width;
   margin: auto;
-  padding: 30px;
-  border: 1px solid $aqua;
   border-radius: 5px;
   background-color: rgba($white, 0.4);
-}
-
-.form-wrapper {
-  .feeding-calculator-flex-wrap {
-    display: flex;
-    width: 100%;
-    text-align: left;
-    flex-wrap: wrap;
-  }
-
-  .long-input-label {
-    width: 100%;
-
-    @media screen and (max-width: 400px) {
-      order: 2;
-    }
-  }
-
-  #feed-name {
-    width: 320px;
-    max-width: 320px;
-
-    @media screen and (max-width: 650px) {
-      width: 100%;
-    }
-  }
-
-  input:not(input[type='submit'], #feed-name) {
-    max-width: 180px;
-  }
-
-  label {
-    display: flex;
-    flex-direction: column;
-    margin: 10px 20px;
-    flex-basis: 20%;
-
-    @media screen and (max-width: $tablet-xl) {
-      flex-basis: 40%;
-    }
-  }
-
-  label.long-input {
-    flex-basis: 100%;
-  }
-
-  .unit-label {
-    flex-basis: 100%;
-    display: block;
-    margin-left: 20px;
-    border-bottom: 1px solid $light-aqua;
-  }
 
   button[type='submit'] {
     margin-left: auto;
     margin-right: 20px;
+    margin-top: 30px;
 
     @media screen and (max-width: $tablet) {
-      margin: auto;
+      margin: 30px auto;
     }
   }
 }

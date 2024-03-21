@@ -15,6 +15,7 @@ router.get('/calculation', (req, res) => {
 
 router.post('/profile', (req, res) => {
   const calc = new Calculation(req.body)
+  console.log("server: ", req.body)
   res.send({ base: calc.baseNeed, work: calc.workNeed })
 })
 

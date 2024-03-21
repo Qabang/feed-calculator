@@ -1,0 +1,39 @@
+@import '../../../assets/style/config';
+
+
+.profile-content {
+    display: flex;
+
+    * {
+        flex: 1 1 100%;
+    }
+
+    h4 {
+        margin-bottom: 0;
+    }
+
+    span {
+        color: $black;
+        display: block;
+        font-style: italic;
+    }
+
+    ul {
+        padding: 0;
+
+        li {
+            font-size: $text-size;
+            margin: 10px 0;
+            padding: 0;
+            list-style-type: none;
+            color: $dark-blue;
+
+            span {
+                color: $black;
+                display: block;
+                font-weight: 500;
+                font-style: italic;
+            }
+        }
+    }
+}

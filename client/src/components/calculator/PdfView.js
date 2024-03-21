@@ -1,117 +1,122 @@
 import { ReactComponent as EfeLogo } from '../../assets/images/logo.svg'
+import FeedTable from './Components/FeedTable'
 
 import './PdfView.scss'
 
-function PdfView({
-  feedData,
-  profileName,
-  work,
-  calculations,
-  quotas,
-  warnings,
-}) {
+export default function PdfView({ feedData, profileName, work, calculations, quotas, warnings }) {
   let year = new Date().getFullYear()
   let month = ('0' + new Date().getMonth()).slice(-2)
   let day = ('0' + new Date().getDate()).slice(-2)
-
+  console.log(warnings)
   const date = year + '-' + month + '-' + day
 
   return (
     <article id="pdf">
-      <section className="pdf-header">
-        <section className="pdf-section text-content">
-          <h1 id="pdf-title">
-            Feed Calculation:
-            <br /> <span>{profileName}</span>
-          </h1>
-          <p>Date: {date}</p>
+      <section className='pdf-page'>
+
+        <section className="pdf-header">
+          <section className="pdf-section text-content">
+            <h1 id="pdf-title">
+              Feed Calculation:
+              <br /> <span>{profileName}</span>
+            </h1>
+            <p>Date: {date}</p>
+          </section>
+          <section className="pdf-section logo">
+            <EfeLogo />
+          </section>
         </section>
-        <section className="pdf-section logo">
-          <EfeLogo />
-        </section>
-      </section>
-      <hr />
-      <section className="pdf-content-column first">
-        <section className="pdf-content headings">
+        <section className="pdf-content-column first">
+          <FeedTable
+            horseBaseData={calculations.horseBaseData}
+            horseWorkData={calculations.horseWorkData}
+            horseResultData={calculations.horseResultData}
+            feedWarningList={{}}
+            toxicValues={{}}
+          />
+          {/* <section className="pdf-content headings">
           <h2>Maintenance needs:</h2>
           <h2>Work needs:</h2>
           <h2>Result:</h2>
-        </section>
+          </section>
 
         <section className="pdf-content">
-          {calculations && calculations.length > 0 && (
-            <>
+        {calculations && calculations.length > 0 && (
+          <>
               <ul className="labels">
                 {Object.keys(calculations[0]).map((key, index) => (
                   <li key={index + '-label'}>{key}</li>
-                ))}
-              </ul>
-
-              {calculations.map((items, index) => (
-                <ul className="pdf-section" key={index + '-pdf-section'}>
+                  ))}
+                  </ul>
+                  
+                  {calculations.map((items, index) => (
+                    <ul className="pdf-section" key={index + '-pdf-section'}>
                   {Object.keys(items).map((key, index) => (
                     <li key={key + index}>{items[key]}</li>
-                  ))}
-                </ul>
-              ))}
-            </>
-          )}
+                    ))}
+                    </ul>
+                    ))}
+                    </>
+                    )}
+                  </section>*/}
         </section>
-        <hr />
+      </section>
+      <section className='pdf-page'>
+
         {quotas}
-      </section>
-      <hr />
-      <section className="pdf-content">
-        <section className="pdf-section feed-list">
-          <h2>Feed List:</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {feedData &&
-                feedData.map((item, index) => (
-                  <tr key={index + '-tr'}>
-                    <td>{item.name || '-'}</td>
-                    <td>{item.amount || 0} Kg</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </section>
-        <div className="vertical-line"></div>
-        <section className="pdf-section work-list">
-          <h2>Work / Day:</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Work</th>
-                <th>Time</th>
-              </tr>
-            </thead>
-            {work && (
+        <section className="pdf-content">
+          <section className="pdf-section feed-list">
+            <h2>Feed List:</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr>
-                  <td>Walk</td>
-                  <td>{work.walk || 0} minutes</td>
-                </tr>
-                <tr>
-                  <td>Trot / Canter</td>
-                  <td>{work.trot || 0} Minutes</td>
-                </tr>
+                {feedData &&
+                  feedData.map((item, index) => (
+                    <tr key={index + '-tr'}>
+                      <td>{item.name || '-'}</td>
+                      <td>{item.amount || 0} Kg</td>
+                    </tr>
+                  ))}
               </tbody>
-            )}
-          </table>
+            </table>
+          </section>
+          <div className="vertical-line"></div>
+          <section className="pdf-section work-list">
+            <h2>Work / Day:</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Work</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              {work && (
+                <tbody>
+                  <tr>
+                    <td>Walk</td>
+                    <td>{work.walk || 0} minutes</td>
+                  </tr>
+                  <tr>
+                    <td>Trot / Canter</td>
+                    <td>{work.trot || 0} Minutes</td>
+                  </tr>
+                </tbody>
+              )}
+            </table>
+          </section>
         </section>
       </section>
-      <hr />
-      <div className="clearfix"></div>
-      {warnings}
+      {warnings && (
+        <section className='pdf-section-warnings pdf-page'>
+          {warnings}
+        </section>
+      )}
     </article>
   )
 }
 
-export default PdfView

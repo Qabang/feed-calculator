@@ -12,11 +12,10 @@ export class ComponentToPrint extends React.PureComponent {
   setRef = (ref) => (this.canvasEl = ref)
 
   render() {
-    const { feedData, profileName, work, calculations, quotas, warnings } =
-      this.props
+    const { feedData, profileName, work, calculations, quotas, warnings } = this.props
 
-    if (calculations[0] === undefined || calculations[0] === null) {
-      return 'Something went wrong, Please try again or contact me about this error, at sandra.lindstrm@gmail.com'
+    if (calculations === undefined || calculations === null) {
+      return 'Something went wrong, Please try again or contact me about this error.'
     }
 
     return (

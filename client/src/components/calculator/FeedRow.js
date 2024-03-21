@@ -1,25 +1,30 @@
 import {
   FaPen,
-  FaTrashAlt,
-  FaChevronDown,
   FaSave,
   FaTimes,
 } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
 import FeedForm from './FeedForm.js'
 
+import './FeedForm.scss'
 import './FeedRow.scss'
+import CollapsibleWidget from '../widgets/CollapsibleWidget.js'
+import WidgetButtons from '../widgets/WidgetButtons.js'
+import { FeedModel } from '../../Models/FeedModel.js'
 
 function FeedRow(props) {
-  let [feedRow, setFeedRow] = useState()
+  const feedModel = new FeedModel(props.feedData)
+  let [feedRow, setFeedRow] = useState(feedModel.feedModelData)
   let [isExpanded, setIsExpanded] = useState(false)
   let [editRow, setEditRow] = useState(false)
+  let [units] = useState(feedModel.feedModelUnits)
 
   let toggleFeedCard = () => {
-    return setIsExpanded(!isExpanded)
+    return setIsExpanded(true)
   }
 
-  let toggleEditRow = () => {
+  let toggleEditRow = async () => {
+    await setIsExpanded(false)
     toggleFeedCard()
     return setEditRow(true)
   }
@@ -31,121 +36,62 @@ function FeedRow(props) {
 
   useEffect(() => {
     setFeedRow(props.feedData)
-  }, [props])
+  }, [props, isExpanded])
 
   return (
     <>
       {feedRow && (
-        <li
-          className={(isExpanded || editRow ? 'open ' : 'closed ') + 'feedrow'}
-        >
-          <div className="feedrow-header">
-            <p className="feedrow-title">
-              {feedRow.name || ' - '}:<span> {feedRow.amount} kg</span>
-            </p>
-            <button
-              className="btn-slim btn-small btn-edit"
-              onClick={toggleEditRow}
+        <WidgetButtons onAction={toggleEditRow} onDelete={() => props.deleteFeedCard(props.index)} onActionIcon={<FaPen />} onActionBtnType={"edit"} onActionTitle={"Edit"}>
+          <CollapsibleWidget title={<>{feedRow.name || ' - '} : <span> {feedRow.amount || ' 0 '} kg</span></>} slim={true} collapseWidget={!isExpanded} textAlignLeft={true}>
+            <section
+              className={(isExpanded || editRow ? 'open ' : 'closed ') + 'feedrow'}
             >
-              <FaPen />
-              <span>Edit</span>
-            </button>
-            <button
-              className="btn-slim btn-small btn-delete"
-              onClick={() => props.deleteFeedCard(props.index)}
-            >
-              <FaTrashAlt />
-              <span>Delete</span>
-            </button>
-            <FaChevronDown
-              className={(editRow ? 'disabled ' : '') + 'toggle-arrow'}
-              onClick={toggleFeedCard}
-              title={
-                editRow
-                  ? 'Close the edit box before you can collapse this card'
-                  : 'Toggle visibility of the data in the card'
-              }
-            />
-          </div>
-          <div className={(editRow ? 'edit ' : '') + 'feedrow-content'}>
-            {!editRow && (
-              <>
-                <ul>
-                  <li>
-                    <label htmlFor="list-mj">mj</label>
-                    <span id="list-mj">{feedRow.mj}</span>
-                  </li>
-                  <li>
-                    <label htmlFor="list-smrp">smrp</label>
-                    <span id="list-smrp">{feedRow.smrp}</span>
-                  </li>
-                </ul>
-                <ul>
-                  <li>
-                    <label htmlFor="list-ca">ca</label>
-                    <span id="list-ca">{feedRow.ca}</span>
-                  </li>
-                  <li>
-                    <label htmlFor="list-p">p</label>
-                    <span id="list-p">{feedRow.p}</span>
-                  </li>
-                  <li>
-                    <label htmlFor="list-mg">mg</label>
-                    <span id="list-mg">{feedRow.mg}</span>
-                  </li>
-                  <li>
-                    <label htmlFor="list-na">na</label>
-                    <span id="list-na">{feedRow.na}</span>
-                  </li>
-                </ul>
-                <ul>
-                  <li>
-                    <label htmlFor="list-fe">fe</label>
-                    <span id="list-fe">{feedRow.fe}</span>
-                  </li>
-                  <li>
-                    <label htmlFor="list-cu">cu</label>
-                    <span id="list-cu">{feedRow.cu}</span>
-                  </li>
-                  <li>
-                    <label htmlFor="list-zn">zn</label>
-                    <span id="list-zn">{feedRow.zn}</span>
-                  </li>
-                  <li>
-                    <label htmlFor="list-mn">mn</label>
-                    <span id="list-mn">{feedRow.mn}</span>
-                  </li>
-                  <li>
-                    <label htmlFor="list-selenium">se</label>
-                    <span id="list-selenium">{feedRow.selenium}</span>
-                  </li>
-                </ul>
-              </>
-            )}
-            {editRow && (
-              <>
-                <FeedForm
-                  addFeedRowCallback={handleEditFeedRow}
-                  defaultValues={feedRow}
-                  edit={true}
-                  buttonIcon={<FaSave />}
-                  buttonText="Save"
-                />
-                <button
-                  className="btn-cancel btn-slim btn-small btn-edit"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setEditRow(false)
-                  }}
-                >
-                  <FaTimes />
-                  <span>Cancel</span>
-                </button>
-              </>
-            )}
-          </div>
-        </li>
+              <div className={(editRow ? 'edit ' : '') + 'feedrow-content form-wrapper'}>
+                {!editRow && (
+                  <>
+                    {props.feedLabels &&
+                      <table cellSpacing={0} cellPadding={3}>
+                        <tbody>
+                          {Object.keys(props.feedLabels).map((key, index) => (
+                            <tr key={key + index}>
+                              <th>{props.feedLabels[key].full}</th>
+                              <td className='text-align-right'>{feedRow[key] || '-'}</td>
+                              <td>{units[key] && `${units[key]} / Kg`}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    }
+                  </>
+                )}
+                {editRow && (
+                  <>
+                    <FeedForm
+                      addFeedRowCallback={handleEditFeedRow}
+                      defaultValues={feedRow}
+                      edit={true}
+                      buttonIcon={<FaSave />}
+                      buttonText="Save"
+                    />
+                    <hr />
+                    <button
+                      className="btn-cancel btn-slim btn-small btn-edit"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setEditRow(false)
+                      }}
+                    >
+                      <FaTimes />
+                      <span>Cancel</span>
+                    </button>
+                  </>
+                )}
+              </div>
+            </section>
+          </CollapsibleWidget>
+        </WidgetButtons>
       )}
+
     </>
   )
 }

@@ -9,8 +9,28 @@
   max-width: $max-width;
   box-sizing: border-box;
 
-  > h2 {
-    margin-left: 30px;
+  .info-text {
+    font-size: 14px;
+    font-style: italic;
+    position: relative;
+    margin-top: -16px;
+  }
+
+  .btn-show-form {
+    margin: 60px 0;
+    font-weight: 700;
+  }
+
+  .btn-edit-form-cancel {
+    margin-left: auto;
+    margin-right: 40px;
+    margin-top: -75px;
+
+    @media screen and (max-width: $tablet) {
+      margin-left: 30px;
+      margin-right: auto;
+      margin-top: 0;
+    }
   }
 
   form {
@@ -21,45 +41,16 @@
     display: flex;
     flex-wrap: wrap;
 
-    .profile-basics {
-      display: flex;
-      flex-basis: 67%;
-
-      .profile-section {
-        display: block;
-        flex-basis: 50%;
-        padding: 15px;
-      }
-
-      @media screen and (max-width: 767px) {
-        flex-basis: 100%;
-      }
-
-      @media screen and (max-width: 424px) {
-        display: block;
-      }
-    }
-
     .profile-section {
       display: flex;
-      justify-content: flex-end;
       flex-direction: column;
       padding: 15px;
       box-sizing: border-box;
-      flex-basis: 33%;
+      flex-basis: 50%;
 
-      label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: 500;
-        line-height: $lineheight-preamble;
-        font-size: $text-size;
-      }
-
-      #work-label {
+      .horse-form-label {
         height: 35px;
-        margin-top: 27px;
-        margin-bottom: auto;
+        margin: 27px 0;
         font-size: 1.2rem;
 
         @media screen and (max-width: $tablet) {
@@ -117,9 +108,8 @@
     .error {
       border-color: $red !important;
     }
+
     .error-message {
-      position: absolute;
-      margin-top: -20px;
       font-size: $caption-size;
       font-weight: bold;
       color: $red;

@@ -50,33 +50,7 @@ function printResult(section, mj, smrp, ca, phosphor, mg, selenium = false) {
   if (selenium) {
     document.querySelector('.result-' + section + '-selen').innerHTML =
       selenium.toFixed(1)
-
-    // Selenium is really toxic if given to much.
-    // Alert if the value is greater than 5mg. TODO FIX THIS!
-    if (
-      document.querySelector('.result-' + section + '-selen').innerHTML > 5.0 &&
-      alerted == false
-    ) {
-      alert('The amount of selenium is probably toxic for your horse!')
-      alerted = true
-    } else {
-      alerted = false
-    }
   }
-
-  // If the total is less than 0 or higher than 5 alert user by adding color changeing class
-  document.querySelectorAll('li[class*="-total"]').forEach((element) => {
-    if (parseFloat(element.innerHTML) < 0) {
-      element.classList.add('low-value')
-    } else if (parseFloat(element.innerHTML) > 5.0) {
-      element.classList.add('high-value')
-    } else if (
-      parseFloat(element.innerHTML) > -1 &&
-      parseFloat(element.innerHTML) < 1
-    ) {
-      element.classList.add('good-value')
-    }
-  })
 }
 
 /**
@@ -103,7 +77,7 @@ function profile_submit() {
   if (age < 0) {
     alert(
       "Well time flies! But we can't use a year ahead of the current year, " +
-        new Date().getFullYear()
+      new Date().getFullYear()
     )
     document.querySelector('.born').classList.add('error')
     return
@@ -114,8 +88,8 @@ function profile_submit() {
   if (age > 65) {
     alert(
       'The worlds oldest horse Billy died at the age of 62 years are you sure your horse is ' +
-        age +
-        ' years old?'
+      age +
+      ' years old?'
     )
     document.querySelector('.born').classList.add('error')
     return
@@ -167,7 +141,7 @@ function base_amount_calculation(age, weight, type) {
   mg = parseFloat(weight / 100) * 1.5
   phosphor = parseFloat(weight / 100) * 2.8
   selenium = parseFloat(weight / 100) * 0.2
-
+  console.log(age)
   if (age < 3) {
     // Todo
     alert(

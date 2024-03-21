@@ -53,7 +53,6 @@ function ContactForm() {
         onSubmit={(values, formData) => {
           setIsVisible(true)
           setLoadingMessage('Prepearing email...')
-          // TODO Post data and email results.
           axios({
             method: 'post',
             url: '/contact',
@@ -62,7 +61,6 @@ function ContactForm() {
             },
           }).then(
             (response) => {
-              console.log(response)
               if (response.status === 200 && response.data.status === 200) {
                 setLoadingMessage('Email was successfully sent.')
                 formData.resetForm({ values: '' })

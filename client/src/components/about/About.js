@@ -1,5 +1,4 @@
 import ContactForm from './ContactForm'
-import { FaExternalLinkAlt } from 'react-icons/fa'
 import './About.scss'
 import LinkWidget from '../widgets/LinkWidget'
 

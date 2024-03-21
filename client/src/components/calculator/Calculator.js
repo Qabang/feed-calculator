@@ -11,13 +11,16 @@ import {
   FaExclamationCircle,
   FaExclamationTriangle,
 } from 'react-icons/fa'
-
 import './Calculator.scss'
-import ResultColumn from './ResultColumn.js'
+
 import FeedWarningsList from './FeedWarningsList.js'
 import Quotas from './Quotas.js'
+import CollapsibleWidget from '../widgets/CollapsibleWidget.js'
+import SimpleWidget from '../widgets/SimpleWidget.js'
+import { FeedModel } from '../../Models/FeedModel.js'
 
 function Calculator() {
+  const feedModel = new FeedModel();
   const [profile, setProfile] = useState('')
   const [feedWarningList, setFeedWarningList] = useState({})
   const [toxicValues, setToxicValues] = useState([])
@@ -27,56 +30,42 @@ function Calculator() {
   const [feedRows, setFeedRows] = useState([])
   const [horseResultData, setHorseResultData] = useState('')
   const [showCalculator, setShowCalculator] = useState(false)
-  const [showCardMessage, setShowCardMessage] = useState(false)
-  const [cardMessage, setCardMessage] = useState('')
   const myRef = useRef(null)
   const calculatorRef = useRef(null)
+  const labels = feedModel.feedModelLabels
 
   let handleHorseForm = (childData) => {
     setHorseBaseData(childData.base)
     setHorseWorkData(childData.work)
     setShowCalculator(true)
-    calculatorRef.current.scrollIntoView()
+
+    if (calculatorRef !== null && calculatorRef.current !== null) {
+      calculatorRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   let handleAddFeedRow = (row) => {
     let list = feedRows
     list.push(row)
-    let msg = 'Added ' + row.name + ' to list'
     calculateValues(list)
-    updateFeedList(list, msg)
+    setFeedRows(list)
   }
 
   let handleEditFeedCard = (key, values) => {
     let list = feedRows
     list[key] = values
     calculateValues(list)
-    updateFeedList(
-      list,
-      'Successfully updated the value(s) for ' + list[key].name
-    )
+    setFeedRows(list)
   }
 
   let handleDeleteFeedCard = (key) => {
     let list = feedRows
-    let msg = 'Successfully deleted ' + list[key].name + ' from list'
     list.splice(key, 1)
     calculateValues(feedRows)
-    updateFeedList(list, msg)
-  }
-
-  function updateFeedList(list, msg) {
     setFeedRows(list)
-    setShowCardMessage(true)
-    setCardMessage(msg)
-    setTimeout(() => {
-      setShowCardMessage(false)
-      setCardMessage('')
-    }, 5000)
   }
 
   const getToxicValues = async (resultData) => {
-    console.log('val: ', profile.weight)
     let values = { profile, resultData }
     axios({
       method: 'post',
@@ -98,19 +87,14 @@ function Calculator() {
   let handleFeedWarnings = (result) => {
     let feedWarnings = {}
     Object.keys(result).map((key) => {
-      let percent =
-        (result[key] / (horseBaseData[key] + horseWorkData[key])) * 100
-
+      let percent = (result[key] / (horseBaseData[key] + horseWorkData[key])) * 100
       if (!(key in toxicValues)) {
-        if (result[key] < horseBaseData[key]) {
+        if (result[key] < horseBaseData[key] && percent < 99.5) {
           feedWarnings[key] =
             "This value is too low and does not cover your horse's minimum needs!"
         } else if (percent > 105) {
           feedWarnings[key] =
             "This value is a bit high. If your horse dosen't get fat it's probably not dangerous"
-        } else if (percent < 95) {
-          feedWarnings[key] =
-            "This value is a bit low. If your horse dosen't get to skinny it's probably not dangerous"
         }
       }
       return feedWarnings
@@ -120,6 +104,7 @@ function Calculator() {
   }
 
   let calculateValues = async (values) => {
+    console.log(values)
     await axios({
       method: 'post',
       url: '/calculate',
@@ -129,10 +114,11 @@ function Calculator() {
     }).then(
       (response) => {
         if (response.status === 200) {
-          myRef.current.scrollIntoView()
-          getToxicValues(response.data)
-          handleFeedWarnings(response.data)
-          setHorseResultData(response.data)
+          const result = response.data
+          // myRef.current.scrollIntoView()
+          getToxicValues(result)
+          handleFeedWarnings(result)
+          setHorseResultData(result)
         }
       },
       (error) => {
@@ -190,121 +176,138 @@ function Calculator() {
 
   return (
     <section id="calculator-section-wrapper">
+      <h2>The Calculator</h2>
       <HorseForm
         calculatorCallback={handleHorseForm}
         setProfile={setProfile}
         setHorseWorkAmount={setHorseWorkAmount}
       />
 
-      {horseBaseData && (
-        <div>
-          <h2>Need results:</h2>
-          <section id="feed-needs" ref={myRef}>
-            <ul id="feed-labels">
-              <div className="feed-clearfix"></div>
-              {horseBaseData &&
-                Object.keys(horseBaseData).map((key, index) => (
-                  <li key={key + index}>{key}</li>
-                ))}
-            </ul>
-            <ResultColumn title="Basic needs" data={horseBaseData} />
-            <ResultColumn title="Work needs" data={horseWorkData} />
-            <ResultColumn title="Total given" data={horseResultData} />
-            {(horseBaseData || horseResultData) && (
-              <ul id="feed-result">
-                <h3 className="feed-clearfix">Result:</h3>
-                {horseResultData &&
-                  Object.keys(horseResultData).map((key, index) => (
-                    <li
-                      key={key + index}
-                      className={
-                        (key in toxicValues ? 'error-danger' : '') +
-                        ' ' +
-                        (key in feedWarningList ? 'error-warning' : '')
-                      }
-                    >
-                      {parseInt(
-                        (horseResultData[key] /
-                          (horseBaseData[key] + horseWorkData[key])) *
-                          100
-                      )}
-                      %
-                      {key in toxicValues && (
-                        <span className="error-icon danger">
-                          <FaExclamationCircle />
-                        </span>
-                      )}
-                      {!(key in toxicValues) && key in feedWarningList && (
-                        <span className="error-icon warning">
-                          <FaExclamationTriangle />
-                        </span>
-                      )}
-                    </li>
-                  ))}
-              </ul>
-            )}
-          </section>
-
-          {horseResultData && <Quotas data={horseResultData} />}
-
-          <FeedWarningsList
-            feedWarningList={feedWarningList}
-            toxicValues={toxicValues}
+      {horseResultData && (
+        <div id="print-section">
+          <ReactToPrint
+            content={reactToPrintContent}
+            documentTitle={'feed-caculation-' + profile.name || '[null]'}
+            onBeforeGetContent={handleOnBeforeGetContent}
+            removeAfterPrint
+            trigger={reactToPrintTrigger}
           />
-          {horseResultData && (
-            <div id="print-section">
-              <ReactToPrint
-                content={reactToPrintContent}
-                documentTitle={'feed-caculation-' + profile.name || '[null]'}
-                onBeforeGetContent={handleOnBeforeGetContent}
-                removeAfterPrint
-                trigger={reactToPrintTrigger}
-              />
-              {loading && <p className="indicator">Preparing document...</p>}
-              <div style={{ display: 'none' }}>
-                <FunctionalComponentToPrint
-                  ref={componentRef}
-                  feedData={feedRows}
-                  profileName={profile.name}
-                  work={horseWorkAmount}
-                  calculations={[horseBaseData, horseWorkData, horseResultData]}
-                  quotas={<Quotas data={horseResultData} />}
-                  warnings={
-                    <FeedWarningsList
-                      feedWarningList={feedWarningList}
-                      toxicValues={toxicValues}
-                    />
-                  }
-                />
-              </div>
-            </div>
-          )}
+          {loading && (<div className='flex-wrapper'><p className="indicator">Preparing document</p><span className='dots'></span></div>)}
+          <div style={{ display: 'none' }}>
+            <FunctionalComponentToPrint
+              ref={componentRef}
+              feedData={feedRows}
+              profileName={profile.name}
+              work={horseWorkAmount}
+              calculations={{ horseBaseData: horseBaseData, horseWorkData: horseWorkData, horseResultData: horseResultData }}
+              quotas={<Quotas data={horseResultData} />}
+              warnings={(Object.keys(feedWarningList).length > 0 || Object.keys(toxicValues).length > 0) ? <FeedWarningsList feedWarningList={feedWarningList} toxicValues={toxicValues} /> : null
+              }
+            />
+          </div>
         </div>
       )}
+
       {showCalculator && (
-        <section
-          id="feeding-calculator-wrapper"
-          className="form-wrapper"
-          ref={calculatorRef}
-        >
-          <FeedForm addFeedRowCallback={handleAddFeedRow} />
-        </section>
+        <>
+          <h3>Add Feed</h3>
+          <SimpleWidget>
+            <section
+              id="feeding-calculator-wrapper"
+              className="form-wrapper"
+              ref={calculatorRef}
+            >
+              <FeedForm addFeedRowCallback={handleAddFeedRow} />
+            </section>
+          </SimpleWidget>
+        </>
+
       )}
-      {showCardMessage && <div>{cardMessage}</div>}
+
       {feedRows && (
-        <ul id="feedrow-wrapper" className="form-wrapper">
+        <section id="feedrow-section" className='calculator-section'>
           {feedRows.map((row, index) => (
+
             <FeedRow
               key={index}
               index={index}
               feedData={row}
               editFeedCard={handleEditFeedCard}
               deleteFeedCard={handleDeleteFeedCard}
+              feedLabels={labels}
             />
+
           ))}
-        </ul>
+        </section>
       )}
+
+      {horseBaseData && (
+        <section className='calculator-section'>
+          <h3>Feedstate result:</h3>
+          <SimpleWidget title="Result:">
+            <table className="feed-table-result" ref={myRef} cellSpacing="1" cellPadding="0">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Basic need</th>
+                  <th>Work need</th>
+                  <th>Total given</th>
+                  <th>Summary</th>
+                </tr>
+              </thead>
+              {horseBaseData &&
+                Object.keys(horseBaseData).map((key, index) => (
+                  <tbody key={key + index} className='table-row-section'>
+                    <tr>
+                      <th title={labels[key].full} className={`row-header ${toxicValues[key] && 'danger'} ${feedWarningList[key] && 'warning'}`}>{labels[key].short}</th>
+                      <td>{horseBaseData[key]}</td>
+                      <td>{horseWorkData[key]}</td>
+                      <td>{horseResultData[key] ?? '-'}</td>
+                      <td className='summary-cell'>
+                        {(isNaN(parseInt(horseResultData[key] / (horseBaseData[key] + horseWorkData[key])))) ?
+                          '-'
+                          :
+                          parseInt(parseFloat(horseResultData[key]) / (parseFloat(horseBaseData[key]) + parseFloat(horseWorkData[key])) * 100) + '%'
+                        }
+
+                        <span className="icon">
+                          {key in toxicValues && (
+                            <span className="error-icon danger">
+                              <FaExclamationCircle />
+                            </span>
+                          )}
+                          {key in feedWarningList && (
+                            <span className="error-icon warning">
+                              <FaExclamationTriangle />
+                            </span>
+                          )}
+                        </span>
+                      </td>
+                    </tr>
+                    {(toxicValues[key] || feedWarningList[key]) &&
+                      <tr className='error-row'>
+                        <td className={`row-header ${toxicValues[key] && 'danger'}`}></td>
+                        <td className='error-cell' colSpan={4}>{toxicValues[key] ? <span className='toxic'>This amount is toxic for your horse (values above {toxicValues[key]}mg per 100kg, are dangerous) You need to adjust the
+                          feedstate or this could potentially kill your horse</span> : feedWarningList[key]} </td>
+                      </tr>
+                    }
+                  </tbody>
+                ))}
+
+            </table>
+          </SimpleWidget>
+        </section>
+      )}
+
+      {horseResultData &&
+        <section className='calculator-section'>
+          <CollapsibleWidget title={<h3>Quotas:</h3>}>
+            {horseResultData && <Quotas data={horseResultData} />}
+          </CollapsibleWidget>
+        </section>
+      }
     </section>
+
   )
 }
 export default Calculator

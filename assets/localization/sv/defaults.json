@@ -1,0 +1,12 @@
+{
+    "app-title": "Equine Feed Estimation",
+    "menu": {
+        "start": "Start",
+        "Calculator": "Kalkylatorn",
+        "About": "Om applikationen"
+    },
+    "information": "Information",
+    "recomended-reading": "Rekommenderad läsning",
+    "edit": "Ändra",
+    "delete": "Tabort"
+}

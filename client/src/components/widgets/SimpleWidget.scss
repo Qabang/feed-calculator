@@ -1,0 +1,15 @@
+@import '../../assets/style/config';
+
+.widget-wrapper {
+    display: block;
+    background: lighten($light-aqua, 55%);
+    border-radius: 20px;
+    filter: drop-shadow($drop-shadow-medium);
+    margin-bottom: 5px;
+    padding: 20px 40px;
+
+    .widget-body {
+
+        overflow-x: auto;
+    }
+}

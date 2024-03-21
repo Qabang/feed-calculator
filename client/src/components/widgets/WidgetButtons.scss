@@ -1,0 +1,182 @@
+@import '../../assets/style/config';
+
+.widget-button-wrapper {
+    display: flex;
+    margin: 10px 0;
+    min-width: 100%;
+
+    @media (max-width: 660px) {
+        >div {
+            flex-basis: 100%;
+        }
+    }
+
+    h3 {
+        font-family: $font-text;
+        margin: auto;
+        width: fit-content;
+    }
+
+    &.active-profile {
+        h3 {
+            color: $dark-blue;
+            border-bottom: 2px solid $aqua;
+        }
+    }
+
+    >* {
+        flex: 1 1 auto;
+    }
+
+    .active {
+        svg {
+            color: $aqua;
+        }
+    }
+
+    .btn {
+        margin: auto;
+        max-width: fit-content;
+        border-radius: 20px;
+        box-sizing: border-box;
+        padding: 12px 20px;
+        margin: auto 20px auto 0;
+        font-size: 16px;
+        min-height: unset;
+
+        @media (max-width: 660px) {
+            order: 1;
+            margin-top: 15px;
+        }
+
+
+
+        &.btn-icon {
+
+            &.delete {
+                background-color: $white;
+                border: 2px solid $red;
+                color: $white;
+                height: 43px;
+                width: 43px;
+                margin: auto 0 auto 20px;
+                padding: 0;
+                min-width: 47px;
+                min-height: 47px;
+                border-radius: 100%;
+
+                span {
+                    display: block;
+                    margin: auto 0;
+                    opacity: 0;
+                    position: absolute;
+                    font-size: 0;
+
+                    @media (max-width: 660px) {
+                        font-size: 16px;
+                        position: relative;
+                        opacity: 1;
+                        color: $white;
+                    }
+
+                    @media (max-width: 420px) {
+                        display: block;
+                        margin: auto 0;
+                        opacity: 0;
+                        position: absolute;
+                        font-size: 0;
+                    }
+                }
+
+                svg {
+                    margin: auto;
+                    color: $red;
+
+                    @media (max-width: 660px) {
+                        margin-right: 20px;
+                        color: $white;
+                    }
+
+                    @media (max-width: 420px) {
+                        margin: auto
+                    }
+                }
+
+                @media (max-width: 660px) {
+                    background-color: $red;
+                    padding: 10px 20px;
+                    order: 2;
+                    margin-top: 15px;
+                    margin-left: auto;
+                    margin-bottom: 40px;
+                    border-radius: 20px;
+                }
+
+                @media (max-width: 420px) {
+                    height: 43px;
+                    width: 43px;
+                    padding: 0;
+                    border-radius: 50%;
+                }
+
+
+            }
+
+            svg {
+                margin-right: 20px;
+            }
+        }
+
+        @media (max-width: 660px) {
+            margin-top: 15px;
+            flex-basis: 50%;
+        }
+    }
+
+    .profile {
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px 20px;
+
+        .profile-content {
+            display: flex;
+
+            * {
+                flex: 1 1 100%;
+            }
+
+            h4 {
+                margin-bottom: 0;
+            }
+
+            span {
+                color: $black;
+                display: block;
+                font-style: italic;
+            }
+
+            ul {
+                padding: 0;
+
+                li {
+                    font-size: $text-size;
+                    margin: 10px 0;
+                    padding: 0;
+                    list-style-type: none;
+                    color: $dark-blue;
+
+                    span {
+                        color: $black;
+                        display: block;
+                        font-weight: 500;
+                        font-style: italic;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 660px) {
+        flex-wrap: wrap;
+    }
+}

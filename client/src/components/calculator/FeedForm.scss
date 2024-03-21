@@ -1,0 +1,45 @@
+@import '../../assets/style/config';
+
+
+.form-feed {
+  padding-bottom: 30px;
+
+  table.feed-form-table {
+
+    tr {
+      display: flex;
+    }
+
+    th {
+      display: block;
+      position: relative;
+    }
+
+    td {
+      width: 100%;
+    }
+
+    .unit-cell {
+      display: block;
+      width: 50px;
+      max-width: 50px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.feedrow {
+  .help-wrapper {
+    display: none;
+  }
+
+  button[type='submit'] {
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 30px;
+
+    @media screen and (max-width: $tablet) {
+      margin: 30px auto;
+    }
+  }
+}

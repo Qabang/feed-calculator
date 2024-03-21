@@ -1,17 +1,77 @@
 @import '../../assets/style/config';
 
 #calculator-section-wrapper {
-  max-width: $max-width;
-  margin: auto;
+  .calculator-section {
+    margin: 20px 0;
+    padding: 15px;
+    box-sizing: border-box;
 
-  @media screen and (max-width: $tablet-xl) {
-    max-width: 90%;
   }
 }
+
+.feed-table-result {
+
+  .row-header {
+    @media (max-width: $tablet) {
+      max-width: 60px;
+      width: 60px;
+    }
+  }
+
+  .summary-cell {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .error-cell {
+    font-style: italic;
+
+    font-size: 14px;
+    color: $dark-blue;
+
+    .toxic {
+      font-weight: bold;
+      color: $red;
+
+    }
+
+  }
+}
+
+table.feed-form-table {
+  margin: auto;
+
+
+  th {
+    width: 150px;
+    height: 100%;
+  }
+
+  td {
+    width: 150px;
+
+    input {
+      border: transparent;
+    }
+
+    .input-effect~.focus-bg {
+      opacity: 1;
+      background-color: rgb(240, 250, 247);
+    }
+
+    .input-effect:not(.select-empty):focus~label,
+    .has-content.input-effect:not(.select-empty)~label,
+    .input-effect:not(:placeholder-shown):not(.select-empty)~label {
+      opacity: 0;
+      top: 8px;
+      left: -16px;
+    }
+  }
+}
+
 #feed-needs {
   display: flex;
   width: 100%;
-  max-width: $max-width;
   margin: auto;
   padding: 40px 30px;
   box-sizing: border-box;
@@ -193,8 +253,29 @@
   display: flex;
   flex-wrap: wrap;
 
-  .indicator {
+  .flex-wrapper {
     flex-basis: 100%;
+
+
+    .dots {
+      width: 4px;
+      height: 4px;
+      margin: auto 5px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      box-shadow: 19px 0 0 7px $aqua, 38px 0 0 3px $light-aqua, 57px 0 0 0 $light-aqua;
+      animation: dots .5s infinite alternate linear;
+    }
+
+    @keyframes dots {
+      50% {
+        box-shadow: 19px 0 0 3px $light-aqua, 38px 0 0 7px $aqua, 57px 0 0 3px $light-aqua
+      }
+
+      100% {
+        box-shadow: 19px 0 0 0 $light-aqua, 38px 0 0 3px $light-aqua, 57px 0 0 7px $aqua
+      }
+    }
   }
 
   #print-trigger {

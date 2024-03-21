@@ -1,247 +1,136 @@
 import { Formik } from 'formik'
-import { FaPlus } from 'react-icons/fa'
+import { FaPlus, FaExternalLinkAlt } from 'react-icons/fa'
 import './CalculatorForm.scss'
 import HelpBox from './HelpBox'
+import { FeedModel } from '../../Models/FeedModel'
+import InputComponent from '../FormComponents/InputComponent'
 
 function FeedForm(props) {
+
+  const feedModel = new FeedModel(props.defaultValues)
+  const labels = feedModel.feedModelLabels
+  const units = feedModel.feedModelUnits
   const btnIcon = props.buttonIcon || <FaPlus />
   const btnText = props.buttonText || 'Add to feed result'
   let defaultValues = props.defaultValues
     ? props.defaultValues
-    : {
-        name: '',
-        amount: '',
-        mj: '',
-        smrp: '',
-        solids: '',
-        ca: '',
-        p: '',
-        mg: '',
-        na: '',
-        fe: '',
-        cu: '',
-        zn: '',
-        mn: '',
-        selenium: '',
-      }
+    : feedModel.feedModelData
 
   const FormRows = ({ change, blur, values }) => (
-    <div className={`feed-row`}>
-      <div className="feeding-calculator-flex-wrap">
-        <label className="long-input-label" htmlFor="feed-name">
-          <span>Name</span>
-          <input
-            id="feed-name"
-            className="form-feed-input input-amount"
-            type="text"
-            placeholder="Feed's name"
-            name={`name`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`name`]}
-          />
-        </label>
-        <HelpBox />
-      </div>
-      <div className="feeding-calculator-flex-wrap">
-        <label htmlFor="feed-amount">
-          <span>
-            Amount <br /> / Kg
-          </span>
-          <input
-            id="feed-amount"
-            step="0.01"
-            className="form-feed-input input-amount"
-            type="number"
-            placeholder=""
-            name={`amount`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`amount`]}
-          />
-        </label>
-        <label htmlFor="feed-solids">
-          <span>
-            Solids <br /> / %
-          </span>
-          <input
-            id="feed-solids"
-            step="0.01"
-            className="form-feed-input input-solids"
-            type="number"
-            placeholder=""
-            name={`solids`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`solids`]}
-          />
-        </label>
-        <label htmlFor="feed-mj">
-          <span>
-            Mj <br /> / Kg
-          </span>
-          <input
-            id="feed-mj"
-            step="0.01"
-            className="form-feed-input input-mj"
-            type="number"
-            placeholder=""
-            name={`mj`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`mj`]}
-          />
-        </label>
-        <label htmlFor="feed-smrp">
-          <span>
-            g smrp <br /> / Kg
-          </span>
-          <input
-            id="feed-smrp"
-            step="0.01"
-            className="form-feed-input input-smrp"
-            type="number"
-            placeholder=""
-            name={`smrp`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`smrp`]}
-          />
-        </label>
-      </div>
-      <span className="caption unit-label">Unit: grams</span>
-      <div className="feeding-calculator-flex-wrap">
-        <label htmlFor="feed-mj">
-          <span>Calcium</span>
-          <input
-            id="feed-ca"
-            step="0.01"
-            className="form-feed-input input-ca"
-            type="number"
-            placeholder=""
-            name={`ca`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`ca`]}
-          />
-        </label>
-        <label htmlFor="feed-p">
-          <span>Phosphor</span>
-          <input
-            id="feed-p"
-            step="0.01"
-            className="form-feed-input input-p"
-            type="number"
-            placeholder=""
-            name={`p`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`p`]}
-          />
-        </label>
-        <label htmlFor="feed-mg">
-          <span>Magnesium</span>
-          <input
-            id="feed-mg"
-            step="0.01"
-            className="form-feed-input input-mg"
-            type="number"
-            placeholder=""
-            name={`mg`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`mg`]}
-          />
-        </label>
-        <label htmlFor="feed-na">
-          <span>Natrium</span>
-          <input
-            id="feed-na"
-            step="0.01"
-            className="form-feed-input input-na"
-            type="number"
-            placeholder=""
-            name={`na`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`na`]}
-          />
-        </label>
-      </div>
-      <span className="caption unit-label">Unit: milligrams</span>
-      <div className="feeding-calculator-flex-wrap">
-        <label htmlFor="feed-fe">
-          <span>Iron</span>
-          <input
-            id="feed-fe"
-            step="0.01"
-            className="form-feed-input input-fe"
-            type="number"
-            placeholder=""
-            name={`fe`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`fe`]}
-          />
-        </label>
-        <label htmlFor="feed-cu">
-          <span>Copper</span>
-          <input
-            id="feed-cu"
-            step="0.01"
-            className="form-feed-input input-cu"
-            type="number"
-            placeholder=""
-            name={`cu`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`cu`]}
-          />
-        </label>
-        <label htmlFor="feed-zn">
-          <span>Zink</span>
-          <input
-            id="feed-zn"
-            step="0.01"
-            className="form-feed-input input-zn"
-            type="number"
-            placeholder=""
-            name={`zn`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`zn`]}
-          />
-        </label>
-        <label htmlFor="feed-mn">
-          <span>Manganese</span>
-          <input
-            id="feed-mn"
-            step="0.01"
-            className="form-feed-input input-mn"
-            type="number"
-            placeholder=""
-            name={`mn`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`mn`]}
-          />
-        </label>
-        <label htmlFor="feed-se">
-          <span>Selenium</span>
-          <input
-            id="feed-se"
-            step="0.01"
-            className="form-feed-input input-selen"
-            type="number"
-            placeholder=""
-            name={`selenium`}
-            onBlur={blur}
-            onChange={change}
-            value={values[`selenium`]}
-          />
-        </label>
-      </div>
-    </div>
+    <table className='feed-form-table'>
+      <thead>
+        <tr>
+          <td colSpan={3}><HelpBox> <p>
+            This form is where you fill in the values of the feed you have
+            intended to use in your calculation. Empty fields will not be
+            included.
+          </p>
+            <p>
+              Solids: If this field is left blank, the program assumes that the
+              feed has a dry matter of 100%.
+            </p>
+            <p>
+              Calcium, Phosphorus, Magnesium and Sodium should be stated in
+              grams. Iron, Copper, Zinc, Managan and Selenium should be stated
+              in milligrams.
+            </p>
+            <p>
+              You can add how many different types of feed you want. As well as
+              edit or delete a feed entry from the list. All values are
+              calculated and displayed in the table below the calculator.
+            </p>
+
+            <p>
+              It is also possible to print or download the calculation as a pdf.
+              If you click on download the button, you can choose whether it
+              should be saved on your computer or if you want to print it
+              directly. Not sure what your feed is worth? check out this list
+              from SLU with many of the most common feed materials listed.
+            </p>
+            <a
+              href="http://www2.freefarm.se/fodertabell/fodtab.pl?djur=hast"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Horse feed nutrition table (Swedish)
+              <FaExternalLinkAlt />
+            </a>
+            <p>
+              Remember that the program is not designed to discover all of the
+              dangerous overdoses. There, it is you as the user who bears the
+              responsibility to not poison your horse.
+            </p></HelpBox></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Feed's Name</th>
+          <td>
+            <InputComponent
+              name={`name`}
+              type="text"
+              title={"Feed's name"}
+              handleBlur={blur}
+              handleChange={change}
+              value={values.name}
+            />
+          </td>
+          <td className='unit-cell'></td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th>Amount of feed</th>
+          <td>
+            <InputComponent
+              name={`amount`}
+              type="number"
+              title={"Amount / Kg"}
+              handleBlur={blur}
+              handleChange={change}
+              value={values.amount}
+            />
+          </td>
+          <td className='unit-cell'>Kg</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th>Solids per kg</th>
+          <td>
+            <InputComponent
+              name={`solids`}
+              type="number"
+              title={"Solids / %"}
+              handleBlur={blur}
+              handleChange={change}
+              value={values.solids}
+            />
+          </td>
+          <td className='unit-cell'>%</td>
+        </tr>
+      </tbody>
+      {Object.keys(labels).map((key, index) => {
+        return (
+          <tbody key={`${key}-${index}`}>
+            <tr>
+              <th>{labels[key].full}</th>
+              <td>
+                <InputComponent
+                  name={key}
+                  type="number"
+                  title={labels[key].short}
+                  handleBlur={blur}
+                  handleChange={change}
+                  value={values[key]}
+                />
+              </td>
+              <td className='unit-cell'>{units[key]}</td>
+            </tr>
+          </tbody>
+        )
+      })}
+    </table>
   )
 
   return (

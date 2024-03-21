@@ -1,165 +1,46 @@
 @import '../../assets/style/config';
-#feedrow-wrapper {
-  margin: 10px auto;
-  padding: 0;
-  max-width: $max-width;
-  width: 90%;
+
+.feedrow {
+  padding: 0 20px;
+  width: 100%;
   box-sizing: border-box;
 
-  .feedrow.open {
-    .feedrow-content {
-      visibility: visible;
-      height: 100%;
+  .feedrow-content {
+    visibility: visible;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .btn-edit:not(.form-feed-submit) {
+      margin: 20px auto 30px;
     }
   }
 
-  .feedrow.closed {
-    .feedrow-content {
-      visibility: hidden;
-      height: 0;
-    }
+  hr {
+    border-top: 1px solid lighten($yellow, 20%);
+    height: 0px;
+    width: 100%;
   }
 
-  .feedrow {
-    padding: 20px;
-    border: 1px solid $aqua;
-    border-radius: 5px;
-    list-style-type: none;
+  table {
     margin: 20px 0;
-    margin-left: 0;
-    background: $white;
-    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    position: relative;
+  }
 
-    &.open {
-      .toggle-arrow {
-        transform: rotate(-180deg);
-        transition: 0.2s;
+  th {
+    text-align: left;
+  }
 
-        &.disabled {
-          color: $light-aqua;
-          cursor: not-allowed;
-        }
-      }
-    }
-
-    .feedrow-header {
+  tr:not(:first-of-type) {
+    &::after {
+      content: ' ';
+      right: 0;
+      left: 0;
       display: flex;
-      font-family: $font-text;
-      font-size: $text-size;
-      justify-content: space-between;
-      cursor: pointer;
-
-      .feedrow-title {
-        font-weight: bold;
-        margin: auto 0;
-        flex-basis: 33%;
-
-        span {
-          font-weight: 400;
-        }
-
-        @media screen and (max-width: 600px) {
-          flex-basis: 100%;
-          margin-bottom: 15px;
-        }
-      }
-
-      .toggle-arrow {
-        transition: 0.2s;
-        margin: auto 0;
-        width: 25px;
-        height: 25px;
-      }
-
-      button {
-        @media screen and (max-width: $tablet-xl) {
-          width: 45px;
-          padding: 0;
-          justify-content: center;
-
-          svg {
-            margin: auto;
-          }
-          span {
-            visibility: hidden;
-            width: 0;
-            margin: 0;
-          }
-        }
-      }
-      @media screen and (max-width: 600px) {
-        flex-wrap: wrap;
-      }
-    }
-
-    .feedrow-content {
-      height: 100%;
-
-      &.edit {
-        margin-top: 20px;
-        border-radius: 5px;
-        background-color: lighten($yellow, 30%);
-        border: 2px solid $yellow;
-        padding: 20px;
-
-        button.btn-cancel {
-          margin-left: 20px;
-          margin-right: auto;
-          margin-top: -45px;
-
-          @media screen and (max-width: $tablet) {
-            margin-top: unset;
-            margin: 25px auto 0 auto;
-          }
-        }
-      }
-
-      ul {
-        display: flex;
-
-        @media screen and (max-width: $tablet) {
-          flex-wrap: wrap;
-        }
-      }
-
-      li {
-        margin: 25px 50px 25px 0;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-
-        &:not(:first) {
-          margin: 25px 50px;
-        }
-
-        label {
-          text-transform: capitalize;
-          font-size: $text-size;
-          margin-bottom: 15px;
-
-          @media screen and (max-width: $tablet) {
-            text-align: left;
-            margin-left: 0;
-          }
-        }
-        span {
-          font-size: $caption-size;
-          text-align: center;
-
-          @media screen and (max-width: $tablet) {
-            text-align: left;
-            margin-left: 0;
-          }
-        }
-
-        @media screen and (max-width: $tablet) {
-          flex-basis: 20%;
-        }
-
-        @media screen and (max-width: 400) {
-          flex-basis: 100%;
-        }
-      }
+      position: absolute;
+      height: 1px;
+      background: $light-aqua;
     }
   }
 }

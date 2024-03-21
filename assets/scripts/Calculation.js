@@ -1,5 +1,9 @@
 class Calculation {
   constructor(data) {
+    if (data.values === undefined) {
+      throw new Error("Data is missing a 'values' key");
+    }
+
     this.data = data.values
   }
 
@@ -49,16 +53,16 @@ class Calculation {
       selenium: null,
     }
 
-    switch (true) {
+    switch (age !== null) {
       // The Young horse, age 1 years old.
       case age >= 1 && age < 2:
         baseConstants = {
           mj: 0.59,
           smrp: 7.5,
-          ca: 10.3,
-          p: 5.7,
-          mg: 1.7,
-          na: 5.1 * 0.4,
+          ca: 7.5,
+          p: 4.2,
+          mg: 1.6,
+          na: 3.8 * 0.4,
           fe: 50,
           cu: 12,
           zn: 50,
@@ -72,9 +76,9 @@ class Calculation {
         baseConstants = {
           mj: 0.57,
           smrp: 6.5,
-          ca: 7.5,
-          p: 4.2,
-          mg: 1.6,
+          ca: 6.2,
+          p: 3.4,
+          mg: 1.5,
           na: 5.1 * 0.4,
           fe: 50,
           cu: 12,
@@ -90,7 +94,7 @@ class Calculation {
           smrp: 6,
           ca: 4,
           p: 2.8,
-          mg: 1.5,
+          mg: 1.9,
           na: 5.1 * 0.4,
           fe: 50,
           cu: 12,
@@ -116,7 +120,7 @@ class Calculation {
         }
         break
       default:
-        console.log('Error in age switch:', age, baseConstants)
+        // TODO LOG ERROR console.log('Error in age switch:', age, baseConstants)
         break
     }
 
@@ -124,6 +128,7 @@ class Calculation {
   }
 
   calcBaseNeed() {
+    console.log("*** Calc base", this.data)
     const currentYear = new Date().getFullYear()
     const age = parseInt(currentYear) - parseInt(this.data.born)
     const baseConstants = this.baseNeedConstants(age)
@@ -153,7 +158,7 @@ class Calculation {
       mn: (weight / 100) * baseConstants.mn,
       selenium: (weight / 100) * baseConstants.selenium,
     }
-
+    console.log(baseNeed)
     // Alter values for enegy and protein based on if the horse is a hard keep or a normal keep.
     if (this.data.bodyType == 'type-normal') {
       baseNeed.mj = baseNeed.mj * 1.05

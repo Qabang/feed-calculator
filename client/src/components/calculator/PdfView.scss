@@ -1,19 +1,42 @@
 @import '../../assets/style/config';
 
 #pdf {
-  padding: 2.54cm;
-  padding-top: calc(2.54cm / 2);
   max-width: 2480px;
   box-sizing: border-box;
   text-align: left;
+  counter-reset: number;
 
   .pdf-section {
     flex: 1;
+
+    tbody::after {
+      background: transparent;
+    }
   }
 
-  hr {
-    border: 1px solid $aqua;
-    margin: 35px 30px;
+  .pdf-page {
+    padding: 2.54cm;
+    box-sizing: border-box;
+    height: 297mm;
+    height: 306mm;
+    height: 296mm;
+    counter-increment: number;
+    position: relative;
+  }
+
+  .pdf-page::before {
+    content: counter(number)" ";
+    position: absolute;
+    top: calc(2.54cm / 2);
+    right: calc(2.54cm / 2);
+    font-size: 10pt;
+
+  }
+
+  .pdf-section-warnings {
+    #calculation-errors {
+      margin-bottom: 0;
+    }
   }
 
   table {
@@ -24,12 +47,54 @@
 
     th {
       font-weight: 900;
-      font-size: 14pt;
+      font-size: 12pt;
     }
+
     td {
       font-weight: 400;
     }
   }
+
+  .list-errors#danger {
+    margin-top: 0;
+  }
+
+  #quotas {
+    margin-bottom: 80px;
+    font-size: 12pt;
+    line-height: normal;
+    padding: 0;
+
+    .cell-error {
+      font-size: 10pt;
+    }
+
+    h3 {
+      font-family: $font-heading;
+      text-align: left;
+      font-size: 16pt;
+      line-height: 115%;
+      font-weight: bold;
+    }
+
+    th {
+      font-family: $font-text;
+      font-size: 13pt;
+    }
+
+    tr {
+      border-bottom: dotted 1px $light-aqua;
+
+      &:last-of-type {
+        border-bottom: 0;
+      }
+    }
+
+    tbody::after {
+      background: transparent;
+    }
+  }
+
   .vertical-line {
     width: 2px;
     background-color: $aqua;
@@ -53,6 +118,9 @@
   .pdf-header {
     display: flex;
     justify-content: space-between;
+    margin-top: calc(-2.54cm / 2);
+    border-bottom: 1px solid $aqua;
+    margin-bottom: 80px;
 
     h1 {
       font-family: $font-heading;
@@ -78,6 +146,7 @@
 
     .logo {
       display: flex;
+
       svg {
         margin: auto 0 auto auto;
         max-width: 170pt;
@@ -96,6 +165,7 @@
 
     &.headings {
       padding-left: 13%;
+
       h2 {
         flex-basis: 33%;
         text-align: left;
